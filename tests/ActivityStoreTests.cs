@@ -21,12 +21,16 @@ public static class ActivityStoreTests
             using (var store = new ActivityStore(directory))
             {
                 check(store.RecordingEnabled && store.RetentionDays == 7 && store.Error is null, "Activity defaults to enabled with seven-day retention");
+                long emptyRevision = store.Revision;
+                await store.FlushAsync();
+                check(store.Revision == emptyRevision, "An unchanged history does not invalidate the UI cache");
                 store.Record(Entry("first", now, upload: 10, download: 100));
                 store.Record(Entry("blocked", now.AddSeconds(1), "blocked.example", "phone-b", "Blocked", 0, 0));
                 store.Record(Entry("updated", now.AddSeconds(2), "video.example.com", upload: 3, download: 4) with { EndedAt = null });
                 store.Record(Entry("updated", now.AddSeconds(2), "video.example.com", upload: 20, download: 300));
                 await store.FlushAsync();
                 var firstPage = store.Query(all, 0, 2);
+                check(store.Revision > emptyRevision, "Committed activity invalidates the UI cache");
                 check(firstPage.TotalCount == 3 && firstPage.Entries.Count == 2 && firstPage.Entries[0].Id == "updated", "Activity upserts IDs and returns newest first with pagination");
                 check(firstPage.UploadBytes == 30 && firstPage.DownloadBytes == 400 && firstPage.BlockedCount == 1, "Activity totals cover the complete filter rather than the visible page");
                 check(store.Query(all, 1, 2).Entries.Single().Id == "first", "Activity second page has remaining entry without duplicates");
@@ -73,7 +77,9 @@ public static class ActivityStoreTests
                     store.Query(all).Entries.Single(e => e.Id == "error-pause") is { Outcome: "Error", EndedAt: not null },
                     "Activity pause finalizes blocked and failed snapshots without changing their outcomes");
                 store.Record(Entry("while-paused", now.AddSeconds(6)));
+                long pausedRevision = store.Revision;
                 await store.FlushAsync();
+                check(store.Revision == pausedRevision, "Ignored observations do not trigger history reloads");
                 check(!store.Query(all).Entries.Any(e => e.Id == "while-paused"), "Activity ignores new records while paused");
                 store.UpdateSettings(true, 30);
                 store.Record(Entry("stale-generation", now.AddSeconds(7)), firstGeneration);
@@ -136,6 +142,20 @@ public static class ActivityStoreTests
             }
 
             string blockedDirectory = Path.Combine(directory, "not-a-directory");
+            string batchDirectory = Path.Combine(directory, "batched-shutdown");
+            using (var batched = new ActivityStore(batchDirectory))
+            {
+                for (int index = 0; index < 1024; index++)
+                    batched.Record(Entry("burst-" + index, now.AddTicks(index), outcome: index % 2 == 0 ? "Blocked" : "Allowed"));
+                // Dispose must commit accepted work even without an explicit flush.
+            }
+            using (var reopenedBatch = new ActivityStore(batchDirectory))
+            {
+                var result = reopenedBatch.Query(all);
+                check(result.TotalCount == 1024 && result.BlockedCount == 512 && result.UploadBytes == 10_240 && result.DownloadBytes == 102_400,
+                    "Batched shutdown drains every accepted observation with accurate outcomes and totals");
+            }
+
             File.WriteAllText(blockedDirectory, "test");
             using (var broken = new ActivityStore(blockedDirectory))
             {

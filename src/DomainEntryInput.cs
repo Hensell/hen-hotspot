@@ -10,7 +10,7 @@ public static class DomainEntryInput
             if (!Uri.TryCreate(value, UriKind.Absolute, out var url) ||
                 (url.Scheme != Uri.UriSchemeHttps && url.Scheme != Uri.UriSchemeHttp) ||
                 !string.IsNullOrEmpty(url.UserInfo))
-                throw new ArgumentException("Usa un dominio o una dirección web http/https válida.");
+                throw new ArgumentException(L10n.T("EnterAValidDomainOrHttpHttpsWebAddress"));
             value = url.IdnHost;
         }
         return Validation.Domain(value);

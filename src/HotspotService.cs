@@ -16,20 +16,21 @@ public record HotspotStatus(string State, string Capability, string Connection, 
 public sealed class HotspotService
 {
     private static ConnectionProfile GetProfile() => NetworkInformation.GetInternetConnectionProfile()
-        ?? throw new InvalidOperationException("Windows no detecta una conexión de internet activa. Conecta la laptop al Wi-Fi y vuelve a intentar.");
+        ?? throw new InvalidOperationException(L10n.T("WindowsCannotDetectAnActiveInternetConnectionConnectThe"));
 
     private static NetworkOperatorTetheringManager GetManager() =>
         NetworkOperatorTetheringManager.CreateFromConnectionProfile(GetProfile());
 
     public Task<HotspotStatus> ReadAsync() => Task.Run(() =>
     {
-        var adapters = NetworkInterface.GetAllNetworkInterfaces()
-            .Where(x => x.NetworkInterfaceType != NetworkInterfaceType.Loopback && x.OperationalStatus != OperationalStatus.NotPresent &&
-                !x.Name.Contains("-0000", StringComparison.Ordinal) && !x.Description.Contains("Tunneling", StringComparison.OrdinalIgnoreCase))
-            .Select(x => new AdapterInfo(x.Name, x.Description, x.OperationalStatus.ToString())).ToList();
-        string connection = "Sin conexión", connectivity = "None", capability = "Unknown";
+        List<AdapterInfo> adapters = [];
+        string connection = L10n.T("Offline"), connectivity = "None", capability = "Unknown";
         try
         {
+            adapters = NetworkInterface.GetAllNetworkInterfaces()
+                .Where(x => x.NetworkInterfaceType != NetworkInterfaceType.Loopback && x.OperationalStatus != OperationalStatus.NotPresent &&
+                    !x.Name.Contains("-0000", StringComparison.Ordinal) && !x.Description.Contains("Tunneling", StringComparison.OrdinalIgnoreCase))
+                .Select(x => new AdapterInfo(x.Name, x.Description, x.OperationalStatus.ToString())).ToList();
             var profile = GetProfile();
             connection = profile.ProfileName;
             connectivity = profile.GetNetworkConnectivityLevel().ToString();
@@ -62,7 +63,7 @@ public sealed class HotspotService
             .SelectMany(n => n.GetIPProperties().UnicastAddresses
                 .Where(a => a.Address.AddressFamily == AddressFamily.InterNetwork && !a.Address.ToString().StartsWith("169.254.", StringComparison.Ordinal))
                 .Select(a => new { n.Name, a.Address, a.PrefixLength })).ToList();
-        if (candidates.Count != 1) throw new InvalidOperationException("No se pudo identificar una única interfaz IPv4 del hotspot. Enciéndelo y actualiza el diagnóstico.");
+        if (candidates.Count != 1) throw new InvalidOperationException(L10n.T("CouldNotIdentifyASingleHotspotIPv4InterfaceTurn"));
         var c = candidates[0]; var bytes = c.Address.GetAddressBytes();
         for (int i = 0; i < 4; i++) bytes[i] &= (byte)(0xff << Math.Clamp(8 - (c.PrefixLength - i * 8), 0, 8));
         return new(c.Address, $"{new IPAddress(bytes)}/{c.PrefixLength}", c.Name);
@@ -79,7 +80,7 @@ public sealed class HotspotService
         Validation.Network(ssid, password);
         var manager = GetManager();
         if (manager.TetheringOperationalState != TetheringOperationalState.Off)
-            throw new InvalidOperationException("Apaga el hotspot antes de cambiar el nombre, la contraseña o la banda.");
+            throw new InvalidOperationException(L10n.T("TurnOffTheHotspotBeforeChangingItsNamePassword"));
         var config = manager.GetCurrentAccessPointConfiguration();
         config.Ssid = ssid.Trim();
         config.Passphrase = password;
@@ -90,10 +91,10 @@ public sealed class HotspotService
     private static void CheckResult(NetworkOperatorTetheringOperationResult result)
     {
         if (result.Status != TetheringOperationStatus.Success)
-            throw new InvalidOperationException($"Windows no pudo completar la operación ({result.Status}). {result.AdditionalErrorMessage}");
+            throw new InvalidOperationException(L10n.F("WindowsCouldNotCompleteTheOperation01", result.Status, result.AdditionalErrorMessage));
     }
 
     public static string Friendly(Exception ex) => ex is UnauthorizedAccessException
-        ? "Windows denegó el acceso al hotspot. Abre la configuración de Windows para comprobar permisos y disponibilidad."
+        ? L10n.T("WindowsDeniedAccessToTheHotspotOpenWindowsSettings")
         : ex.Message;
 }

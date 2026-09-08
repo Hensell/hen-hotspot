@@ -20,7 +20,7 @@ public partial class MainWindow
 
     private void Devices_Click(object sender, RoutedEventArgs e)
     {
-        Navigate(DevicesPanel, DeviceNav, "Dispositivos", "");
+        Navigate(DevicesPanel, DeviceNav);
         UpdateDevices();
     }
 
@@ -39,26 +39,26 @@ public partial class MainWindow
         bool hotspotOn = status?.State == "On" && status.Error is null;
         var guard = deviceGuard?.Snapshot;
         bool active = guard?.Active == true && guard.Error is null && !deviceGuardUncertain && hotspotOn;
-        GlobalDeviceAccessText.Text = active ? "Control activo · prueba" : deviceGuard is null ? "Control apagado" : "Control sin confirmar";
+        GlobalDeviceAccessText.Text = active ? L10n.T("ControlOnTrial") : deviceGuard is null ? L10n.T("ControlOff") : L10n.T("ControlUnconfirmed");
         GlobalDeviceAccessText.ToolTip = active
-            ? "Acceso a internet limitado a los dispositivos autorizados."
-            : deviceGuard is null ? "Las decisiones guardadas no están limitando el acceso."
-            : "Windows no confirmó el control. Apaga el hotspot si necesitas impedir el acceso.";
-        DeviceGuardStateText.Text = deviceBusy ? "Actualizando el control…" : active
-            ? "Control de dispositivos activo" : deviceGuard is null
-            ? "Control de dispositivos apagado" : "Control sin confirmar";
+            ? L10n.T("InternetAccessLimitedToAuthorizedDevices")
+            : deviceGuard is null ? L10n.T("SavedDecisionsAreNotRestrictingAccess")
+            : L10n.T("WindowsDidNotConfirmAccessControlTurnOffThe");
+        DeviceGuardStateText.Text = deviceBusy ? L10n.T("UpdatingAccessControl") : active
+            ? L10n.T("DeviceAccessControlOn") : deviceGuard is null
+            ? L10n.T("DeviceAccessControlOff") : L10n.T("ControlUnconfirmed");
         DeviceGuardDetailText.Text = active
-            ? "Solo dispositivos autorizados · al cerrar Hen se apaga el hotspot."
+            ? L10n.T("AuthorizedDevicesOnlyClosingHenTurnsOffTheHotspot")
             : deviceGuard is null
-            ? "Las autorizaciones guardadas se aplicarán al activar el control."
-            : "Windows no confirmó el bloqueo de internet. Desactiva el control para retirar sus reglas o apaga el hotspot.";
+            ? L10n.T("SavedAuthorizationsWillApplyWhenYouEnableAccessControl")
+            : L10n.T("WindowsDidNotConfirmInternetBlockingDisableAccessControl");
         DevicesPanel.IsEnabled = !working;
-        DeviceGuardToggleButton.Content = deviceGuard is null ? "Activar control" : "Desactivar control";
+        DeviceGuardToggleButton.Content = deviceGuard is null ? L10n.T("EnableControl") : L10n.T("DisableControl");
         DeviceGuardToggleButton.IsEnabled = !working && (deviceGuard is not null || hotspotOn);
         DeviceGuardToggleButton.ToolTip = deviceGuard is not null
-            ? "Quita este control y vuelve al acceso sin aprobación. Las decisiones quedan guardadas."
-            : hotspotOn ? "Windows pedirá permiso de administrador para instalar los filtros temporales."
-            : "Enciende el hotspot para activar el control. Puedes preparar la lista mientras tanto.";
+            ? L10n.T("RemoveThisControlAndRestoreAccessWithoutApprovalDecisions")
+            : hotspotOn ? L10n.T("WindowsWillAskForAdministratorPermissionToInstallTemporary")
+            : L10n.T("TurnOnTheHotspotToEnableAccessControlYou");
 
         string? error = deviceError ?? guard?.Error ?? devicePermissions.LastError;
         DeviceGuardErrorText.Text = error ?? "";
@@ -75,29 +75,29 @@ public partial class MainWindow
             bool valid = !key.StartsWith("invalid:", StringComparison.Ordinal);
             string mac = valid ? key : clients![0].Mac;
             string name = !string.IsNullOrWhiteSpace(permission?.Name) ? permission.Name :
-                clients?.Length > 0 ? ClientRow.From(clients[0]).DisplayName : "Dispositivo sin nombre";
+                clients?.Length > 0 ? ClientRow.From(clients[0]).DisplayName : L10n.T("UnnamedDevice");
             var addresses = (clients ?? []).SelectMany(c => c.IpAddresses ?? []).Distinct().ToArray();
-            string address = clients is null ? "Sin conexión" : addresses.Length == 0 ? "Sin IP asignada" : string.Join(", ", addresses);
+            string address = clients is null ? L10n.T("Offline") : addresses.Length == 0 ? L10n.T("NoIPAssigned") : string.Join(", ", addresses);
             var state = permission?.State ?? DeviceAccessState.Pending;
-            string label = !valid ? "MAC no válida" : state switch
+            string label = !valid ? L10n.T("InvalidMAC") : state switch
             {
-                DeviceAccessState.Approved when !active => "Autorización guardada",
-                DeviceAccessState.Blocked when !active => "Bloqueo guardado",
-                DeviceAccessState.Approved when addresses.Length == 0 => "Esperando IP",
-                DeviceAccessState.Approved when !addresses.Any(a => guard!.ApprovedAddresses.Contains(a, StringComparer.Ordinal)) => "Por aplicar",
-                DeviceAccessState.Approved => "Autorizado",
-                DeviceAccessState.Blocked => "Bloqueado",
-                _ => "Pendiente"
+                DeviceAccessState.Approved when !active => L10n.T("AuthorizationSaved"),
+                DeviceAccessState.Blocked when !active => L10n.T("BlockSaved"),
+                DeviceAccessState.Approved when addresses.Length == 0 => L10n.T("WaitingForIP"),
+                DeviceAccessState.Approved when !addresses.Any(a => guard!.ApprovedAddresses.Contains(a, StringComparer.Ordinal)) => L10n.T("NotYetApplied"),
+                DeviceAccessState.Approved => L10n.T("Authorized"),
+                DeviceAccessState.Blocked => L10n.T("Blocked2"),
+                _ => L10n.T("Pending")
             };
             return new DeviceAccessRow(name, mac, address, label,
                 valid && !working && state != DeviceAccessState.Approved,
-                valid && !working && state != DeviceAccessState.Blocked);
-        }).OrderBy(r => r.Status == "Pendiente" ? 0 : 1).ThenBy(r => r.Name, StringComparer.OrdinalIgnoreCase).ToArray();
+                valid && !working && state != DeviceAccessState.Blocked, valid && state == DeviceAccessState.Pending);
+        }).OrderBy(r => r.Pending ? 0 : 1).ThenBy(r => r.Name, StringComparer.CurrentCultureIgnoreCase).ToArray();
         if (DeviceGrid.ItemsSource is not DeviceAccessRow[] previous || !previous.SequenceEqual(rows)) DeviceGrid.ItemsSource = rows;
         DeviceGrid.Visibility = rows.Length == 0 ? Visibility.Collapsed : Visibility.Visible;
         DeviceEmptyText.Visibility = rows.Length == 0 ? Visibility.Visible : Visibility.Collapsed;
-        DeviceEmptyText.Text = hotspotOn ? "Conecta un dispositivo para revisarlo, o añade su MAC en la otra pestaña."
-            : "Todavía no hay autorizaciones guardadas. Enciende el hotspot para detectar equipos o añade una MAC manualmente.";
+        DeviceEmptyText.Text = hotspotOn ? L10n.T("ConnectADeviceToReviewItOrAddIts")
+            : L10n.T("NoSavedAuthorizationsYetTurnOnTheHotspotTo");
     }
 
     private async Task RunDeviceOperationAsync(Func<Task> operation, string success)
@@ -126,14 +126,14 @@ public partial class MainWindow
             {
                 await deviceGuard.ReleaseAsync();
                 deviceGuard = null; deviceGuardUncertain = false;
-            }, "Control desactivado. Este bloqueo de internet se ha retirado; las autorizaciones quedan guardadas.");
+            }, L10n.T("ControlDisabledThisInternetBlockHasBeenRemovedAuthorizations"));
             return;
         }
         await RunDeviceOperationAsync(async () =>
         {
             status = await service.ReadAsync();
             if (status.State != "On" || status.Error is not null)
-                throw new InvalidOperationException("Enciende el hotspot y confirma su estado antes de activar el control.");
+                throw new InvalidOperationException(L10n.T("TurnOnTheHotspotAndConfirmItsStatusBefore"));
             deviceGuard = new DeviceGuardClient();
             deviceGuardUncertain = true;
             try
@@ -142,7 +142,7 @@ public partial class MainWindow
                 deviceGuardUncertain = false;
             }
             catch { deviceGuardUncertain = true; throw; }
-        }, "Filtros instalados. Comprueba con tu teléfono que el bloqueo y la autorización funcionan. Al cerrar la app se apagará el hotspot.");
+        }, L10n.T("FiltersInstalledUseYourPhoneToCheckBlockingAnd"));
     }
 
     private async void ApproveDevice_Click(object sender, RoutedEventArgs e)
@@ -172,8 +172,8 @@ public partial class MainWindow
     {
         bool hadGuard = deviceGuard is not null;
         string success = hadGuard
-            ? "Decisión guardada y enviada al control de acceso. Comprueba el resultado en el teléfono."
-            : "Decisión guardada. Se aplicará cuando actives el control de dispositivos.";
+            ? L10n.T("DecisionSavedAndSentToAccessControlCheckThe")
+            : L10n.T("DecisionSavedItWillApplyWhenYouEnableDevice");
         await RunDeviceOperationAsync(async () =>
         {
             await Task.Run(() => devicePermissions.Set(mac, name, state));
@@ -195,11 +195,11 @@ public partial class MainWindow
                         await service.StopAsync();
                         status = await service.ReadAsync();
                         stopped = status.State == "Off" && status.Error is null
-                            ? "El hotspot se apagó para evitar acceso sin control."
-                            : "No se pudo confirmar el apagado del hotspot; apágalo desde Windows.";
+                            ? L10n.T("TheHotspotWasTurnedOffToPreventUncontrolledAccess")
+                            : L10n.T("CouldNotConfirmThatTheHotspotIsOffTurn");
                     }
-                    catch { stopped = "No se pudo apagar el hotspot. Apágalo desde Windows para impedir acceso sin control."; }
-                    throw new InvalidOperationException("La decisión quedó guardada, pero no se confirmó su aplicación. " + stopped + " " + ex.Message, ex);
+                    catch { stopped = L10n.T("CouldNotTurnOffTheHotspotTurnItOff"); }
+                    throw new InvalidOperationException(L10n.T("TheDecisionWasSavedButItsApplicationWasNot") + stopped + " " + ex.Message, ex);
                 }
             }
             if (clearManual) { DeviceMacBox.Clear(); DeviceNameBox.Clear(); }
@@ -219,7 +219,7 @@ public partial class MainWindow
         }
         status = current;
         if (current.State != "Off" || current.Error is not null)
-            throw new InvalidOperationException("No se pudo confirmar el apagado del hotspot. El control se conserva; apaga el hotspot desde Windows antes de cerrar.");
+            throw new InvalidOperationException(L10n.T("CouldNotConfirmThatTheHotspotIsOffAccess"));
         try { await guard.ReleaseAsync(); }
         catch
         {
@@ -230,4 +230,4 @@ public partial class MainWindow
     }
 }
 
-public sealed record DeviceAccessRow(string Name, string Mac, string Address, string Status, bool ApproveEnabled, bool BlockEnabled);
+public sealed record DeviceAccessRow(string Name, string Mac, string Address, string Status, bool ApproveEnabled, bool BlockEnabled, bool Pending);

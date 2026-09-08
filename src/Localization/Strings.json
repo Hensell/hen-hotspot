@@ -1,0 +1,2102 @@
+{
+  "HistoryIsReceivingTooManyConnectionsSomeRecordsWere": {
+    "es": "El historial recibió demasiados eventos y omitió algunos registros. Esto no afecta al filtro.",
+    "en": "Too many events were received, so some history records were skipped. This does not affect filtering.",
+    "pt-BR": "O histórico recebeu eventos demais e ignorou alguns registros. Isso não afeta o filtro."
+  },
+  "LocalStorageIsUnavailableCloseAndReopenTheApp": {
+    "es": "El almacenamiento local no está disponible. Cierra y vuelve a abrir la aplicación para intentarlo de nuevo.",
+    "en": "Local storage is unavailable. Close and reopen the app to try again.",
+    "pt-BR": "O armazenamento local não está disponível. Feche e reabra o aplicativo para tentar novamente."
+  },
+  "CouldNotAccessLocalHistoryFilteringIsStillRunning": {
+    "es": "No se pudo acceder al historial local. Esto no afecta al filtro. Detalle: ",
+    "en": "Could not access local history. This does not affect filtering. Details: ",
+    "pt-BR": "Não foi possível acessar o histórico local. Isso não afeta o filtro. Detalhes: "
+  },
+  "HenHotspotIsAlreadyOpenUseTheExistingWindow": {
+    "es": "Hen Hotspot ya está abierto. Usa la ventana existente.",
+    "en": "Hen Hotspot is already open. Use the existing window.",
+    "pt-BR": "O Hen Hotspot já está aberto. Use a janela existente."
+  },
+  "InvalidAuthorizationStatus": {
+    "es": "El estado de autorización no es válido.",
+    "en": "Invalid authorization status.",
+    "pt-BR": "Estado de autorização inválido."
+  },
+  "YouCanSaveUpTo128DevicesRemoveAn": {
+    "es": "Se alcanzó el límite de 128 dispositivos guardados.",
+    "en": "The limit of 128 saved devices has been reached.",
+    "pt-BR": "O limite de 128 dispositivos salvos foi atingido."
+  },
+  "CouldNotSaveDeviceAuthorizations": {
+    "es": "No se pudieron guardar las autorizaciones de los dispositivos: ",
+    "en": "Could not save device authorizations: ",
+    "pt-BR": "Não foi possível salvar as autorizações dos dispositivos: "
+  },
+  "TheAuthorizationFileExceedsTheSizeLimit": {
+    "es": "El archivo de autorizaciones supera el tamaño permitido.",
+    "en": "The authorization file exceeds the size limit.",
+    "pt-BR": "O arquivo de autorizações excede o tamanho permitido."
+  },
+  "InvalidAuthorizationFormat": {
+    "es": "El formato de autorizaciones no es válido.",
+    "en": "Invalid authorization format.",
+    "pt-BR": "Formato de autorizações inválido."
+  },
+  "AnAuthorizationIsIncompleteOrHasAnInvalidStatus": {
+    "es": "Hay una autorización incompleta o con un estado no válido.",
+    "en": "An authorization is incomplete or has an invalid status.",
+    "pt-BR": "Uma autorização está incompleta ou tem um estado inválido."
+  },
+  "TheFileContainsDuplicateDeviceAddresses": {
+    "es": "El archivo contiene direcciones MAC duplicadas.",
+    "en": "The file contains duplicate MAC addresses.",
+    "pt-BR": "O arquivo contém endereços MAC duplicados."
+  },
+  "CouldNotReadAuthorizationsNoDevicesWillBeApproved": {
+    "es": "No se pudieron leer las autorizaciones. Ningún dispositivo se aprobará a partir de este archivo. ",
+    "en": "Could not read authorizations. No devices will be approved from this file. ",
+    "pt-BR": "Não foi possível ler as autorizações. Nenhum dispositivo será aprovado com base neste arquivo. "
+  },
+  "TheNameCanContainUpTo80CharactersWithout": {
+    "es": "El nombre admite hasta 80 caracteres y no puede contener saltos de línea ni caracteres de control.",
+    "en": "The name can contain up to 80 characters, without line breaks or control characters.",
+    "pt-BR": "O nome pode ter até 80 caracteres, sem quebras de linha ou caracteres de controle."
+  },
+  "EnterAValidUnicastMACAddressWithSixHexadecimal": {
+    "es": "Escribe una dirección MAC unicast válida: seis pares de dígitos hexadecimales separados por dos puntos o guiones.",
+    "en": "Enter a valid unicast MAC address: six pairs of hexadecimal digits separated by colons or hyphens.",
+    "pt-BR": "Digite um endereço MAC unicast válido: seis pares de dígitos hexadecimais separados por dois-pontos ou hífens."
+  },
+  "TheAccessControlMessageExceedsItsSizeLimit": {
+    "es": "El mensaje del control de acceso supera el tamaño permitido.",
+    "en": "The access control message exceeds the size limit.",
+    "pt-BR": "A mensagem de controle de acesso excede o tamanho permitido."
+  },
+  "InvalidAccessMessage": {
+    "es": "Mensaje de acceso no válido.",
+    "en": "Invalid access message.",
+    "pt-BR": "Mensagem de acesso inválida."
+  },
+  "EmptyAccessMessage": {
+    "es": "Mensaje de acceso vacío.",
+    "en": "Empty access message.",
+    "pt-BR": "Mensagem de acesso vazia."
+  },
+  "AccessControlHasAlreadyStarted": {
+    "es": "El control ya se inició.",
+    "en": "Access control has already started.",
+    "pt-BR": "O controle de acesso já foi iniciado."
+  },
+  "CouldNotOpenTheAdministratorPermissionPrompt": {
+    "es": "No se pudo iniciar el control de acceso con permisos de administrador.",
+    "en": "Could not start access control with administrator permission.",
+    "pt-BR": "Não foi possível iniciar o controle de acesso com permissão de administrador."
+  },
+  "CouldNotVerifyTheAccessControlProcess": {
+    "es": "No se pudo verificar el proceso del control de acceso.",
+    "en": "Could not verify the access control process.",
+    "pt-BR": "Não foi possível verificar o processo de controle de acesso."
+  },
+  "AccessControlDidNotStart": {
+    "es": "El control no se activó.",
+    "en": "Access control did not start.",
+    "pt-BR": "O controle de acesso não foi ativado."
+  },
+  "AccessControlStopped": {
+    "es": "El control de acceso se detuvo.",
+    "en": "Access control stopped.",
+    "pt-BR": "O controle de acesso foi interrompido."
+  },
+  "UpTo128AuthorizedDevices": {
+    "es": "Puedes autorizar hasta 128 dispositivos.",
+    "en": "You can authorize up to 128 devices.",
+    "pt-BR": "Você pode autorizar até 128 dispositivos."
+  },
+  "AccessControlConnectionLost": {
+    "es": "Se perdió la conexión con el control de acceso: ",
+    "en": "The connection to access control was lost: ",
+    "pt-BR": "A conexão com o controle de acesso foi perdida: "
+  },
+  "InvalidAccessRequest": {
+    "es": "Solicitud de acceso no válida.",
+    "en": "Invalid access request.",
+    "pt-BR": "Solicitação de acesso inválida."
+  },
+  "TheHotspotMustBeOnAndAvailable": {
+    "es": "El hotspot debe estar encendido y disponible.",
+    "en": "The hotspot must be on and available.",
+    "pt-BR": "O hotspot deve estar ligado e disponível."
+  },
+  "TheHotspotInterfaceChangedEnableAccessControlAgain": {
+    "es": "Cambió la interfaz del hotspot. Vuelve a activar el control.",
+    "en": "The hotspot interface changed. Enable access control again.",
+    "pt-BR": "A interface do hotspot mudou. Ative o controle novamente."
+  },
+  "CouldNotIdentifyTheHotspotInterfaceForAccessControl": {
+    "es": "No se pudo identificar la interfaz del hotspot para el control de acceso.",
+    "en": "Could not identify the hotspot interface for access control.",
+    "pt-BR": "Não foi possível identificar a interface do hotspot para o controle de acesso."
+  },
+  "TheHotspotSubnetIsNotSupportedByAccessControl": {
+    "es": "La subred del hotspot no es compatible con el control de acceso.",
+    "en": "The hotspot subnet is not supported by access control.",
+    "pt-BR": "A sub-rede do hotspot não é compatível com o controle de acesso."
+  },
+  "InvalidHotspotInterface": {
+    "es": "Interfaz del hotspot no válida.",
+    "en": "Invalid hotspot interface.",
+    "pt-BR": "Interface do hotspot inválida."
+  },
+  "TheFilterHasAlreadyStarted": {
+    "es": "El filtro ya se inició.",
+    "en": "The filter has already started.",
+    "pt-BR": "O filtro já foi iniciado."
+  },
+  "CouldNotOpenTheFilterWithAdministratorPermission": {
+    "es": "No se pudo iniciar el filtro con permisos de administrador.",
+    "en": "Could not start the filter with administrator permission.",
+    "pt-BR": "Não foi possível iniciar o filtro com permissão de administrador."
+  },
+  "CouldNotVerifyTheFilterProcess": {
+    "es": "No se pudo verificar el proceso del filtro.",
+    "en": "Could not verify the filter process.",
+    "pt-BR": "Não foi possível verificar o processo do filtro."
+  },
+  "TheFilterIsStopping": {
+    "es": "El filtro se está deteniendo.",
+    "en": "The filter is stopping.",
+    "pt-BR": "O filtro está sendo encerrado."
+  },
+  "TheFilterDidNotStart": {
+    "es": "El filtro no se activó.",
+    "en": "The filter did not start.",
+    "pt-BR": "O filtro não foi ativado."
+  },
+  "FilterConfirmationLost": {
+    "es": "No se pudo confirmar el estado del filtro: ",
+    "en": "Could not confirm the filter status: ",
+    "pt-BR": "Não foi possível confirmar o estado do filtro: "
+  },
+  "FilterConnectionLost": {
+    "es": "Se perdió la conexión con el filtro: ",
+    "en": "The connection to the filter was lost: ",
+    "pt-BR": "A conexão com o filtro foi perdida: "
+  },
+  "InvalidFilterRequest": {
+    "es": "Solicitud de filtro no válida.",
+    "en": "Invalid filter request.",
+    "pt-BR": "Solicitação de filtro inválida."
+  },
+  "TheHotspotMustBeOnToFilterDomains": {
+    "es": "El hotspot debe estar encendido para filtrar dominios.",
+    "en": "The hotspot must be on to filter domains.",
+    "pt-BR": "O hotspot deve estar ligado para filtrar domínios."
+  },
+  "TheHotspotInterfaceChangedEnableTheFilterAgain": {
+    "es": "Cambió la interfaz del hotspot. Vuelve a activar el filtro.",
+    "en": "The hotspot interface changed. Enable the filter again.",
+    "pt-BR": "A interface do hotspot mudou. Ative o filtro novamente."
+  },
+  "UpTo128DomainsPerProfile": {
+    "es": "Cada perfil admite hasta 128 dominios.",
+    "en": "Each profile supports up to 128 domains.",
+    "pt-BR": "Cada perfil aceita até 128 domínios."
+  },
+  "TheFilterIsNotRunning": {
+    "es": "El filtro no está funcionando.",
+    "en": "The filter is not running.",
+    "pt-BR": "O filtro não está funcionando."
+  },
+  "TheDNSFilterHasAlreadyStartedCreateANew": {
+    "es": "El filtro DNS ya se inició. Crea una sesión nueva para reiniciarlo.",
+    "en": "The DNS filter has already started. Create a new session to restart it.",
+    "pt-BR": "O filtro DNS já foi iniciado. Crie uma nova sessão para reiniciá-lo."
+  },
+  "TheDNSFilterRequires64BitWindows": {
+    "es": "El filtro DNS requiere Windows x64.",
+    "en": "The DNS filter requires 64-bit Windows.",
+    "pt-BR": "O filtro DNS requer Windows de 64 bits."
+  },
+  "EnableTheDNSFilter": {
+    "es": "activar el filtro DNS",
+    "en": "enable the DNS filter",
+    "pt-BR": "ativar o filtro DNS"
+  },
+  "CloseUnfilteredTCPDNS": {
+    "es": "bloquear las consultas DNS por TCP sin filtrar",
+    "en": "block unfiltered DNS queries over TCP",
+    "pt-BR": "bloquear as consultas DNS por TCP sem filtro"
+  },
+  "CouldNotLoadWinDivertReinstallHenWithItsFilter": {
+    "es": "No se pudo cargar WinDivert. Reinstala Hen con sus archivos de filtro para Windows x64.",
+    "en": "Could not load WinDivert. Reinstall Hen with its filter files for 64-bit Windows.",
+    "pt-BR": "Não foi possível carregar o WinDivert. Reinstale o Hen com os arquivos do filtro para Windows de 64 bits."
+  },
+  "ConfigureTheDNSQueue": {
+    "es": "configurar la cola DNS",
+    "en": "configure the DNS queue",
+    "pt-BR": "configurar a fila DNS"
+  },
+  "ReceiveADNSQuery": {
+    "es": "recibir una consulta DNS",
+    "en": "receive a DNS query",
+    "pt-BR": "receber uma consulta DNS"
+  },
+  "CouldNotPrepareTheDNSFilterResponse": {
+    "es": "No se pudo preparar la respuesta del filtro DNS.",
+    "en": "Could not prepare the DNS filter response.",
+    "pt-BR": "Não foi possível preparar a resposta do filtro DNS."
+  },
+  "DeliverADNSResponseOrQuery": {
+    "es": "entregar una respuesta o consulta DNS",
+    "en": "deliver a DNS response or query",
+    "pt-BR": "entregar uma resposta ou consulta DNS"
+  },
+  "WinDivertDidNotDeliverTheCompleteDNSPacket": {
+    "es": "WinDivert no entregó el paquete DNS completo.",
+    "en": "WinDivert did not deliver the complete DNS packet.",
+    "pt-BR": "O WinDivert não entregou o pacote DNS completo."
+  },
+  "StopReceivingDNSQueries": {
+    "es": "detener la recepción de consultas DNS",
+    "en": "stop receiving DNS queries",
+    "pt-BR": "interromper o recebimento de consultas DNS"
+  },
+  "TheHotspotIPv4InterfaceIsInvalidForTheDNS": {
+    "es": "La interfaz IPv4 del hotspot no es válida para el filtro DNS.",
+    "en": "The hotspot IPv4 interface is invalid for the DNS filter.",
+    "pt-BR": "A interface IPv4 do hotspot não é válida para o filtro DNS."
+  },
+  "TheHotspotAddressIsNotAValidIPv4Host": {
+    "es": "La dirección del hotspot no es una dirección IPv4 de equipo válida.",
+    "en": "The hotspot address is not a valid IPv4 host address.",
+    "pt-BR": "O endereço do hotspot não é um endereço IPv4 de host válido."
+  },
+  "EnterAValidDomainOrHttpHttpsWebAddress": {
+    "es": "Escribe un dominio o una dirección web válida con HTTP o HTTPS.",
+    "en": "Enter a valid domain or an HTTP or HTTPS web address.",
+    "pt-BR": "Digite um domínio ou um endereço web válido com HTTP ou HTTPS."
+  },
+  "UpTo128DomainsPerList": {
+    "es": "Cada lista admite hasta 128 dominios.",
+    "en": "Each list supports up to 128 domains.",
+    "pt-BR": "Cada lista aceita até 128 domínios."
+  },
+  "TheListContainsAnEmptyOrOverlyLongDomain": {
+    "es": "La lista contiene un dominio vacío o demasiado largo.",
+    "en": "The list contains an empty or overly long domain.",
+    "pt-BR": "A lista contém um domínio vazio ou longo demais."
+  },
+  "AddAtLeastOneDomainToTheAllowlist": {
+    "es": "Agrega al menos un dominio a la lista de permitidos.",
+    "en": "Add at least one domain to the allowlist.",
+    "pt-BR": "Adicione pelo menos um domínio à lista de domínios permitidos."
+  },
+  "ItWillBeRemovedFromTheAllowlistTheFilter": {
+    "es": "Se eliminará de la lista de permitidos. El cambio tendrá efecto cuando apliques las reglas.",
+    "en": "It will be removed from the allowlist. The change takes effect when you apply the rules.",
+    "pt-BR": "Ele será removido da lista de domínios permitidos. A alteração terá efeito quando você aplicar as regras."
+  },
+  "ItWillBeRemovedFromTheBlocklistTheFilter": {
+    "es": "Se eliminará de la lista de bloqueo. El cambio tendrá efecto cuando apliques las reglas.",
+    "en": "It will be removed from the blocklist. The change takes effect when you apply the rules.",
+    "pt-BR": "Ele será removido da lista de bloqueio. A alteração terá efeito quando você aplicar as regras."
+  },
+  "WindowsCannotDetectAnActiveInternetConnectionConnectThe": {
+    "es": "Windows no detecta una conexión activa a internet. Conecta la laptop al Wi-Fi e inténtalo de nuevo.",
+    "en": "Windows cannot detect an active internet connection. Connect the laptop to Wi-Fi and try again.",
+    "pt-BR": "O Windows não detectou uma conexão ativa com a internet. Conecte o notebook ao Wi-Fi e tente novamente."
+  },
+  "Offline": {
+    "es": "Sin conexión",
+    "en": "Offline",
+    "pt-BR": "Sem conexão"
+  },
+  "CouldNotIdentifyASingleHotspotIPv4InterfaceTurn": {
+    "es": "No se pudo identificar una única interfaz IPv4 del hotspot. Enciende el hotspot y actualiza el diagnóstico.",
+    "en": "Could not identify a single IPv4 interface for the hotspot. Turn on the hotspot and refresh Diagnostics.",
+    "pt-BR": "Não foi possível identificar uma única interface IPv4 do hotspot. Ligue o hotspot e atualize o diagnóstico."
+  },
+  "TurnOffTheHotspotBeforeChangingItsNamePassword": {
+    "es": "Apaga el hotspot antes de cambiar el nombre, la contraseña o la banda.",
+    "en": "Turn off the hotspot before changing its name, password, or band.",
+    "pt-BR": "Desligue o hotspot antes de alterar o nome, a senha ou a banda."
+  },
+  "WindowsCouldNotCompleteTheOperation01": {
+    "es": "Windows no pudo completar la operación ({0}). {1}",
+    "en": "Windows could not complete the operation ({0}). {1}",
+    "pt-BR": "O Windows não pôde concluir a operação ({0}). {1}"
+  },
+  "WindowsDeniedAccessToTheHotspotOpenWindowsSettings": {
+    "es": "Windows denegó el acceso al hotspot. Abre la configuración de Windows para comprobar permisos y disponibilidad.",
+    "en": "Windows denied access to the hotspot. Open Windows settings to check permissions and availability.",
+    "pt-BR": "O Windows negou acesso ao hotspot. Abra as configurações do Windows para verificar permissões e disponibilidade."
+  },
+  "Unconfirmed": {
+    "es": "Sin confirmar",
+    "en": "Unconfirmed",
+    "pt-BR": "Não confirmado"
+  },
+  "Changing": {
+    "es": "Cambiando…",
+    "en": "Changing…",
+    "pt-BR": "Alterando…"
+  },
+  "OnWorking": {
+    "es": "Encendido · trabajando",
+    "en": "On · working",
+    "pt-BR": "Ligado · processando"
+  },
+  "OffWorking": {
+    "es": "Apagado · trabajando",
+    "en": "Off · working",
+    "pt-BR": "Desligado · processando"
+  },
+  "AllDevices": {
+    "es": "Todos los dispositivos",
+    "en": "All devices",
+    "pt-BR": "Todos os dispositivos"
+  },
+  "HistoryIsUnavailable": {
+    "es": "El historial no está disponible: ",
+    "en": "History is unavailable: ",
+    "pt-BR": "O histórico não está disponível: "
+  },
+  "HotspotDNSQueries": {
+    "es": "Consultas DNS del hotspot.",
+    "en": "Hotspot DNS queries.",
+    "pt-BR": "Consultas DNS do hotspot."
+  },
+  "ChooseAStartDateAndAnEndDateOn": {
+    "es": "Elige una fecha inicial y una fecha final igual o posterior a la inicial.",
+    "en": "Choose a start date and an end date that is the same or later.",
+    "pt-BR": "Escolha uma data inicial e uma data final igual ou posterior à inicial."
+  },
+  "TheEndDateIsOutOfRange": {
+    "es": "La fecha final está fuera del intervalo permitido.",
+    "en": "The end date is outside the allowed range.",
+    "pt-BR": "A data final está fora do intervalo permitido."
+  },
+  "PauseRecording": {
+    "es": "Pausar registro",
+    "en": "Pause recording",
+    "pt-BR": "Pausar registro"
+  },
+  "ResumeRecording": {
+    "es": "Reanudar registro",
+    "en": "Resume recording",
+    "pt-BR": "Retomar registro"
+  },
+  "HistoryUnavailable": {
+    "es": "Historial no disponible",
+    "en": "History unavailable",
+    "pt-BR": "Histórico indisponível"
+  },
+  "DNSQueryRecordingActive": {
+    "es": "Registro de consultas DNS activo",
+    "en": "DNS query recording active",
+    "pt-BR": "Registro de consultas DNS ativo"
+  },
+  "RecordingWaitingForDNSFilter": {
+    "es": "Registro en espera del filtro DNS",
+    "en": "Recording is waiting for the DNS filter",
+    "pt-BR": "Registro aguardando o filtro DNS"
+  },
+  "RecordingPaused": {
+    "es": "Registro pausado",
+    "en": "Recording paused",
+    "pt-BR": "Registro pausado"
+  },
+  "Retention01StoredOnThisLaptop": {
+    "es": "Historial local · conservación: {0} {1}",
+    "en": "Local history · retention: {0} {1}",
+    "pt-BR": "Histórico local · retenção: {0} {1}"
+  },
+  "Day": {
+    "es": "día",
+    "en": "day",
+    "pt-BR": "dia"
+  },
+  "Days": {
+    "es": "días",
+    "en": "days",
+    "pt-BR": "dias"
+  },
+  "FilteringMayStillWorkHistoryMayBeIncomplete": {
+    "es": " El filtrado puede seguir funcionando; el historial puede estar incompleto.",
+    "en": " Filtering may still work; history may be incomplete.",
+    "pt-BR": " O filtro pode continuar funcionando; o histórico pode estar incompleto."
+  },
+  "NoQueriesMatchTheseFilters": {
+    "es": "No hay consultas que coincidan con estos filtros.",
+    "en": "No queries match these filters.",
+    "pt-BR": "Nenhuma consulta corresponde a estes filtros."
+  },
+  "NoMatchesRecordingIsPaused": {
+    "es": "Sin coincidencias. El registro está pausado.",
+    "en": "No matches. Recording is paused.",
+    "pt-BR": "Nenhum resultado. O registro está pausado."
+  },
+  "Records0N0Blocked1N0": {
+    "es": "Registros: {0:N0} · Bloqueados: {1:N0}",
+    "en": "Records: {0:N0} · Blocked: {1:N0}",
+    "pt-BR": "Registros: {0:N0} · Bloqueados: {1:N0}"
+  },
+  "Page0Of1": {
+    "es": "Página {0} de {1}",
+    "en": "Page {0} of {1}",
+    "pt-BR": "Página {0} de {1}"
+  },
+  "CouldNotQueryHistory": {
+    "es": "No se pudo consultar el historial: ",
+    "en": "Could not query history: ",
+    "pt-BR": "Não foi possível consultar o histórico: "
+  },
+  "RecordingResumedNewDNSQueriesWillBeSaved": {
+    "es": "Registro reanudado. Se guardarán las consultas DNS nuevas.",
+    "en": "Recording resumed. New DNS queries will be saved.",
+    "pt-BR": "Registro retomado. As novas consultas DNS serão salvas."
+  },
+  "RecordingPausedTheFilterKeepsItsActiveRules": {
+    "es": "Registro pausado. Las reglas del filtro se mantienen.",
+    "en": "Recording paused. The filter rules remain unchanged.",
+    "pt-BR": "Registro pausado. As regras do filtro são mantidas."
+  },
+  "CouldNotChangeRecording": {
+    "es": "No se pudo cambiar el estado del registro: ",
+    "en": "Could not change the recording status: ",
+    "pt-BR": "Não foi possível alterar o estado do registro: "
+  },
+  "RetentionSaved01OlderRecordsAreDeletedAutomatically": {
+    "es": "Plazo de conservación guardado: {0} {1}. Los registros más antiguos se eliminan automáticamente.",
+    "en": "Retention period saved: {0} {1}. Older records are deleted automatically.",
+    "pt-BR": "Prazo de retenção salvo: {0} {1}. Os registros mais antigos são excluídos automaticamente."
+  },
+  "CouldNotSaveRetention": {
+    "es": "No se pudo guardar el plazo de conservación: ",
+    "en": "Could not save the retention period: ",
+    "pt-BR": "Não foi possível salvar o prazo de retenção: "
+  },
+  "HistoryClearedIfRecordingIsActiveItWillContinue": {
+    "es": "Historial borrado. Si el registro está activo, se seguirán guardando las nuevas consultas DNS.",
+    "en": "History cleared. If recording is active, new DNS queries will continue to be saved.",
+    "pt-BR": "Histórico apagado. Se o registro estiver ativo, as novas consultas DNS continuarão sendo salvas."
+  },
+  "CouldNotClearHistory": {
+    "es": "No se pudo borrar el historial: ",
+    "en": "Could not clear history: ",
+    "pt-BR": "Não foi possível apagar o histórico: "
+  },
+  "NoValidDomain": {
+    "es": "Sin dominio válido",
+    "en": "No valid domain",
+    "pt-BR": "Sem domínio válido"
+  },
+  "DNSQuery": {
+    "es": "Consulta DNS",
+    "en": "DNS query",
+    "pt-BR": "Consulta DNS"
+  },
+  "PreviousRecord": {
+    "es": "Registro anterior",
+    "en": "Previous record",
+    "pt-BR": "Registro anterior"
+  },
+  "Historical": {
+    "es": " · histórico",
+    "en": " · historical",
+    "pt-BR": " · histórico"
+  },
+  "InProgress": {
+    "es": "En curso",
+    "en": "In progress",
+    "pt-BR": "Em andamento"
+  },
+  "InProgress2": {
+    "es": "en curso",
+    "en": "in progress",
+    "pt-BR": "em andamento"
+  },
+  "NoTransfer": {
+    "es": "sin transferencia",
+    "en": "no transfer",
+    "pt-BR": "sem transferência"
+  },
+  "ControlOnTrial": {
+    "es": "Control activo",
+    "en": "Access control on",
+    "pt-BR": "Controle ativo"
+  },
+  "ControlOff": {
+    "es": "Control apagado",
+    "en": "Access control off",
+    "pt-BR": "Controle desligado"
+  },
+  "ControlUnconfirmed": {
+    "es": "Control sin confirmar",
+    "en": "Access control unconfirmed",
+    "pt-BR": "Controle não confirmado"
+  },
+  "InternetAccessLimitedToAuthorizedDevices": {
+    "es": "Acceso a internet limitado a los dispositivos autorizados.",
+    "en": "Internet access limited to authorized devices.",
+    "pt-BR": "Acesso à internet limitado aos dispositivos autorizados."
+  },
+  "SavedDecisionsAreNotRestrictingAccess": {
+    "es": "Las decisiones guardadas no están limitando el acceso.",
+    "en": "Saved decisions are not restricting access.",
+    "pt-BR": "As decisões salvas não estão limitando o acesso."
+  },
+  "WindowsDidNotConfirmAccessControlTurnOffThe": {
+    "es": "Windows no confirmó el control. Apaga el hotspot si necesitas impedir el acceso.",
+    "en": "Windows did not confirm access control. Turn off the hotspot if you need to prevent access.",
+    "pt-BR": "O Windows não confirmou o controle. Desligue o hotspot se precisar impedir o acesso."
+  },
+  "UpdatingAccessControl": {
+    "es": "Actualizando el control…",
+    "en": "Updating access control…",
+    "pt-BR": "Atualizando o controle…"
+  },
+  "DeviceAccessControlOn": {
+    "es": "Control de dispositivos activo",
+    "en": "Device access control on",
+    "pt-BR": "Controle de dispositivos ativo"
+  },
+  "DeviceAccessControlOff": {
+    "es": "Control de dispositivos apagado",
+    "en": "Device access control off",
+    "pt-BR": "Controle de dispositivos desligado"
+  },
+  "AuthorizedDevicesOnlyClosingHenTurnsOffTheHotspot": {
+    "es": "Solo dispositivos autorizados. Al cerrar Hen, se apaga el hotspot.",
+    "en": "Authorized devices only. Closing Hen turns off the hotspot.",
+    "pt-BR": "Somente dispositivos autorizados. Fechar o Hen desliga o hotspot."
+  },
+  "SavedAuthorizationsWillApplyWhenYouEnableAccessControl": {
+    "es": "Las autorizaciones guardadas se aplicarán al activar el control.",
+    "en": "Saved authorizations will apply when you enable access control.",
+    "pt-BR": "As autorizações salvas serão aplicadas ao ativar o controle."
+  },
+  "WindowsDidNotConfirmInternetBlockingDisableAccessControl": {
+    "es": "Windows no confirmó el bloqueo de internet. Desactiva el control para retirar sus reglas o apaga el hotspot.",
+    "en": "Windows did not confirm internet blocking. Disable access control to remove its rules or turn off the hotspot.",
+    "pt-BR": "O Windows não confirmou o bloqueio de internet. Desative o controle para remover suas regras ou desligue o hotspot."
+  },
+  "EnableControl": {
+    "es": "Activar control",
+    "en": "Enable control",
+    "pt-BR": "Ativar controle"
+  },
+  "DisableControl": {
+    "es": "Desactivar control",
+    "en": "Disable control",
+    "pt-BR": "Desativar controle"
+  },
+  "RemoveThisControlAndRestoreAccessWithoutApprovalDecisions": {
+    "es": "Desactiva este control y permite el acceso sin aprobación. Las autorizaciones quedan guardadas.",
+    "en": "Disable this control to allow access without approval. Authorizations remain saved.",
+    "pt-BR": "Desative este controle para permitir o acesso sem aprovação. As autorizações continuam salvas."
+  },
+  "WindowsWillAskForAdministratorPermissionToInstallTemporary": {
+    "es": "Windows pedirá permiso de administrador para instalar los filtros temporales.",
+    "en": "Windows will ask for administrator permission to install temporary filters.",
+    "pt-BR": "O Windows pedirá permissão de administrador para instalar os filtros temporários."
+  },
+  "TurnOnTheHotspotToEnableAccessControlYou": {
+    "es": "Enciende el hotspot para activar el control. Puedes preparar la lista mientras tanto.",
+    "en": "Turn on the hotspot to enable access control. You can prepare the list now.",
+    "pt-BR": "Ligue o hotspot para ativar o controle. Você pode preparar a lista agora."
+  },
+  "UnnamedDevice": {
+    "es": "Dispositivo sin nombre",
+    "en": "Unnamed device",
+    "pt-BR": "Dispositivo sem nome"
+  },
+  "NoIPAssigned": {
+    "es": "Sin IP asignada",
+    "en": "No IP assigned",
+    "pt-BR": "Sem IP atribuído"
+  },
+  "InvalidMAC": {
+    "es": "MAC no válida",
+    "en": "Invalid MAC",
+    "pt-BR": "MAC inválido"
+  },
+  "AuthorizationSaved": {
+    "es": "Autorización guardada",
+    "en": "Authorization saved",
+    "pt-BR": "Autorização salva"
+  },
+  "BlockSaved": {
+    "es": "Bloqueo guardado",
+    "en": "Block saved",
+    "pt-BR": "Bloqueio salvo"
+  },
+  "WaitingForIP": {
+    "es": "Esperando IP",
+    "en": "Waiting for IP",
+    "pt-BR": "Aguardando IP"
+  },
+  "NotYetApplied": {
+    "es": "Por aplicar",
+    "en": "Not yet applied",
+    "pt-BR": "Aguardando aplicação"
+  },
+  "ConnectADeviceToReviewItOrAddIts": {
+    "es": "Conecta un dispositivo para revisarlo o agrega su dirección MAC en la otra pestaña.",
+    "en": "Connect a device to review it or add its MAC address in the other tab.",
+    "pt-BR": "Conecte um dispositivo para verificá-lo ou adicione seu endereço MAC na outra aba."
+  },
+  "NoSavedAuthorizationsYetTurnOnTheHotspotTo": {
+    "es": "Todavía no hay autorizaciones guardadas. Enciende el hotspot para detectar dispositivos o agrega una dirección MAC manualmente.",
+    "en": "No authorizations saved yet. Turn on the hotspot to detect devices or add a MAC address manually.",
+    "pt-BR": "Ainda não há autorizações salvas. Ligue o hotspot para detectar dispositivos ou adicione um endereço MAC manualmente."
+  },
+  "ControlDisabledThisInternetBlockHasBeenRemovedAuthorizations": {
+    "es": "Control desactivado. Se retiró este bloqueo de internet. Las autorizaciones quedan guardadas.",
+    "en": "Access control disabled. This internet block has been removed. Authorizations remain saved.",
+    "pt-BR": "Controle desativado. Este bloqueio de internet foi removido. As autorizações continuam salvas."
+  },
+  "TurnOnTheHotspotAndConfirmItsStatusBefore": {
+    "es": "Enciende el hotspot y confirma su estado antes de activar el control.",
+    "en": "Turn on the hotspot and confirm its status before enabling access control.",
+    "pt-BR": "Ligue o hotspot e confirme seu estado antes de ativar o controle."
+  },
+  "FiltersInstalledUseYourPhoneToCheckBlockingAnd": {
+    "es": "Filtros instalados. Comprueba en tu teléfono que el bloqueo y la autorización funcionan. Al cerrar la aplicación, se apagará el hotspot.",
+    "en": "Filters installed. Check on your phone that blocking and authorization work. Closing the app will turn off the hotspot.",
+    "pt-BR": "Filtros instalados. Verifique no celular se o bloqueio e a autorização funcionam. Fechar o aplicativo desligará o hotspot."
+  },
+  "DecisionSavedAndSentToAccessControlCheckThe": {
+    "es": "Decisión guardada y enviada al control de acceso. Comprueba el resultado en el teléfono.",
+    "en": "Decision saved and sent to access control. Check the result on your phone.",
+    "pt-BR": "Decisão salva e enviada ao controle de acesso. Verifique o resultado no celular."
+  },
+  "DecisionSavedItWillApplyWhenYouEnableDevice": {
+    "es": "Decisión guardada. Se aplicará cuando actives el control de dispositivos.",
+    "en": "Decision saved. It will apply when you enable device access control.",
+    "pt-BR": "Decisão salva. Ela será aplicada ao ativar o controle de dispositivos."
+  },
+  "TheHotspotWasTurnedOffToPreventUncontrolledAccess": {
+    "es": "El hotspot se apagó para evitar acceso sin control.",
+    "en": "The hotspot was turned off to prevent uncontrolled access.",
+    "pt-BR": "O hotspot foi desligado para evitar acesso sem controle."
+  },
+  "CouldNotConfirmThatTheHotspotIsOffTurn": {
+    "es": "No se pudo confirmar que el hotspot esté apagado. Apágalo desde Windows.",
+    "en": "Could not confirm that the hotspot is off. Turn it off in Windows.",
+    "pt-BR": "Não foi possível confirmar que o hotspot está desligado. Desligue-o pelo Windows."
+  },
+  "CouldNotTurnOffTheHotspotTurnItOff": {
+    "es": "No se pudo apagar el hotspot. Apágalo desde Windows para impedir acceso sin control.",
+    "en": "Could not turn off the hotspot. Turn it off in Windows to prevent uncontrolled access.",
+    "pt-BR": "Não foi possível desligar o hotspot. Desligue-o pelo Windows para impedir acesso sem controle."
+  },
+  "TheDecisionWasSavedButItsApplicationWasNot": {
+    "es": "La decisión quedó guardada, pero no se confirmó su aplicación. ",
+    "en": "The decision was saved, but its application was not confirmed. ",
+    "pt-BR": "A decisão foi salva, mas sua aplicação não foi confirmada. "
+  },
+  "CouldNotConfirmThatTheHotspotIsOffAccess": {
+    "es": "No se pudo confirmar que el hotspot esté apagado. El control permanece abierto. Apaga el hotspot desde Windows antes de cerrar la aplicación.",
+    "en": "Could not confirm that the hotspot is off. Access control remains open. Turn off the hotspot in Windows before closing the app.",
+    "pt-BR": "Não foi possível confirmar que o hotspot está desligado. O controle permanece aberto. Desligue o hotspot pelo Windows antes de fechar o aplicativo."
+  },
+  "ThatDomainIsAlreadyOnTheList": {
+    "es": "Ese dominio ya está en la lista.",
+    "en": "That domain is already on the list.",
+    "pt-BR": "Esse domínio já está na lista."
+  },
+  "TheListSupportsUpTo128Domains": {
+    "es": "La lista admite hasta 128 dominios.",
+    "en": "The list supports up to 128 domains.",
+    "pt-BR": "A lista aceita até 128 domínios."
+  },
+  "CouldNotReadTheSavedDraftYouCanCreate": {
+    "es": "No se pudo leer el borrador guardado. Puedes crear uno nuevo.",
+    "en": "Could not read the saved draft. You can create a new one.",
+    "pt-BR": "Não foi possível ler o rascunho salvo. Você pode criar um novo."
+  },
+  "WaitForTheOperationToFinish": {
+    "es": "Espera a que termine la operación.",
+    "en": "Wait for the operation to finish.",
+    "pt-BR": "Aguarde o fim da operação."
+  },
+  "TheAppRemainsOpenBecauseSafeShutdownDidNot": {
+    "es": "La aplicación sigue abierta porque no se pudo completar el cierre seguro: ",
+    "en": "The app remains open because safe shutdown could not be completed: ",
+    "pt-BR": "O aplicativo permanece aberto porque não foi possível concluir o encerramento seguro: "
+  },
+  "WiFiNetwork": {
+    "es": "Red Wi-Fi",
+    "en": "Wi-Fi network",
+    "pt-BR": "Rede Wi-Fi"
+  },
+  "Diagnostics": {
+    "es": "Diagnóstico",
+    "en": "Diagnostics",
+    "pt-BR": "Diagnóstico"
+  },
+  "StatusUpdatedFromWindows": {
+    "es": "Estado actualizado desde Windows.",
+    "en": "Status updated from Windows.",
+    "pt-BR": "Estado atualizado pelo Windows."
+  },
+  "TheDNSFilterStopped": {
+    "es": "El filtro DNS se detuvo. ",
+    "en": "The DNS filter stopped. ",
+    "pt-BR": "O filtro DNS foi interrompido. "
+  },
+  "ShutdownPending": {
+    "es": " Cierre pendiente: ",
+    "en": " Shutdown pending: ",
+    "pt-BR": " Encerramento pendente: "
+  },
+  "DNSFilterShutdownWasNotConfirmed": {
+    "es": "No se pudo confirmar el cierre del filtro DNS: ",
+    "en": "Could not confirm that the DNS filter has closed: ",
+    "pt-BR": "Não foi possível confirmar o encerramento do filtro DNS: "
+  },
+  "SharingInternetBand0": {
+    "es": "Compartiendo internet · banda: {0}",
+    "en": "Sharing internet · band: {0}",
+    "pt-BR": "Compartilhando internet · banda: {0}"
+  },
+  "OffTurnItOnToShareInternet": {
+    "es": "Apagado · enciéndelo para compartir internet",
+    "en": "Off · turn it on to share internet",
+    "pt-BR": "Desligado · ligue para compartilhar internet"
+  },
+  "WindowsIsChangingTheStatus": {
+    "es": "Windows está cambiando el estado…",
+    "en": "Windows is changing the status…",
+    "pt-BR": "O Windows está alterando o estado…"
+  },
+  "CouldNotConfirmTheStatus": {
+    "es": "No se pudo confirmar el estado",
+    "en": "Could not confirm the status",
+    "pt-BR": "Não foi possível confirmar o estado"
+  },
+  "Network0Band1": {
+    "es": "Red: {0} · Banda: {1}",
+    "en": "Network: {0} · Band: {1}",
+    "pt-BR": "Rede: {0} · Banda: {1}"
+  },
+  "SetUpYourNetworkToGetStarted": {
+    "es": "Configura tu red para comenzar.",
+    "en": "Set up your network to get started.",
+    "pt-BR": "Configure sua rede para começar."
+  },
+  "TurnOffHotspot": {
+    "es": "Apagar hotspot",
+    "en": "Turn off hotspot",
+    "pt-BR": "Desligar hotspot"
+  },
+  "TurnOnHotspot": {
+    "es": "Encender hotspot",
+    "en": "Turn on hotspot",
+    "pt-BR": "Ligar hotspot"
+  },
+  "CapacityUpTo0Devices": {
+    "es": "Límite de dispositivos: {0}",
+    "en": "Device limit: {0}",
+    "pt-BR": "Limite de dispositivos: {0}"
+  },
+  "CapacityUnavailable": {
+    "es": "Capacidad no disponible",
+    "en": "Capacity unavailable",
+    "pt-BR": "Capacidade indisponível"
+  },
+  "ConnectionAvailable": {
+    "es": "Conexión disponible",
+    "en": "Connection available",
+    "pt-BR": "Conexão disponível"
+  },
+  "InternetAccessUnconfirmed": {
+    "es": "Acceso a internet sin confirmar",
+    "en": "Internet access unconfirmed",
+    "pt-BR": "Acesso à internet não confirmado"
+  },
+  "CouldNotReadTheDeviceListRefreshTheStatus": {
+    "es": "No se pudo consultar la lista de dispositivos. Actualiza el estado para intentarlo de nuevo.",
+    "en": "Could not read the device list. Refresh the status to try again.",
+    "pt-BR": "Não foi possível consultar a lista de dispositivos. Atualize o estado para tentar novamente."
+  },
+  "TurnOnTheHotspotAndConnectADeviceIt": {
+    "es": "Enciende el hotspot y conecta un dispositivo. Aparecerá aquí automáticamente.",
+    "en": "Turn on the hotspot and connect a device. It will appear here automatically.",
+    "pt-BR": "Ligue o hotspot e conecte um dispositivo. Ele aparecerá aqui automaticamente."
+  },
+  "WaitForWindowsToFinishChangingTheHotspotStatus": {
+    "es": "Espera a que Windows termine de cambiar el estado del hotspot.",
+    "en": "Wait for Windows to finish changing the hotspot status.",
+    "pt-BR": "Aguarde o Windows terminar de alterar o estado do hotspot."
+  },
+  "NoDevicesConnectedYetConnectAPhoneToThis": {
+    "es": "Todavía no hay dispositivos conectados. Conecta un teléfono a esta red para comenzar.",
+    "en": "No devices connected yet. Connect a phone to this network to get started.",
+    "pt-BR": "Ainda não há dispositivos conectados. Conecte um celular a esta rede para começar."
+  },
+  "WindowsReports0CheckDiagnosticsToContinue": {
+    "es": "Windows indica: {0}. Revisa la sección Diagnóstico para continuar.",
+    "en": "Windows reports: {0}. Open Diagnostics to continue.",
+    "pt-BR": "O Windows informa: {0}. Abra a seção Diagnóstico para continuar."
+  },
+  "StatusCheckedDirectlyWithWindows": {
+    "es": "Estado consultado directamente en Windows. La frecuencia de actualización se adapta a la actividad.",
+    "en": "Status checked directly with Windows. The refresh rate adapts to activity.",
+    "pt-BR": "Estado consultado diretamente no Windows. A frequência de atualização se adapta à atividade."
+  },
+  "CloseThePreviousFilterOrAccessControlBeforeTurning": {
+    "es": "Cierra el filtro o el control anterior antes de volver a encender el hotspot.",
+    "en": "Close the previous filter or access control before turning the hotspot on again.",
+    "pt-BR": "Feche o filtro ou controle anterior antes de ligar o hotspot novamente."
+  },
+  "StopFilteringDNSQueries": {
+    "es": "Detén el filtrado de consultas DNS.",
+    "en": "Stop filtering DNS queries.",
+    "pt-BR": "Interrompa o filtro de consultas DNS."
+  },
+  "RequiresAdministratorPermission": {
+    "es": "Requiere permiso de administrador.",
+    "en": "Requires administrator permission.",
+    "pt-BR": "Requer permissão de administrador."
+  },
+  "TurnOnTheHotspotToEnableTheDNSFilter": {
+    "es": "Enciende el hotspot para activar el filtro DNS.",
+    "en": "Turn on the hotspot to enable the DNS filter.",
+    "pt-BR": "Ligue o hotspot para ativar o filtro DNS."
+  },
+  "TheseRulesAreAlreadyApplied": {
+    "es": "Estas reglas ya están aplicadas.",
+    "en": "These rules are already applied.",
+    "pt-BR": "Estas regras já estão aplicadas."
+  },
+  "RulesApplyToNewDNSQueriesCachedResponsesMay": {
+    "es": "Las reglas se aplicarán a las nuevas consultas DNS. Las respuestas guardadas en caché pueden seguir funcionando.",
+    "en": "The rules will apply to new DNS queries. Cached responses may still work.",
+    "pt-BR": "As regras serão aplicadas às novas consultas DNS. As respostas em cache podem continuar funcionando."
+  },
+  "TurnOnTheHotspotAndDNSFilterFirst": {
+    "es": "Activa primero el hotspot y el filtro DNS.",
+    "en": "Turn on the hotspot and DNS filter first.",
+    "pt-BR": "Ative primeiro o hotspot e o filtro DNS."
+  },
+  "HotspotOffSettingsAvailable": {
+    "es": "Hotspot apagado · configuración disponible",
+    "en": "Hotspot off · settings available",
+    "pt-BR": "Hotspot desligado · configuração disponível"
+  },
+  "TurnOffTheHotspotToEditSettings": {
+    "es": "Apaga el hotspot para editar la configuración.",
+    "en": "Turn off the hotspot to edit settings.",
+    "pt-BR": "Desligue o hotspot para editar a configuração."
+  },
+  "WaitForWindowsToFinishTheOperationBeforeEditing": {
+    "es": "Espera a que Windows termine la operación para editar la red.",
+    "en": "Wait for Windows to finish the operation before editing the network.",
+    "pt-BR": "Aguarde o Windows terminar a operação antes de editar a rede."
+  },
+  "EditingLockedUntilWindowsConfirmsHotspotSettingsAreAvailable": {
+    "es": "Edición bloqueada hasta confirmar que Windows permite configurar el hotspot.",
+    "en": "Editing locked until Windows confirms hotspot settings are available.",
+    "pt-BR": "Edição bloqueada até o Windows confirmar que é possível configurar o hotspot."
+  },
+  "WindowsIsProcessingTheOperation": {
+    "es": "Windows está procesando la operación…",
+    "en": "Windows is processing the operation…",
+    "pt-BR": "O Windows está processando a operação…"
+  },
+  "HotspotDNSFilterAndDeviceAccessControlTurnedOff": {
+    "es": "Hotspot, filtro DNS y control de dispositivos apagados.",
+    "en": "Hotspot, DNS filter, and device access control turned off.",
+    "pt-BR": "Hotspot, filtro DNS e controle de dispositivos desligados."
+  },
+  "HotspotIsOnConnectAPhoneToTheNetwork": {
+    "es": "Hotspot encendido. Conecta un teléfono a la red para comprobar la navegación.",
+    "en": "Hotspot is on. Connect a phone to the network to check browsing.",
+    "pt-BR": "Hotspot ligado. Conecte um celular à rede para testar a navegação."
+  },
+  "SettingsSavedInWindowsYouCanTurnOnThe": {
+    "es": "Configuración guardada en Windows. Puedes encender el hotspot desde la sección Resumen.",
+    "en": "Settings saved in Windows. You can turn on the hotspot from Overview.",
+    "pt-BR": "Configurações salvas no Windows. Você pode ligar o hotspot na seção Resumo."
+  },
+  "DraftSaved": {
+    "es": "Borrador guardado.",
+    "en": "Draft saved.",
+    "pt-BR": "Rascunho salvo."
+  },
+  "AllowedDomains": {
+    "es": "Dominios permitidos",
+    "en": "Allowed domains",
+    "pt-BR": "Domínios permitidos"
+  },
+  "BlockedDomains": {
+    "es": "Dominios bloqueados",
+    "en": "Blocked domains",
+    "pt-BR": "Domínios bloqueados"
+  },
+  "AddAtLeastOneDomainToEnableThisList": {
+    "es": "Agrega al menos un dominio para activar esta lista.",
+    "en": "Add at least one domain to enable this list.",
+    "pt-BR": "Adicione pelo menos um domínio para ativar esta lista."
+  },
+  "AddTheFirstDomainYouWantToBlock": {
+    "es": "Agrega el primer dominio que quieras bloquear.",
+    "en": "Add the first domain you want to block.",
+    "pt-BR": "Adicione o primeiro domínio que deseja bloquear."
+  },
+  "DomainWaitingToBeAdded": {
+    "es": "Hay un dominio pendiente de agregar.",
+    "en": "A domain is waiting to be added.",
+    "pt-BR": "Há um domínio aguardando adição."
+  },
+  "AllChangesApplied": {
+    "es": "Todos los cambios aplicados.",
+    "en": "All changes applied.",
+    "pt-BR": "Todas as alterações aplicadas."
+  },
+  "DraftSavedWaitingToApply": {
+    "es": "Borrador guardado. Falta aplicar los cambios.",
+    "en": "Draft saved. Changes have not been applied yet.",
+    "pt-BR": "Rascunho salvo. As alterações ainda não foram aplicadas."
+  },
+  "ChangesNotAppliedToTheDNSFilter": {
+    "es": "Cambios sin aplicar al filtro DNS.",
+    "en": "Changes not applied to the DNS filter.",
+    "pt-BR": "Alterações não aplicadas ao filtro DNS."
+  },
+  "UnsavedChanges": {
+    "es": "Cambios sin guardar.",
+    "en": "Unsaved changes.",
+    "pt-BR": "Alterações não salvas."
+  },
+  "DNSFilterOffItsRulesNoLongerApplyTo": {
+    "es": "Filtro DNS apagado. Sus reglas ya no se aplican a las consultas nuevas.",
+    "en": "DNS filter off. Its rules no longer apply to new queries.",
+    "pt-BR": "Filtro DNS desligado. Suas regras não se aplicam mais às novas consultas."
+  },
+  "FilterActiveButTheDraftCouldNotBeSaved": {
+    "es": "Filtro activo, pero no se pudo guardar el borrador: ",
+    "en": "Filter active, but the draft could not be saved: ",
+    "pt-BR": "Filtro ativo, mas não foi possível salvar o rascunho: "
+  },
+  "DNSFilterEnabled": {
+    "es": "Filtro DNS activado.",
+    "en": "DNS filter enabled.",
+    "pt-BR": "Filtro DNS ativado."
+  },
+  "TheHotspotAndDNSFilterMustBeOn": {
+    "es": "El hotspot y el filtro DNS deben estar encendidos.",
+    "en": "The hotspot and DNS filter must be on.",
+    "pt-BR": "O hotspot e o filtro DNS devem estar ligados."
+  },
+  "ApplyingTheRulesWasNotConfirmed": {
+    "es": "No se pudo confirmar la aplicación de las reglas: ",
+    "en": "Could not confirm that the rules were applied: ",
+    "pt-BR": "Não foi possível confirmar a aplicação das regras: "
+  },
+  "ChangesApplied": {
+    "es": "Cambios aplicados.",
+    "en": "Changes applied.",
+    "pt-BR": "Alterações aplicadas."
+  },
+  "DNSOn": {
+    "es": "DNS activo",
+    "en": "DNS on",
+    "pt-BR": "DNS ativo"
+  },
+  "DNSOff": {
+    "es": "DNS apagado",
+    "en": "DNS off",
+    "pt-BR": "DNS desligado"
+  },
+  "DNSUnconfirmed": {
+    "es": "DNS sin confirmar",
+    "en": "DNS unconfirmed",
+    "pt-BR": "DNS não confirmado"
+  },
+  "OnlyDNSQueriesThatDevicesSendToTheHotspot": {
+    "es": "Solo se filtran las consultas DNS enviadas al hotspot. No se bloquea toda la navegación.",
+    "en": "Only DNS queries sent to the hotspot are filtered. This does not block all browsing.",
+    "pt-BR": "Somente as consultas DNS enviadas ao hotspot são filtradas. Isso não bloqueia toda a navegação."
+  },
+  "DNSFilterOn": {
+    "es": "Filtro DNS activo",
+    "en": "DNS filter on",
+    "pt-BR": "Filtro DNS ativo"
+  },
+  "DNSFilterOff": {
+    "es": "Filtro DNS apagado",
+    "en": "DNS filter off",
+    "pt-BR": "Filtro DNS desligado"
+  },
+  "DNSFilterUnconfirmed": {
+    "es": "Filtro DNS sin confirmar",
+    "en": "DNS filter unconfirmed",
+    "pt-BR": "Filtro DNS não confirmado"
+  },
+  "EnableDNSFilter": {
+    "es": "Activar filtro DNS",
+    "en": "Enable DNS filter",
+    "pt-BR": "Ativar filtro DNS"
+  },
+  "DisableFilter": {
+    "es": "Desactivar filtro",
+    "en": "Disable filter",
+    "pt-BR": "Desativar filtro"
+  },
+  "CloseFilter": {
+    "es": "Cerrar filtro",
+    "en": "Close filter",
+    "pt-BR": "Fechar filtro"
+  },
+  "HotspotDomainRules": {
+    "es": "Reglas de dominios del hotspot",
+    "en": "Hotspot domain rules",
+    "pt-BR": "Regras de domínios do hotspot"
+  },
+  "QueriesThisSession0N0Blocked1N0": {
+    "es": "Consultas en esta sesión: {0:N0} · Bloqueadas: {1:N0}",
+    "en": "Queries this session: {0:N0} · Blocked: {1:N0}",
+    "pt-BR": "Consultas nesta sessão: {0:N0} · Bloqueadas: {1:N0}"
+  },
+  "AllowlistOnly": {
+    "es": "Solo permitidos",
+    "en": "Allowlist only",
+    "pt-BR": "Somente permitidos"
+  },
+  "Blocklist": {
+    "es": "Lista de bloqueo",
+    "en": "Blocklist",
+    "pt-BR": "Lista de bloqueio"
+  },
+  "EnableTheFilterToApplyThisList": {
+    "es": "Activa el filtro para aplicar esta lista.",
+    "en": "Enable the filter to apply this list.",
+    "pt-BR": "Ative o filtro para aplicar esta lista."
+  },
+  "TurnOnTheHotspotToEnableTheFilter": {
+    "es": "Enciende el hotspot para activar el filtro.",
+    "en": "Turn on the hotspot to enable the filter.",
+    "pt-BR": "Ligue o hotspot para ativar o filtro."
+  },
+  "UnidentifiedDevice": {
+    "es": "Dispositivo sin identificar",
+    "en": "Unidentified device",
+    "pt-BR": "Dispositivo não identificado"
+  },
+  "JSONDiagnosticsJson": {
+    "es": "Diagnóstico JSON|*.json",
+    "en": "JSON diagnostics|*.json",
+    "pt-BR": "Diagnóstico JSON|*.json"
+  },
+  "DiagnosticsExportedIncludesNetworkNamesAndDeviceAddressesDoes": {
+    "es": "Diagnóstico exportado. Contiene nombres de red y direcciones de dispositivos, pero no contraseñas.",
+    "en": "Diagnostics exported. The file contains network names and device addresses, but no passwords.",
+    "pt-BR": "Diagnóstico exportado. O arquivo contém nomes de rede e endereços de dispositivos, mas não inclui senhas."
+  },
+  "Automatic": {
+    "es": "Automática",
+    "en": "Automatic",
+    "pt-BR": "Automática"
+  },
+  "AccessControlRequires64BitWindows": {
+    "es": "El control de acceso requiere Windows x64.",
+    "en": "Access control requires 64-bit Windows.",
+    "pt-BR": "O controle de acesso requer Windows de 64 bits."
+  },
+  "HenHotspotAccessSession": {
+    "es": "Hen Hotspot · sesión de acceso",
+    "en": "Hen Hotspot · access session",
+    "pt-BR": "Hen Hotspot · sessão de acesso"
+  },
+  "OpenTheWindowsFilter": {
+    "es": "abrir el filtro de Windows",
+    "en": "open the Windows filter",
+    "pt-BR": "abrir o filtro do Windows"
+  },
+  "HenHotspotDevices": {
+    "es": "Hen Hotspot · dispositivos",
+    "en": "Hen Hotspot · devices",
+    "pt-BR": "Hen Hotspot · dispositivos"
+  },
+  "CreateTheDeviceSession": {
+    "es": "crear la sesión de dispositivos",
+    "en": "create the device session",
+    "pt-BR": "criar a sessão de dispositivos"
+  },
+  "InvalidInterface": {
+    "es": "Interfaz no válida.",
+    "en": "Invalid interface.",
+    "pt-BR": "Interface inválida."
+  },
+  "StartTheAccessChanges": {
+    "es": "iniciar los cambios de acceso",
+    "en": "start the access changes",
+    "pt-BR": "iniciar as alterações de acesso"
+  },
+  "UpdateAnAccessRule": {
+    "es": "actualizar una regla de acceso",
+    "en": "update an access rule",
+    "pt-BR": "atualizar uma regra de acesso"
+  },
+  "UnauthorizedInboundBeforeNAT": {
+    "es": "Sin autorización · entrada antes de NAT",
+    "en": "Unauthorized · inbound before NAT",
+    "pt-BR": "Sem autorização · entrada antes do NAT"
+  },
+  "UnauthorizedInternetReturn": {
+    "es": "Sin autorización · retorno de internet",
+    "en": "Unauthorized · internet return",
+    "pt-BR": "Sem autorização · retorno da internet"
+  },
+  "UnauthorizedOutboundIPv6": {
+    "es": "Sin autorización · salida IPv6",
+    "en": "Unauthorized · outbound IPv6",
+    "pt-BR": "Sem autorização · saída IPv6"
+  },
+  "UnauthorizedIPv6Return": {
+    "es": "Sin autorización · retorno IPv6",
+    "en": "Unauthorized · IPv6 return",
+    "pt-BR": "Sem autorização · retorno IPv6"
+  },
+  "LocalTrafficCheckServices": {
+    "es": "Tráfico local · comprobar servicios",
+    "en": "Local traffic · check services",
+    "pt-BR": "Tráfego local · verificar serviços"
+  },
+  "UnauthorizedLaptopServices": {
+    "es": "Sin autorización · servicios de la laptop",
+    "en": "Unauthorized · laptop services",
+    "pt-BR": "Sem autorização · serviços do notebook"
+  },
+  "DHCPAssignment": {
+    "es": "Asignación DHCP",
+    "en": "DHCP assignment",
+    "pt-BR": "Atribuição DHCP"
+  },
+  "AuthorizedDeviceInboundBeforeNAT": {
+    "es": "Dispositivo autorizado · entrada antes de NAT",
+    "en": "Authorized device · inbound before NAT",
+    "pt-BR": "Dispositivo autorizado · entrada antes do NAT"
+  },
+  "AuthorizedDeviceReturn": {
+    "es": "Dispositivo autorizado · retorno",
+    "en": "Authorized device · return",
+    "pt-BR": "Dispositivo autorizado · retorno"
+  },
+  "AuthorizedDeviceLocalServices": {
+    "es": "Dispositivo autorizado · servicios locales",
+    "en": "Authorized device · local services",
+    "pt-BR": "Dispositivo autorizado · serviços locais"
+  },
+  "ApplyTheAccessChanges": {
+    "es": "aplicar los cambios de acceso",
+    "en": "apply the access changes",
+    "pt-BR": "aplicar as alterações de acesso"
+  },
+  "CheckTheAccessFilter": {
+    "es": "comprobar el filtro de acceso",
+    "en": "check the access filter",
+    "pt-BR": "verificar o filtro de acesso"
+  },
+  "TheAccessRuleChangedUnexpectedly": {
+    "es": "La regla de acceso cambió inesperadamente.",
+    "en": "The access rule changed unexpectedly.",
+    "pt-BR": "A regra de acesso mudou inesperadamente."
+  },
+  "CreateTheRule": {
+    "es": "crear la regla ",
+    "en": "create the rule ",
+    "pt-BR": "criar a regra "
+  },
+  "WindowsCouldNot00x1X82": {
+    "es": "Windows no pudo {0} (0x{1:X8}): {2}",
+    "en": "Windows could not {0} (0x{1:X8}): {2}",
+    "pt-BR": "O Windows não pôde {0} (0x{1:X8}): {2}"
+  },
+  "WinDivertDriverFilesAreMissingNextToHen": {
+    "es": "Faltan los archivos del controlador WinDivert en la carpeta de Hen Hotspot.",
+    "en": "The WinDivert driver files are missing from the Hen Hotspot folder.",
+    "pt-BR": "Os arquivos do driver WinDivert não estão na pasta do Hen Hotspot."
+  },
+  "WindowsRequiresAdministratorPermissionToEnableTheFilter": {
+    "es": "Windows requiere autorización de administrador para activar el filtro.",
+    "en": "Windows requires administrator permission to enable the filter.",
+    "pt-BR": "O Windows requer permissão de administrador para ativar o filtro."
+  },
+  "WindowsDidNotAcceptTheWinDivertDriverSignature": {
+    "es": "Windows no aceptó la firma del controlador WinDivert.",
+    "en": "Windows did not accept the WinDivert driver signature.",
+    "pt-BR": "O Windows não aceitou a assinatura do driver WinDivert."
+  },
+  "AnotherWinDivertVersionIsLoadedRestartWindowsBeforeTrying": {
+    "es": "Hay otra versión de WinDivert cargada. Reinicia Windows antes de intentarlo de nuevo.",
+    "en": "Another version of WinDivert is loaded. Restart Windows before trying again.",
+    "pt-BR": "Outra versão do WinDivert está carregada. Reinicie o Windows antes de tentar novamente."
+  },
+  "WindowsOrSecuritySoftwareBlockedTheWinDivertDriver": {
+    "es": "Windows o un programa de seguridad bloqueó el controlador WinDivert.",
+    "en": "Windows or security software blocked the WinDivert driver.",
+    "pt-BR": "O Windows ou um programa de segurança bloqueou o driver WinDivert."
+  },
+  "CouldNot01WinDivert2": {
+    "es": "No se pudo {0} (WinDivert {2}). {1}",
+    "en": "Could not {0} (WinDivert {2}). {1}",
+    "pt-BR": "Não foi possível {0} (WinDivert {2}). {1}"
+  },
+  "TheNetworkNameMustUse132BytesAnd": {
+    "es": "El nombre de la red debe ocupar entre 1 y 32 bytes y no contener saltos de línea.",
+    "en": "The network name must use 1–32 bytes and contain no line breaks.",
+    "pt-BR": "O nome da rede deve ocupar de 1 a 32 bytes e não conter quebras de linha."
+  },
+  "UseAPasswordOf863CharactersUnaccentedLetters": {
+    "es": "Usa una contraseña de 8 a 63 caracteres: letras sin acentos, números o símbolos.",
+    "en": "Use a password with 8–63 characters: unaccented letters, numbers, or symbols.",
+    "pt-BR": "Use uma senha de 8 a 63 caracteres: letras sem acentos, números ou símbolos."
+  },
+  "EnterOnlyTheDomainForExampleYoutubeCom0": {
+    "es": "Entrada no válida: {0}. Escribe solo el dominio, por ejemplo, youtube.com.",
+    "en": "Invalid input: {0}. Enter only the domain, for example, youtube.com.",
+    "pt-BR": "Entrada inválida: {0}. Digite apenas o domínio, por exemplo, youtube.com."
+  },
+  "InvalidDomain0": {
+    "es": "Dominio no válido: {0}",
+    "en": "Invalid domain: {0}",
+    "pt-BR": "Domínio inválido: {0}"
+  },
+  "SpeedMustBeBetween01And10000Mbps": {
+    "es": "La velocidad debe estar entre 0,1 y 10 000 Mbps.",
+    "en": "Speed must be between 0.1 and 10,000 Mbps.",
+    "pt-BR": "A velocidade deve estar entre 0,1 e 10.000 Mbps."
+  },
+  "ThisTestRequiresAdministratorPermission": {
+    "es": "Esta prueba requiere permiso de administrador.",
+    "en": "This test requires administrator permission.",
+    "pt-BR": "Este teste requer permissão de administrador."
+  },
+  "OpenTheTestWithoutTraffic": {
+    "es": "abrir la prueba sin tráfico",
+    "en": "open the test without traffic",
+    "pt-BR": "abrir o teste sem tráfego"
+  },
+  "ReadTheDriverVersion": {
+    "es": "leer la versión del controlador",
+    "en": "read the driver version",
+    "pt-BR": "ler a versão do driver"
+  },
+  "UnexpectedDriverVersion01": {
+    "es": "Versión inesperada del controlador: {0}.{1}",
+    "en": "Unexpected driver version: {0}.{1}",
+    "pt-BR": "Versão inesperada do driver: {0}.{1}"
+  },
+  "CloseTheTestReceiver": {
+    "es": "cerrar la recepción de prueba",
+    "en": "close the test receiver",
+    "pt-BR": "fechar o recebimento de teste"
+  },
+  "NativeCancellationDidNotReturnTheExpectedResult": {
+    "es": "La cancelación nativa no devolvió el resultado esperado.",
+    "en": "Native cancellation did not return the expected result.",
+    "pt-BR": "O cancelamento nativo não retornou o resultado esperado."
+  },
+  "CloseTheTestFilter": {
+    "es": "cerrar el filtro de prueba",
+    "en": "close the test filter",
+    "pt-BR": "fechar o filtro de teste"
+  },
+  "RemoveDomain": {
+    "es": "Eliminar dominio",
+    "en": "Remove domain",
+    "pt-BR": "Remover domínio"
+  },
+  "RemoveThisDomain": {
+    "es": "¿Eliminar este dominio?",
+    "en": "Remove this domain?",
+    "pt-BR": "Remover este domínio?"
+  },
+  "WORKSPACE": {
+    "es": "ESPACIO DE TRABAJO",
+    "en": "WORKSPACE",
+    "pt-BR": "ESPAÇO DE TRABALHO"
+  },
+  "NetworkConsole": {
+    "es": "Consola de red",
+    "en": "Network console",
+    "pt-BR": "Console de rede"
+  },
+  "DeviceAccessControlStatus": {
+    "es": "Estado del control de dispositivos",
+    "en": "Device access control status",
+    "pt-BR": "Estado do controle de dispositivos"
+  },
+  "YourNetworkOverview": {
+    "es": "Resumen de tu red",
+    "en": "Your network overview",
+    "pt-BR": "Resumo da sua rede"
+  },
+  "YourConnectionDevicesAndAccessAllInOnePlace": {
+    "es": "Tu conexión, tus dispositivos y el acceso, en un solo lugar.",
+    "en": "Your connection, devices, and access in one place.",
+    "pt-BR": "Sua conexão, seus dispositivos e o acesso em um só lugar."
+  },
+  "RefreshStatus": {
+    "es": "Actualizar estado",
+    "en": "Refresh status",
+    "pt-BR": "Atualizar estado"
+  },
+  "DismissNotice": {
+    "es": "Cerrar aviso",
+    "en": "Dismiss notice",
+    "pt-BR": "Fechar aviso"
+  },
+  "YOURACCESSPOINT": {
+    "es": "TU PUNTO DE ACCESO",
+    "en": "YOUR ACCESS POINT",
+    "pt-BR": "SEU PONTO DE ACESSO"
+  },
+  "CheckingWindows": {
+    "es": "Consultando el estado en Windows…",
+    "en": "Checking the status in Windows…",
+    "pt-BR": "Consultando o estado no Windows…"
+  },
+  "SetUpNetwork": {
+    "es": "Configurar red",
+    "en": "Set up network",
+    "pt-BR": "Configurar rede"
+  },
+  "CheckingCapacity": {
+    "es": "Consultando capacidad",
+    "en": "Checking capacity",
+    "pt-BR": "Consultando capacidade"
+  },
+  "INTERNETSOURCE": {
+    "es": "INTERNET DE ENTRADA",
+    "en": "INTERNET SOURCE",
+    "pt-BR": "FONTE DE INTERNET"
+  },
+  "CheckingConnection": {
+    "es": "Consultando conexión",
+    "en": "Checking connection",
+    "pt-BR": "Consultando conexão"
+  },
+  "DNSFILTERTRIAL": {
+    "es": "FILTRO DNS · EXPERIMENTAL",
+    "en": "DNS FILTER · EXPERIMENTAL",
+    "pt-BR": "FILTRO DNS · EXPERIMENTAL"
+  },
+  "NoRulesInUse": {
+    "es": "Sin reglas en uso",
+    "en": "No rules in use",
+    "pt-BR": "Nenhuma regra em uso"
+  },
+  "OnYourNetwork": {
+    "es": "En tu red",
+    "en": "On your network",
+    "pt-BR": "Na sua rede"
+  },
+  "LIVE": {
+    "es": "EN VIVO",
+    "en": "LIVE",
+    "pt-BR": "AO VIVO"
+  },
+  "ConnectADeviceToSeeItHere": {
+    "es": "Conecta un dispositivo para verlo aquí.",
+    "en": "Connect a device to see it here.",
+    "pt-BR": "Conecte um dispositivo para vê-lo aqui."
+  },
+  "ConnectedDevices": {
+    "es": "Dispositivos conectados",
+    "en": "Connected devices",
+    "pt-BR": "Dispositivos conectados"
+  },
+  "NetworkSettings": {
+    "es": "Configuración de red",
+    "en": "Network settings",
+    "pt-BR": "Configurações de rede"
+  },
+  "WindowsSettings": {
+    "es": "Configuración de Windows",
+    "en": "Windows settings",
+    "pt-BR": "Configurações do Windows"
+  },
+  "CheckingAvailability": {
+    "es": "Consultando disponibilidad…",
+    "en": "Checking availability…",
+    "pt-BR": "Consultando disponibilidade…"
+  },
+  "NetworkName": {
+    "es": "Nombre de la red",
+    "en": "Network name",
+    "pt-BR": "Nome da rede"
+  },
+  "NewPassword": {
+    "es": "Nueva contraseña",
+    "en": "New password",
+    "pt-BR": "Nova senha"
+  },
+  "863Characters": {
+    "es": "8–63 caracteres",
+    "en": "8–63 characters",
+    "pt-BR": "8–63 caracteres"
+  },
+  "WiFiBand": {
+    "es": "Banda Wi-Fi",
+    "en": "Wi-Fi band",
+    "pt-BR": "Banda Wi-Fi"
+  },
+  "SaveSettings": {
+    "es": "Guardar configuración",
+    "en": "Save settings",
+    "pt-BR": "Salvar configurações"
+  },
+  "0Domains": {
+    "es": "0 dominios",
+    "en": "0 domains",
+    "pt-BR": "0 domínios"
+  },
+  "DNSFilteringMode": {
+    "es": "Modo de filtrado DNS",
+    "en": "DNS filtering mode",
+    "pt-BR": "Modo de filtragem DNS"
+  },
+  "FilteringMode": {
+    "es": "Modo de filtrado",
+    "en": "Filtering mode",
+    "pt-BR": "Modo de filtragem"
+  },
+  "BlockDomains": {
+    "es": "Bloquear dominios",
+    "en": "Block domains",
+    "pt-BR": "Bloquear domínios"
+  },
+  "AllowOnlyTheseDomains": {
+    "es": "Permitir solo estos dominios",
+    "en": "Allow only these domains",
+    "pt-BR": "Permitir somente estes domínios"
+  },
+  "AddDomainOrWebAddress": {
+    "es": "Agregar dominio o dirección web",
+    "en": "Add domain or web address",
+    "pt-BR": "Adicionar domínio ou endereço web"
+  },
+  "TypeADomainOrPasteAURL": {
+    "es": "Escribe un dominio o pega una URL",
+    "en": "Type a domain or paste a URL",
+    "pt-BR": "Digite um domínio ou cole uma URL"
+  },
+  "AddDomain": {
+    "es": "Agregar dominio",
+    "en": "Add domain",
+    "pt-BR": "Adicionar domínio"
+  },
+  "DomainList": {
+    "es": "Lista de dominios",
+    "en": "Domain list",
+    "pt-BR": "Lista de domínios"
+  },
+  "IncludesSubdomains": {
+    "es": "Incluye subdominios",
+    "en": "Includes subdomains",
+    "pt-BR": "Inclui subdomínios"
+  },
+  "NoDomains": {
+    "es": "Sin dominios",
+    "en": "No domains",
+    "pt-BR": "Nenhum domínio"
+  },
+  "SaveDraft": {
+    "es": "Guardar borrador",
+    "en": "Save draft",
+    "pt-BR": "Salvar rascunho"
+  },
+  "ApplyChanges": {
+    "es": "Aplicar cambios",
+    "en": "Apply changes",
+    "pt-BR": "Aplicar alterações"
+  },
+  "AboutTheDNSFilter": {
+    "es": "Acerca del filtro DNS",
+    "en": "About the DNS filter",
+    "pt-BR": "Sobre o filtro DNS"
+  },
+  "FiltersDNSQueriesSentToTheHotspotPrivateOr": {
+    "es": "El filtro actúa sobre las consultas DNS enviadas al hotspot. El DNS privado o externo, las VPN, las respuestas en caché y las conexiones directas a direcciones IP pueden eludir las reglas. Los cambios afectan a las nuevas consultas, pero no cierran las conexiones existentes. Hen debe permanecer abierto para que el filtro siga activo.",
+    "en": "The filter acts on DNS queries sent to the hotspot. Private or external DNS, VPNs, cached responses, and direct connections to IP addresses can bypass the rules. Changes affect new queries but do not close existing connections. Hen must remain open for the filter to stay active.",
+    "pt-BR": "O filtro atua nas consultas DNS enviadas ao hotspot. DNS privado ou externo, VPNs, respostas em cache e conexões diretas a endereços IP podem contornar as regras. As alterações afetam as novas consultas, mas não encerram as conexões existentes. O Hen deve permanecer aberto para que o filtro continue ativo."
+  },
+  "INTERNETACCESS": {
+    "es": "ACCESO A INTERNET",
+    "en": "INTERNET ACCESS",
+    "pt-BR": "ACESSO À INTERNET"
+  },
+  "EnableAccessControlToChooseWhichDevicesCanUse": {
+    "es": "Activa el control para decidir qué dispositivos pueden usar internet.",
+    "en": "Enable access control to choose which devices can use the internet.",
+    "pt-BR": "Ative o controle para escolher quais dispositivos podem usar a internet."
+  },
+  "WindowsWillAskForAdministratorPermissionDisablingAccessControl": {
+    "es": "Windows pedirá permiso de administrador. Desactivar el control quita este bloqueo de internet.",
+    "en": "Windows will ask for administrator permission. Disabling access control removes this internet block.",
+    "pt-BR": "O Windows pedirá permissão de administrador. Desativar o controle remove este bloqueio de internet."
+  },
+  "MANUALAPPROVAL": {
+    "es": "APROBACIÓN MANUAL",
+    "en": "MANUAL APPROVAL",
+    "pt-BR": "APROVAÇÃO MANUAL"
+  },
+  "AccessForAuthorizedDevicesOnlyWhileControlIsActive": {
+    "es": "Solo los dispositivos autorizados pueden acceder a internet mientras el control esté activo.",
+    "en": "Only authorized devices can access the internet while access control is active.",
+    "pt-BR": "Somente dispositivos autorizados podem acessar a internet enquanto o controle estiver ativo."
+  },
+  "ConnectADeviceToTheHotspotToReviewIt": {
+    "es": "Conecta un dispositivo al hotspot para revisarlo o agrega su dirección MAC en la otra pestaña.",
+    "en": "Connect a device to the hotspot to review it or add its MAC address in the other tab.",
+    "pt-BR": "Conecte um dispositivo ao hotspot para verificá-lo ou adicione seu endereço MAC na outra aba."
+  },
+  "DevicesAndInternetAuthorization": {
+    "es": "Dispositivos y permisos de acceso a internet",
+    "en": "Devices and internet access permissions",
+    "pt-BR": "Dispositivos e permissões de acesso à internet"
+  },
+  "IPADDRESS": {
+    "es": "DIRECCIÓN IP",
+    "en": "IP ADDRESS",
+    "pt-BR": "ENDEREÇO IP"
+  },
+  "AboutDeviceAccessControl": {
+    "es": "Acerca del control de dispositivos",
+    "en": "About device access control",
+    "pt-BR": "Sobre o controle de dispositivos"
+  },
+  "AccessControlRequiresAdministratorPermissionClosingHenWithControl": {
+    "es": "El control requiere permisos de administrador. Al cerrar Hen con el control activo, se apaga el hotspot. Bloquear el acceso a internet no desconecta el dispositivo del Wi-Fi.",
+    "en": "Access control requires administrator permission. Closing Hen while access control is active turns off the hotspot. Blocking internet access does not disconnect the device from Wi-Fi.",
+    "pt-BR": "O controle requer permissão de administrador. Fechar o Hen com o controle ativo desliga o hotspot. Bloquear o acesso à internet não desconecta o dispositivo do Wi-Fi."
+  },
+  "AMACIdentifiesANetworkConnectionItDoesNot": {
+    "es": "La dirección MAC identifica una interfaz de red, pero no a la persona que usa el dispositivo. Si el dispositivo cambia su dirección MAC privada, aparecerá como uno nuevo.",
+    "en": "A MAC address identifies a network interface, but not the person using the device. If the device changes its private MAC address, it will appear as a new device.",
+    "pt-BR": "O endereço MAC identifica uma interface de rede, mas não a pessoa que usa o dispositivo. Se o dispositivo mudar seu endereço MAC privado, ele aparecerá como um novo dispositivo."
+  },
+  "AddByMAC": {
+    "es": "Agregar por MAC",
+    "en": "Add by MAC",
+    "pt-BR": "Adicionar por MAC"
+  },
+  "NewDevice": {
+    "es": "Nuevo dispositivo",
+    "en": "New device",
+    "pt-BR": "Novo dispositivo"
+  },
+  "UseTheMACAddressTheDeviceShowsForThis": {
+    "es": "Usa la dirección MAC que el dispositivo muestra para esta red.",
+    "en": "Use the MAC address the device shows for this network.",
+    "pt-BR": "Use o endereço MAC que o dispositivo mostra para esta rede."
+  },
+  "MACAddress": {
+    "es": "Dirección MAC",
+    "en": "MAC address",
+    "pt-BR": "Endereço MAC"
+  },
+  "DeviceMACAddress": {
+    "es": "Dirección MAC del dispositivo",
+    "en": "Device MAC address",
+    "pt-BR": "Endereço MAC do dispositivo"
+  },
+  "ExampleAABBCCDDEEFF": {
+    "es": "Ejemplo: AA:BB:CC:DD:EE:FF",
+    "en": "Example: AA:BB:CC:DD:EE:FF",
+    "pt-BR": "Exemplo: AA:BB:CC:DD:EE:FF"
+  },
+  "DeviceName": {
+    "es": "Nombre del dispositivo",
+    "en": "Device name",
+    "pt-BR": "Nome do dispositivo"
+  },
+  "AddDevice": {
+    "es": "Agregar dispositivo",
+    "en": "Add device",
+    "pt-BR": "Adicionar dispositivo"
+  },
+  "LocalRecording": {
+    "es": "Registro local",
+    "en": "Local recording",
+    "pt-BR": "Registro local"
+  },
+  "HistoryStartDate": {
+    "es": "Fecha inicial del historial",
+    "en": "History start date",
+    "pt-BR": "Data inicial do histórico"
+  },
+  "HistoryEndDate": {
+    "es": "Fecha final del historial",
+    "en": "History end date",
+    "pt-BR": "Data final do histórico"
+  },
+  "FilterDevice": {
+    "es": "Filtrar por dispositivo",
+    "en": "Filter by device",
+    "pt-BR": "Filtrar por dispositivo"
+  },
+  "DomainContains": {
+    "es": "Buscar dominio",
+    "en": "Search domains",
+    "pt-BR": "Buscar domínio"
+  },
+  "SearchHistoryByDomain": {
+    "es": "Buscar dominio en el historial",
+    "en": "Search history by domain",
+    "pt-BR": "Buscar domínio no histórico"
+  },
+  "LeaveBlankToSeeAllEnterADomainOr": {
+    "es": "Escribe un dominio o parte de su nombre. Deja el campo vacío para ver todos los registros.",
+    "en": "Enter a domain or part of its name. Leave the field blank to see all records.",
+    "pt-BR": "Digite um domínio ou parte do nome. Deixe o campo em branco para ver todos os registros."
+  },
+  "FilterOutcome": {
+    "es": "Filtrar por resultado",
+    "en": "Filter by outcome",
+    "pt-BR": "Filtrar por resultado"
+  },
+  "NoRecords": {
+    "es": "Sin registros",
+    "en": "No records",
+    "pt-BR": "Nenhum registro"
+  },
+  "YourActivityWillAppearHere": {
+    "es": "Tu actividad aparecerá aquí",
+    "en": "Your activity will appear here",
+    "pt-BR": "Sua atividade aparecerá aqui"
+  },
+  "LocalDNSQueryHistoryAndPreviousRecords": {
+    "es": "Historial local de consultas DNS y registros anteriores",
+    "en": "Local DNS query history and previous records",
+    "pt-BR": "Histórico local de consultas DNS e registros anteriores"
+  },
+  "DURATION": {
+    "es": "DURACIÓN",
+    "en": "DURATION",
+    "pt-BR": "DURAÇÃO"
+  },
+  "TRAFFIC": {
+    "es": "TRÁFICO",
+    "en": "TRAFFIC",
+    "pt-BR": "TRÁFEGO"
+  },
+  "Page1Of1": {
+    "es": "Página 1 de 1",
+    "en": "Page 1 of 1",
+    "pt-BR": "Página 1 de 1"
+  },
+  "KeepHistory": {
+    "es": "Conservar historial",
+    "en": "History retention",
+    "pt-BR": "Retenção do histórico"
+  },
+  "RecordsOutsideTheRetentionPeriodAreDeletedAutomatically": {
+    "es": "Los registros que superan el plazo de conservación se eliminan automáticamente.",
+    "en": "Records older than the retention period are deleted automatically.",
+    "pt-BR": "Os registros que ultrapassam o prazo de retenção são excluídos automaticamente."
+  },
+  "RetentionDays": {
+    "es": "Días de conservación",
+    "en": "Retention days",
+    "pt-BR": "Dias de retenção"
+  },
+  "1Day": {
+    "es": "1 día",
+    "en": "1 day",
+    "pt-BR": "1 dia"
+  },
+  "7Days": {
+    "es": "7 días",
+    "en": "7 days",
+    "pt-BR": "7 dias"
+  },
+  "30Days": {
+    "es": "30 días",
+    "en": "30 days",
+    "pt-BR": "30 dias"
+  },
+  "90Days": {
+    "es": "90 días",
+    "en": "90 days",
+    "pt-BR": "90 dias"
+  },
+  "ClearHistory": {
+    "es": "Borrar historial",
+    "en": "Clear history",
+    "pt-BR": "Apagar histórico"
+  },
+  "DeleteAllRecordsStoredOnThisLaptop": {
+    "es": "Se eliminarán todos los registros guardados en esta laptop.",
+    "en": "All records stored on this laptop will be deleted.",
+    "pt-BR": "Todos os registros salvos neste notebook serão apagados."
+  },
+  "ThisActionCannotBeUndone": {
+    "es": "Esta acción no se puede deshacer.",
+    "en": "This action cannot be undone.",
+    "pt-BR": "Esta ação não pode ser desfeita."
+  },
+  "DeletePermanently": {
+    "es": "Borrar definitivamente",
+    "en": "Delete permanently",
+    "pt-BR": "Apagar definitivamente"
+  },
+  "ComputerStatus": {
+    "es": "Estado del equipo",
+    "en": "Computer status",
+    "pt-BR": "Estado do computador"
+  },
+  "ExportDiagnostics": {
+    "es": "Exportar diagnóstico",
+    "en": "Export diagnostics",
+    "pt-BR": "Exportar diagnóstico"
+  },
+  "On": {
+    "es": "Encendido",
+    "en": "On",
+    "pt-BR": "Ligado"
+  },
+  "Off": {
+    "es": "Apagado",
+    "en": "Off",
+    "pt-BR": "Desligado"
+  },
+  "Activity": {
+    "es": "Actividad",
+    "en": "Activity",
+    "pt-BR": "Atividade"
+  },
+  "Connecting": {
+    "es": "Conectando",
+    "en": "Connecting",
+    "pt-BR": "Conectando"
+  },
+  "Blocked": {
+    "es": "Bloqueada",
+    "en": "Blocked",
+    "pt-BR": "Bloqueada"
+  },
+  "Interrupted": {
+    "es": "Interrumpida",
+    "en": "Interrupted",
+    "pt-BR": "Interrompida"
+  },
+  "Allowed": {
+    "es": "Permitida",
+    "en": "Allowed",
+    "pt-BR": "Permitida"
+  },
+  "Devices": {
+    "es": "Dispositivos",
+    "en": "Devices",
+    "pt-BR": "Dispositivos"
+  },
+  "Authorized": {
+    "es": "Autorizado",
+    "en": "Authorized",
+    "pt-BR": "Autorizado"
+  },
+  "Blocked2": {
+    "es": "Bloqueado",
+    "en": "Blocked",
+    "pt-BR": "Bloqueado"
+  },
+  "Pending": {
+    "es": "Pendiente",
+    "en": "Pending",
+    "pt-BR": "Pendente"
+  },
+  "Overview": {
+    "es": "Resumen",
+    "en": "Overview",
+    "pt-BR": "Resumo"
+  },
+  "Domains": {
+    "es": "Dominios",
+    "en": "Domains",
+    "pt-BR": "Domínios"
+  },
+  "Connected": {
+    "es": "conectado",
+    "en": "connected",
+    "pt-BR": "conectado"
+  },
+  "Connected2": {
+    "es": "conectados",
+    "en": "connected",
+    "pt-BR": "conectados"
+  },
+  "Domain": {
+    "es": "dominio",
+    "en": "domain",
+    "pt-BR": "domínio"
+  },
+  "Domains2": {
+    "es": "dominios",
+    "en": "domains",
+    "pt-BR": "domínios"
+  },
+  "Active": {
+    "es": "Activo",
+    "en": "Active",
+    "pt-BR": "Ativo"
+  },
+  "Cancel": {
+    "es": "Cancelar",
+    "en": "Cancel",
+    "pt-BR": "Cancelar"
+  },
+  "Remove": {
+    "es": "Eliminar",
+    "en": "Remove",
+    "pt-BR": "Remover"
+  },
+  "Checking": {
+    "es": "Consultando",
+    "en": "Checking",
+    "pt-BR": "Consultando"
+  },
+  "Refresh": {
+    "es": "Actualizar",
+    "en": "Refresh",
+    "pt-BR": "Atualizar"
+  },
+  "DEVICES": {
+    "es": "DISPOSITIVOS",
+    "en": "DEVICES",
+    "pt-BR": "DISPOSITIVOS"
+  },
+  "DEVICE": {
+    "es": "DISPOSITIVO",
+    "en": "DEVICE",
+    "pt-BR": "DISPOSITIVO"
+  },
+  "STATUS": {
+    "es": "ESTADO",
+    "en": "STATUS",
+    "pt-BR": "ESTADO"
+  },
+  "Connected3": {
+    "es": "Conectado",
+    "en": "Connected",
+    "pt-BR": "Conectado"
+  },
+  "Add": {
+    "es": "Agregar",
+    "en": "Add",
+    "pt-BR": "Adicionar"
+  },
+  "DOMAIN": {
+    "es": "DOMINIO",
+    "en": "DOMAIN",
+    "pt-BR": "DOMÍNIO"
+  },
+  "SCOPE": {
+    "es": "ALCANCE",
+    "en": "SCOPE",
+    "pt-BR": "ABRANGÊNCIA"
+  },
+  "EXPERIMENTAL": {
+    "es": "EXPERIMENTAL",
+    "en": "EXPERIMENTAL",
+    "pt-BR": "EXPERIMENTAL"
+  },
+  "Devices2": {
+    "es": "Equipos",
+    "en": "Devices",
+    "pt-BR": "Dispositivos"
+  },
+  "ACCESS": {
+    "es": "ACCESO",
+    "en": "ACCESS",
+    "pt-BR": "ACESSO"
+  },
+  "ACTIONS": {
+    "es": "ACCIONES",
+    "en": "ACTIONS",
+    "pt-BR": "AÇÕES"
+  },
+  "Authorize": {
+    "es": "Autorizar",
+    "en": "Authorize",
+    "pt-BR": "Autorizar"
+  },
+  "Block": {
+    "es": "Bloquear",
+    "en": "Block",
+    "pt-BR": "Bloquear"
+  },
+  "History": {
+    "es": "Historial",
+    "en": "History",
+    "pt-BR": "Histórico"
+  },
+  "From": {
+    "es": "Desde",
+    "en": "From",
+    "pt-BR": "De"
+  },
+  "To": {
+    "es": "Hasta",
+    "en": "To",
+    "pt-BR": "Até"
+  },
+  "Device": {
+    "es": "Dispositivo",
+    "en": "Device",
+    "pt-BR": "Dispositivo"
+  },
+  "Outcome": {
+    "es": "Resultado",
+    "en": "Outcome",
+    "pt-BR": "Resultado"
+  },
+  "All": {
+    "es": "Todos",
+    "en": "All",
+    "pt-BR": "Todos"
+  },
+  "Allowed2": {
+    "es": "Permitidas",
+    "en": "Allowed",
+    "pt-BR": "Permitidas"
+  },
+  "Blocked3": {
+    "es": "Bloqueadas",
+    "en": "Blocked",
+    "pt-BR": "Bloqueadas"
+  },
+  "Errors": {
+    "es": "Errores",
+    "en": "Errors",
+    "pt-BR": "Erros"
+  },
+  "Interrupted2": {
+    "es": "Interrumpidas",
+    "en": "Interrupted",
+    "pt-BR": "Interrompidas"
+  },
+  "Filter": {
+    "es": "Filtrar",
+    "en": "Filter",
+    "pt-BR": "Filtrar"
+  },
+  "START": {
+    "es": "INICIO",
+    "en": "START",
+    "pt-BR": "INÍCIO"
+  },
+  "OUTCOME": {
+    "es": "RESULTADO",
+    "en": "OUTCOME",
+    "pt-BR": "RESULTADO"
+  },
+  "Previous": {
+    "es": "Anterior",
+    "en": "Previous",
+    "pt-BR": "Anterior"
+  },
+  "Next": {
+    "es": "Siguiente",
+    "en": "Next",
+    "pt-BR": "Próxima"
+  },
+  "Preferences": {
+    "es": "Preferencias",
+    "en": "Preferences",
+    "pt-BR": "Preferências"
+  },
+  "Save": {
+    "es": "Guardar",
+    "en": "Save",
+    "pt-BR": "Salvar"
+  },
+  "DETAILS0": {
+    "es": "\n\nDETALLE\n{0}",
+    "en": "\n\nDETAILS\n{0}",
+    "pt-BR": "\n\nDETALHES\n{0}"
+  },
+  "Language": {
+    "es": "Idioma",
+    "en": "Language",
+    "pt-BR": "Idioma"
+  },
+  "ChangeLanguage": {
+    "es": "Cambiar idioma",
+    "en": "Change language",
+    "pt-BR": "Alterar idioma"
+  },
+  "LanguageSaveFailed": {
+    "es": "No se pudo guardar el idioma: ",
+    "en": "Could not save the language: ",
+    "pt-BR": "Não foi possível salvar o idioma: "
+  },
+  "ErrorLabel": {
+    "es": "Error",
+    "en": "Error",
+    "pt-BR": "Erro"
+  },
+  "FilterQueryCounts": {
+    "es": "Consultas: {0:N0} · Bloqueadas: {1:N0}",
+    "en": "Queries: {0:N0} · Blocked: {1:N0}",
+    "pt-BR": "Consultas: {0:N0} · Bloqueadas: {1:N0}"
+  },
+  "ActivePolicySummary": {
+    "es": "Dominios: {0} · {1}",
+    "en": "Domains: {0} · {1}",
+    "pt-BR": "Domínios: {0} · {1}"
+  },
+  "DnsRecordDetails": {
+    "es": "{0}\n{1} · {2}\nConsulta DNS: {3:g}\nUna consulta DNS no confirma una visita al sitio web ni mide el tiempo de pantalla. No se registran el volumen de datos ni la duración de la navegación.",
+    "en": "{0}\n{1} · {2}\nDNS query: {3:g}\nA DNS query does not confirm a website visit or measure screen time. Browsing data volume and duration are not recorded.",
+    "pt-BR": "{0}\n{1} · {2}\nConsulta DNS: {3:g}\nUma consulta DNS não confirma uma visita ao site nem mede o tempo de tela. O volume de dados e a duração da navegação não são registrados."
+  },
+  "LegacyRecordDetails": {
+    "es": "{0}\n{1} · {2}\nInicio: {3:g}\nFin del registro: {4}\nÚltima transferencia: {5}\nSe mide la duración de la conexión, no el tiempo de pantalla. El estado «Interrumpida» puede indicar una pausa del registro, un reinicio o una desconexión.",
+    "en": "{0}\n{1} · {2}\nStart: {3:g}\nEnd of record: {4}\nLast transfer: {5}\nThis measures connection duration, not screen time. The “Interrupted” status may indicate paused recording, a restart, or a disconnection.",
+    "pt-BR": "{0}\n{1} · {2}\nInício: {3:g}\nFim do registro: {4}\nÚltima transferência: {5}\nÉ medida a duração da conexão, não o tempo de tela. O estado “Interrompida” pode indicar uma pausa no registro, um reinício ou uma desconexão."
+  },
+  "DiagnosticSummary": {
+    "es": "Windows: {0}\nConexión: {1}\nAcceso a internet: {2}\nDisponibilidad del hotspot: {3}\nEstado: {4}\nLímite de dispositivos: {5}\n\nADAPTADORES\n",
+    "en": "Windows: {0}\nConnection: {1}\nInternet access: {2}\nHotspot availability: {3}\nStatus: {4}\nDevice limit: {5}\n\nADAPTERS\n",
+    "pt-BR": "Windows: {0}\nConexão: {1}\nAcesso à internet: {2}\nDisponibilidade do hotspot: {3}\nEstado: {4}\nLimite de dispositivos: {5}\n\nADAPTADORES\n"
+  },
+  "AboutMe": {
+    "es": "Sobre mí",
+    "en": "About me",
+    "pt-BR": "Sobre mim"
+  },
+  "CreatedBy": {
+    "es": "Creado por",
+    "en": "Created by",
+    "pt-BR": "Criado por"
+  },
+  "Portfolio": {
+    "es": "Portafolio",
+    "en": "Portfolio",
+    "pt-BR": "Portfólio"
+  },
+  "OpenPortfolioInBrowser": {
+    "es": "Abrir el portafolio de Hensell en el navegador",
+    "en": "Open Hensell’s portfolio in the browser",
+    "pt-BR": "Abrir o portfólio de Hensell no navegador"
+  },
+  "PortfolioOpenFailed": {
+    "es": "No se pudo abrir el portafolio en el navegador. ",
+    "en": "Could not open the portfolio in the browser. ",
+    "pt-BR": "Não foi possível abrir o portfólio no navegador. "
+  },
+  "LastSynced": {
+    "es": "Sincronizado con Windows · {0:HH:mm:ss}",
+    "en": "Synced with Windows · {0:HH:mm:ss}",
+    "pt-BR": "Sincronizado com o Windows · {0:HH:mm:ss}"
+  }
+}

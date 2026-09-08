@@ -11,6 +11,8 @@ public partial class App : Application
     protected override async void OnStartup(StartupEventArgs e)
     {
         base.OnStartup(e);
+        L10n.SetLanguage(new PreferencesStore().LoadLanguage());
+        L10n.ApplyResources(this);
         if (e.Args.Length == 1 && e.Args[0] == "--dns-self-test")
         {
             Shutdown(await WinDivertSelfTest.RunAsync());
@@ -45,7 +47,7 @@ public partial class App : Application
         instanceMutex = new Mutex(true, "Local\\HenHotspot.MainWindow", out ownsInstance);
         if (!ownsInstance)
         {
-            MessageBox.Show("Hen Hotspot ya está abierto. Usa la ventana existente.", "Hen Hotspot", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show(L10n.T("HenHotspotIsAlreadyOpenUseTheExistingWindow"), "Hen Hotspot", MessageBoxButton.OK, MessageBoxImage.Information);
             Shutdown(0); return;
         }
         var window = new MainWindow();

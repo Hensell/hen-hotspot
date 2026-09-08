@@ -1,0 +1,19 @@
+Hen Hotspot redistributes unmodified .NET 10.0.11 runtime libraries and
+Microsoft.Data.Sqlite 10.0.11. They retain their upstream licenses.
+
+Copyright (c) .NET Foundation and Contributors. All rights reserved.
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+LICENSE.TXT and THIRD-PARTY-NOTICES.TXT are copied without modification from
+Microsoft.NETCore.App.Runtime.win-x64 10.0.11. The Windows Desktop runtime and
+Microsoft.Data.Sqlite use the same .NET Foundation MIT license.
+
+WPF-THIRD-PARTY-NOTICES.TXT is copied without modification from:
+https://github.com/dotnet/wpf/blob/v10.0.11/THIRD-PARTY-NOTICES.TXT
+
+Sources:
+https://github.com/dotnet/runtime/tree/v10.0.11
+https://github.com/dotnet/wpf/tree/v10.0.11
+https://github.com/dotnet/efcore/tree/v10.0.11
+
+Maintainers: review these notices when updating the packaged runtime or libraries.

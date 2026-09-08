@@ -21,13 +21,13 @@ public static class WinDivertSelfTest
         try
         {
             if (!new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(WindowsBuiltInRole.Administrator))
-                throw new InvalidOperationException("Esta prueba requiere permiso de administrador.");
+                throw new InvalidOperationException(L10n.T("ThisTestRequiresAdministratorPermission"));
             handle = NativeWinDivert.Open("false", NativeWinDivert.NetworkLayer, 90, 0);
-            if (handle == NativeWinDivert.InvalidHandle) { handle = IntPtr.Zero; throw NativeWinDivert.Failure("abrir la prueba sin tráfico"); }
+            if (handle == NativeWinDivert.InvalidHandle) { handle = IntPtr.Zero; throw NativeWinDivert.Failure(L10n.T("OpenTheTestWithoutTraffic")); }
             checks.Add("Signed driver opened a filter that matches no packets");
             if (!GetParam(handle, 3, out ulong major) || !GetParam(handle, 4, out ulong minor))
-                throw NativeWinDivert.Failure("leer la versión del controlador");
-            if (major != 2 || minor != 2) throw new InvalidOperationException($"Versión de controlador inesperada: {major}.{minor}");
+                throw NativeWinDivert.Failure(L10n.T("ReadTheDriverVersion"));
+            if (major != 2 || minor != 2) throw new InvalidOperationException(L10n.F("UnexpectedDriverVersion01", major, minor));
             checks.Add($"Native driver version {major}.{minor}");
             IntPtr receiveHandle = handle;
             var receive = Task.Factory.StartNew(() =>
@@ -35,12 +35,12 @@ public static class WinDivertSelfTest
                 bool result = NativeWinDivert.Receive(receiveHandle, new byte[65535], 65535, out _, out _);
                 return (Result: result, Code: Marshal.GetLastWin32Error());
             }, CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default);
-            if (!NativeWinDivert.Shutdown(handle, 1)) throw NativeWinDivert.Failure("cerrar la recepción de prueba");
+            if (!NativeWinDivert.Shutdown(handle, 1)) throw NativeWinDivert.Failure(L10n.T("CloseTheTestReceiver"));
             var received = await receive.WaitAsync(TimeSpan.FromSeconds(3));
             if (received.Result || received.Code != NativeWinDivert.NoData)
-                throw new Win32Exception(received.Code, "La cancelación nativa no devolvió el resultado esperado.");
+                throw new Win32Exception(received.Code, L10n.T("NativeCancellationDidNotReturnTheExpectedResult"));
             checks.Add("Blocking receive released by shutdown with ERROR_NO_DATA (232)");
-            if (!NativeWinDivert.Close(handle)) throw NativeWinDivert.Failure("cerrar el filtro de prueba");
+            if (!NativeWinDivert.Close(handle)) throw NativeWinDivert.Failure(L10n.T("CloseTheTestFilter"));
             handle = IntPtr.Zero;
             checks.Add("Native handle closed successfully");
             LegacyProxyCleanup.RemoveOwnedRule();

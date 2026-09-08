@@ -18,9 +18,9 @@ public static class DeviceGuardPolicy
             n.GetIPProperties().UnicastAddresses.Any(a => a.Address.Equals(binding.Address)));
         uint index = checked((uint)adapter.GetIPProperties().GetIPv4Properties().Index);
         if (index == 0 || NativeWfp.ConvertInterfaceIndexToLuid(index, out ulong luid) != 0)
-            throw new InvalidOperationException("No se pudo identificar la interfaz del hotspot para el control de acceso.");
+            throw new InvalidOperationException(L10n.T("CouldNotIdentifyTheHotspotInterfaceForAccessControl"));
         int prefix = adapter.GetIPProperties().UnicastAddresses.Single(a => a.Address.Equals(binding.Address)).PrefixLength;
-        if (prefix is < 16 or > 30) throw new InvalidOperationException("La subred del hotspot no es compatible con el control de acceso.");
+        if (prefix is < 16 or > 30) throw new InvalidOperationException(L10n.T("TheHotspotSubnetIsNotSupportedByAccessControl"));
         return new(adapter.Id, index, luid, adapter.Name, binding.Address.ToString(), prefix);
     }
 
@@ -28,9 +28,9 @@ public static class DeviceGuardPolicy
     {
         if (network.Index == 0 || network.Luid == 0 || network.PrefixLength is < 16 or > 30 ||
             !IPAddress.TryParse(network.Address, out var localAddress) || localAddress.AddressFamily != AddressFamily.InterNetwork)
-            throw new ArgumentException("Interfaz del hotspot no válida.");
+            throw new ArgumentException(L10n.T("InvalidHotspotInterface"));
         var approved = approvedMacs.Select(DeviceAccessStore.NormalizeMac).ToHashSet(StringComparer.Ordinal);
-        if (approved.Count > 128) throw new ArgumentException("Máximo 128 dispositivos autorizados.");
+        if (approved.Count > 128) throw new ArgumentException(L10n.T("UpTo128AuthorizedDevices"));
         uint local = BinaryPrimitives.ReadUInt32BigEndian(IPAddress.Parse(network.Address).GetAddressBytes());
         uint mask = uint.MaxValue << (32 - network.PrefixLength);
         var owners = new Dictionary<string, HashSet<string>>(StringComparer.Ordinal);

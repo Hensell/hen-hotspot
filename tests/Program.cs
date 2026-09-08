@@ -3,7 +3,14 @@ using System.Security.Cryptography;
 using Windows.Networking.Connectivity;
 using Windows.Networking.NetworkOperators;
 
+if (args.Contains("--benchmark"))
+{
+    await PerformanceBenchmarks.Run();
+    return;
+}
+
 int passed = 0;
+L10n.SetLanguage("es");
 void Check(bool condition, string name) { if (!condition) throw new Exception(name); passed++; Console.WriteLine($"PASS {name}"); }
 void Reject(Action action, string name) { try { action(); } catch (ArgumentException) { Check(true, name); return; } throw new Exception($"Accepted invalid input: {name}"); }
 Validation.Network("Hen Hotspot", "test-pass-123");
@@ -71,6 +78,9 @@ await DeviceAccessStoreTests.Run(Check);
 await DeviceGuardTests.Run(Check);
 await DnsPacketTests.Run(Check);
 await DnsIntegrationTests.Run(Check);
+await LocalizationTests.Run(Check);
+RefreshPolicyTests.Run(Check);
+ProfileStoreTests.Run(Check);
 if (args.Contains("--internet"))
 {
     using var handler = new HttpClientHandler { UseProxy = false };

@@ -56,10 +56,10 @@ public sealed class DnsFilterEngine : IDisposable, IAsyncDisposable
         lock (gate)
         {
             if (stopping) throw new ObjectDisposedException(nameof(DnsFilterEngine));
-            if (started) throw new InvalidOperationException("El filtro DNS ya se inició; crea una sesión nueva para reiniciarlo.");
+            if (started) throw new InvalidOperationException(L10n.T("TheDNSFilterHasAlreadyStartedCreateANew"));
             started = true;
             if (!OperatingSystem.IsWindows() || !Environment.Is64BitProcess)
-                throw new PlatformNotSupportedException("El filtro DNS requiere Windows x64.");
+                throw new PlatformNotSupportedException(L10n.T("TheDNSFilterRequires64BitWindows"));
             try
             {
                 var filters = BuildFilters(network);
@@ -67,14 +67,14 @@ public sealed class DnsFilterEngine : IDisposable, IAsyncDisposable
                 if (udpHandle == NativeWinDivert.InvalidHandle)
                 {
                     udpHandle = IntPtr.Zero;
-                    throw NativeWinDivert.Failure("activar el filtro DNS");
+                    throw NativeWinDivert.Failure(L10n.T("EnableTheDNSFilter"));
                 }
                 SetQueueParameter(0, 512); SetQueueParameter(1, 1000); SetQueueParameter(2, 1024 * 1024);
                 tcpHandle = NativeWinDivert.Open(filters.Tcp, NativeWinDivert.NetworkLayer, 90, NativeWinDivert.Drop);
                 if (tcpHandle == NativeWinDivert.InvalidHandle)
                 {
                     tcpHandle = IntPtr.Zero;
-                    throw NativeWinDivert.Failure("cerrar el DNS TCP sin filtrar");
+                    throw NativeWinDivert.Failure(L10n.T("CloseUnfilteredTCPDNS"));
                 }
                 IntPtr handle = udpHandle;
                 Volatile.Write(ref active, 1);
@@ -86,7 +86,7 @@ public sealed class DnsFilterEngine : IDisposable, IAsyncDisposable
                 Volatile.Write(ref active, 0);
                 CloseOwnedHandles();
                 var failure = ex is DllNotFoundException or BadImageFormatException
-                    ? new InvalidOperationException("No se pudo cargar WinDivert. Reinstala Hen con sus archivos de filtro para Windows x64.", ex)
+                    ? new InvalidOperationException(L10n.T("CouldNotLoadWinDivertReinstallHenWithItsFilter"), ex)
                     : ex;
                 Volatile.Write(ref error, failure.Message);
                 throw failure;
@@ -107,7 +107,7 @@ public sealed class DnsFilterEngine : IDisposable, IAsyncDisposable
     private void SetQueueParameter(int parameter, ulong value)
     {
         if (!NativeWinDivert.SetParam(udpHandle, parameter, value))
-            throw NativeWinDivert.Failure("configurar la cola DNS");
+            throw NativeWinDivert.Failure(L10n.T("ConfigureTheDNSQueue"));
     }
 
     private void ReceiveLoop(IntPtr handle)
@@ -121,7 +121,7 @@ public sealed class DnsFilterEngine : IDisposable, IAsyncDisposable
                 {
                     int code = Marshal.GetLastWin32Error();
                     if (Volatile.Read(ref releaseRequested) == 1 && code is NativeWinDivert.NoData or 6 or 995) return;
-                    throw NativeWinDivert.Failure("recibir una consulta DNS", code);
+                    throw NativeWinDivert.Failure(L10n.T("ReceiveADNSQuery"), code);
                 }
                 if (Volatile.Read(ref releaseRequested) == 1)
                 {
@@ -154,7 +154,7 @@ public sealed class DnsFilterEngine : IDisposable, IAsyncDisposable
                         SubInterfaceIndex = address.SubInterfaceIndex
                     };
                     if (!NativeWinDivert.CalculateChecksums(response, (uint)response.Length, ref replyAddress, 0))
-                        throw new InvalidOperationException("No se pudo preparar la respuesta del filtro DNS.");
+                        throw new InvalidOperationException(L10n.T("CouldNotPrepareTheDNSFilterResponse"));
                     SendPacket(handle, response, (uint)response.Length, ref replyAddress);
                     Interlocked.Increment(ref blocked);
                 }
@@ -182,8 +182,8 @@ public sealed class DnsFilterEngine : IDisposable, IAsyncDisposable
     private static void SendPacket(IntPtr handle, byte[] packet, uint length, ref NativeWinDivert.Address address)
     {
         if (!NativeWinDivert.Send(handle, packet, length, out uint sent, ref address))
-            throw NativeWinDivert.Failure("entregar una respuesta o consulta DNS");
-        if (sent != length) throw new InvalidOperationException("WinDivert no entregó el paquete DNS completo.");
+            throw NativeWinDivert.Failure(L10n.T("DeliverADNSResponseOrQuery"));
+        if (sent != length) throw new InvalidOperationException(L10n.T("WinDivertDidNotDeliverTheCompleteDNSPacket"));
     }
 
     public Task StopAsync()
@@ -205,7 +205,7 @@ public sealed class DnsFilterEngine : IDisposable, IAsyncDisposable
             if (handle == IntPtr.Zero) return;
             if (!NativeWinDivert.Shutdown(handle, 1))
             {
-                Volatile.Write(ref error, NativeWinDivert.Failure("detener la recepción DNS").Message);
+                Volatile.Write(ref error, NativeWinDivert.Failure(L10n.T("StopReceivingDNSQueries")).Message);
                 // Closing also releases an outstanding blocking receive.
                 CloseOwnedHandles();
             }
@@ -254,11 +254,11 @@ public sealed class DnsFilterEngine : IDisposable, IAsyncDisposable
         if (network.Index == 0 || network.Luid == 0 || network.PrefixLength is < 16 or > 30 ||
             !IPAddress.TryParse(network.Address, out var ip) || ip.AddressFamily != AddressFamily.InterNetwork ||
             ip.ToString() != network.Address)
-            throw new ArgumentException("La interfaz IPv4 del hotspot no es válida para el filtro DNS.");
+            throw new ArgumentException(L10n.T("TheHotspotIPv4InterfaceIsInvalidForTheDNS"));
         uint value = BinaryPrimitives.ReadUInt32BigEndian(ip.GetAddressBytes());
         uint networkMask = uint.MaxValue << (32 - network.PrefixLength);
         if (value == (value & networkMask) || value == (value | ~networkMask) || (value >> 24) is 0 or 127 or >= 224)
-            throw new ArgumentException("La dirección del hotspot no es una dirección IPv4 de equipo válida.");
+            throw new ArgumentException(L10n.T("TheHotspotAddressIsNotAValidIPv4Host"));
     }
 
     public void Dispose() => StopAsync().GetAwaiter().GetResult();

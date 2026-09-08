@@ -2,6 +2,7 @@
 **/obj/
 app/
 work/
+dist/
 *.user
 
 # IDE state and local shortcuts
@@ -19,6 +20,7 @@ work/
 *.log
 policy-draft.json
 device-access.json
+preferences.json
 windivert-self-test.json
 hen-hotspot-diagnostico.json
 

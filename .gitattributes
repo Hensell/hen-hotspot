@@ -7,10 +7,11 @@
 *.txt text eol=lf
 *.svg text eol=lf
 *.png binary
+*.jpg binary
 *.ico binary
 *.dll binary
 *.sys binary
 *.zip binary
 
 # Preserve upstream distribution files and their original formatting.
-src/ThirdParty/WinDivert/** -text -whitespace
+src/ThirdParty/** -text -whitespace

@@ -9,8 +9,8 @@ public partial class DomainRemovalDialog : Window
         InitializeComponent();
         DomainText.Text = domain;
         EffectText.Text = allowOnly
-            ? "Se quitará de la lista de permitidos. El filtro cambiará cuando apliques las reglas."
-            : "Se quitará de la lista de bloqueo. El filtro cambiará cuando apliques las reglas.";
+            ? L10n.T("ItWillBeRemovedFromTheAllowlistTheFilter")
+            : L10n.T("ItWillBeRemovedFromTheBlocklistTheFilter");
         Loaded += (_, _) => CancelButton.Focus();
     }
 

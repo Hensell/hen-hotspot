@@ -18,6 +18,7 @@ public sealed class ActivityStore : IDisposable
 {
     private const int MaxPending = 4096;
     private const int MaxRows = 50_000;
+    private const int MaxBatchSize = 128;
     private static readonly ActivityPage EmptyPage = new([], 0, 0, 0, 0);
     private readonly string directory;
     private readonly string connectionString;
@@ -27,12 +28,14 @@ public sealed class ActivityStore : IDisposable
     private readonly Task worker;
     private readonly Task timer;
     private SqliteConnection? connection;
+    private SqliteCommand? insertCommand;
     private volatile bool recordingEnabled = true;
     private volatile int retentionDays = 7;
     private volatile string? error;
     private bool disposed;
     private int pending;
     private long generation;
+    private long revision;
     private long clearedBefore;
     private int writesSincePrune;
 
@@ -40,14 +43,17 @@ public sealed class ActivityStore : IDisposable
     public int RetentionDays => retentionDays;
     public string? Error => error;
     public long Generation => Interlocked.Read(ref generation);
+    public long Revision => Interlocked.Read(ref revision);
 
     public ActivityStore(string? directory = null)
     {
         this.directory = directory ?? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "HenHotspot");
         connectionString = new SqliteConnectionStringBuilder
         {
-            DataSource = Path.Combine(this.directory, "activity.db"), Mode = SqliteOpenMode.ReadWriteCreate,
-            Pooling = false, DefaultTimeout = 2
+            DataSource = Path.Combine(this.directory, "activity.db"),
+            Mode = SqliteOpenMode.ReadWriteCreate,
+            Pooling = false,
+            DefaultTimeout = 2
         }.ToString();
         try { Initialize(); }
         catch (Exception ex) { Fail(ex); }
@@ -69,7 +75,7 @@ public sealed class ActivityStore : IDisposable
                     entry.StartedAt < DateTimeOffset.UtcNow.AddDays(-retentionDays)) return;
                 if (pending >= MaxPending)
                 {
-                    error = "El historial está recibiendo demasiadas conexiones; se omitieron registros. El proxy sigue funcionando.";
+                    error = L10n.T("HistoryIsReceivingTooManyConnectionsSomeRecordsWere");
                     return;
                 }
                 Interlocked.Increment(ref pending);
@@ -197,8 +203,10 @@ public sealed class ActivityStore : IDisposable
                 client_ip TEXT NOT NULL, device_name TEXT NOT NULL, device_id TEXT NOT NULL,
                 domain TEXT NOT NULL, protocol TEXT NOT NULL, outcome TEXT NOT NULL,
                 upload_bytes INTEGER NOT NULL, download_bytes INTEGER NOT NULL, duration_seconds REAL NOT NULL);
-            CREATE INDEX IF NOT EXISTS activity_started ON activity(started_at DESC);
-            CREATE INDEX IF NOT EXISTS activity_device_started ON activity(device_id,started_at DESC);
+            CREATE INDEX IF NOT EXISTS activity_started_id ON activity(started_at DESC,id DESC);
+            CREATE INDEX IF NOT EXISTS activity_device_started_id ON activity(device_id,started_at DESC,id DESC);
+            DROP INDEX IF EXISTS activity_started;
+            DROP INDEX IF EXISTS activity_device_started;
             """);
         using (var settings = connection.CreateCommand())
         {
@@ -220,17 +228,31 @@ public sealed class ActivityStore : IDisposable
     {
         await foreach (var work in queue.Reader.ReadAllAsync().ConfigureAwait(false))
         {
-            if (work.Kind == WorkKind.Record) Interlocked.Decrement(ref pending);
+            if (work.Kind == WorkKind.Record)
+            {
+                var batch = new List<ActivityEntry>(MaxBatchSize) { work.Entry! };
+                Interlocked.Decrement(ref pending);
+                // Never read past a pause, clear, settings or flush barrier.
+                while (batch.Count < MaxBatchSize && queue.Reader.TryPeek(out var next) && next.Kind == WorkKind.Record)
+                {
+                    if (!queue.Reader.TryRead(out next)) break;
+                    Interlocked.Decrement(ref pending);
+                    batch.Add(next.Entry!);
+                }
+                try
+                {
+                    WriteBatch(batch);
+                    if (writesSincePrune >= 256) Prune();
+                }
+                catch (Exception ex) { Fail(ex); }
+                continue;
+            }
             try
             {
                 if (connection is null || connection.State != System.Data.ConnectionState.Open)
-                    throw new IOException("El almacenamiento local no está disponible. Cierra y vuelve a abrir la aplicación para reintentar.");
+                    throw new IOException(L10n.T("LocalStorageIsUnavailableCloseAndReopenTheApp"));
                 switch (work.Kind)
                 {
-                    case WorkKind.Record:
-                        if (work.Entry!.StartedAt >= DateTimeOffset.UtcNow.AddDays(-retentionDays)) Upsert(work.Entry);
-                        if (++writesSincePrune >= 256) Prune();
-                        break;
                     case WorkKind.Settings:
                         using (var settings = connection.CreateCommand())
                         {
@@ -241,9 +263,12 @@ public sealed class ActivityStore : IDisposable
                         }
                         if (work.At is { } pausedAt) InterruptActive(pausedAt);
                         Prune();
+                        Interlocked.Increment(ref revision);
                         break;
                     case WorkKind.Clear:
-                        Execute("DELETE FROM activity; PRAGMA wal_checkpoint(TRUNCATE); VACUUM; PRAGMA wal_checkpoint(TRUNCATE);");
+                        Execute("DELETE FROM activity;");
+                        Interlocked.Increment(ref revision);
+                        Execute("PRAGMA wal_checkpoint(TRUNCATE); VACUUM; PRAGMA wal_checkpoint(TRUNCATE);");
                         break;
                     case WorkKind.Maintain:
                     case WorkKind.Flush:
@@ -260,6 +285,7 @@ public sealed class ActivityStore : IDisposable
             }
             finally { work.Completion?.TrySetResult(); }
         }
+        insertCommand?.Dispose();
         connection?.Dispose();
     }
 
@@ -274,9 +300,30 @@ public sealed class ActivityStore : IDisposable
         catch (OperationCanceledException) { }
     }
 
-    private void Upsert(ActivityEntry entry)
+    private void WriteBatch(IReadOnlyList<ActivityEntry> entries)
     {
-        using var command = connection!.CreateCommand();
+        if (connection is null || connection.State != System.Data.ConnectionState.Open)
+            throw new IOException(L10n.T("LocalStorageIsUnavailableCloseAndReopenTheApp"));
+        insertCommand ??= CreateInsertCommand();
+        using var transaction = connection.BeginTransaction();
+        insertCommand.Transaction = transaction;
+        try
+        {
+            var cutoff = DateTimeOffset.UtcNow.AddDays(-retentionDays);
+            int changed = 0;
+            foreach (var entry in entries)
+                if (entry.StartedAt >= cutoff) changed += Upsert(entry);
+            transaction.Commit();
+            // Readers invalidate their views only after the whole batch is committed.
+            if (changed > 0) Interlocked.Increment(ref revision);
+            writesSincePrune += changed;
+        }
+        finally { insertCommand.Transaction = null; }
+    }
+
+    private SqliteCommand CreateInsertCommand()
+    {
+        var command = connection!.CreateCommand();
         command.CommandText = """
             INSERT INTO activity VALUES($id,$start,$end,$last,$ip,$name,$device,$domain,$protocol,$outcome,$up,$down,$duration)
             ON CONFLICT(id) DO UPDATE SET ended_at=excluded.ended_at,last_traffic_at=excluded.last_traffic_at,
@@ -284,24 +331,36 @@ public sealed class ActivityStore : IDisposable
                 upload_bytes=excluded.upload_bytes,download_bytes=excluded.download_bytes,duration_seconds=excluded.duration_seconds
             WHERE activity.ended_at IS NULL OR excluded.ended_at IS NOT NULL
             """;
-        command.Parameters.AddWithValue("$id", Clip(entry.Id, 128));
-        command.Parameters.AddWithValue("$start", entry.StartedAt.UtcTicks);
-        command.Parameters.AddWithValue("$end", (object?)entry.EndedAt?.UtcTicks ?? DBNull.Value);
-        command.Parameters.AddWithValue("$last", (object?)entry.LastTrafficAt?.UtcTicks ?? DBNull.Value);
-        command.Parameters.AddWithValue("$ip", Clip(entry.ClientIp, 64));
-        command.Parameters.AddWithValue("$name", Clip(entry.DeviceName, 128));
-        command.Parameters.AddWithValue("$device", Clip(string.IsNullOrWhiteSpace(entry.DeviceId) ? entry.ClientIp : entry.DeviceId, 128));
+        foreach (string name in new[] { "$id", "$ip", "$name", "$device", "$domain", "$protocol", "$outcome" })
+            command.Parameters.Add(name, SqliteType.Text);
+        foreach (string name in new[] { "$start", "$end", "$last", "$up", "$down" })
+            command.Parameters.Add(name, SqliteType.Integer);
+        command.Parameters.Add("$duration", SqliteType.Real);
+        try { command.Prepare(); return command; }
+        catch { command.Dispose(); throw; }
+    }
+
+    private int Upsert(ActivityEntry entry)
+    {
+        var command = insertCommand!;
+        command.Parameters["$id"].Value = Clip(entry.Id, 128);
+        command.Parameters["$start"].Value = entry.StartedAt.UtcTicks;
+        command.Parameters["$end"].Value = (object?)entry.EndedAt?.UtcTicks ?? DBNull.Value;
+        command.Parameters["$last"].Value = (object?)entry.LastTrafficAt?.UtcTicks ?? DBNull.Value;
+        command.Parameters["$ip"].Value = Clip(entry.ClientIp, 64);
+        command.Parameters["$name"].Value = Clip(entry.DeviceName, 128);
+        command.Parameters["$device"].Value = Clip(string.IsNullOrWhiteSpace(entry.DeviceId) ? entry.ClientIp : entry.DeviceId, 128);
         var domain = entry.Domain.Trim().TrimEnd('.').ToLowerInvariant();
         // Defense in depth: a mistaken URL passed by a caller must never write paths or queries to history.
         if (domain.IndexOfAny(['/', '?', '#', '\\', '\r', '\n', '@']) >= 0) domain = "";
-        command.Parameters.AddWithValue("$domain", Clip(domain, 253));
-        command.Parameters.AddWithValue("$protocol", entry.Protocol is "HTTP" or "HTTPS" or "DNS" ? entry.Protocol : "Unknown");
-        command.Parameters.AddWithValue("$outcome", entry.Outcome is "Connecting" or "Allowed" or "Blocked" or "Error" or "Interrupted" ? entry.Outcome : "Error");
+        command.Parameters["$domain"].Value = Clip(domain, 253);
+        command.Parameters["$protocol"].Value = entry.Protocol is "HTTP" or "HTTPS" or "DNS" ? entry.Protocol : "Unknown";
+        command.Parameters["$outcome"].Value = entry.Outcome is "Connecting" or "Allowed" or "Blocked" or "Error" or "Interrupted" ? entry.Outcome : "Error";
         // The per-row upper bound also keeps SUM over MaxRows within Int64.
-        command.Parameters.AddWithValue("$up", Math.Clamp(entry.UploadBytes, 0, 100_000_000_000_000));
-        command.Parameters.AddWithValue("$down", Math.Clamp(entry.DownloadBytes, 0, 100_000_000_000_000));
-        command.Parameters.AddWithValue("$duration", double.IsFinite(entry.DurationSeconds) ? Math.Clamp(entry.DurationSeconds, 0, 90 * 86400) : 0);
-        command.ExecuteNonQuery();
+        command.Parameters["$up"].Value = Math.Clamp(entry.UploadBytes, 0, 100_000_000_000_000);
+        command.Parameters["$down"].Value = Math.Clamp(entry.DownloadBytes, 0, 100_000_000_000_000);
+        command.Parameters["$duration"].Value = double.IsFinite(entry.DurationSeconds) ? Math.Clamp(entry.DurationSeconds, 0, 90 * 86400) : 0;
+        return command.ExecuteNonQuery();
     }
 
     private void InterruptActive(DateTimeOffset at)
@@ -316,14 +375,15 @@ public sealed class ActivityStore : IDisposable
     {
         writesSincePrune = 0;
         using var command = connection!.CreateCommand();
-        command.CommandText = """
-            DELETE FROM activity WHERE started_at < $cutoff;
-            DELETE FROM activity WHERE id IN (SELECT id FROM activity ORDER BY started_at DESC,id DESC LIMIT -1 OFFSET $max);
-            PRAGMA incremental_vacuum(256);
-            """;
+        command.CommandText = "DELETE FROM activity WHERE started_at < $cutoff";
         command.Parameters.AddWithValue("$cutoff", DateTimeOffset.UtcNow.AddDays(-retentionDays).UtcTicks);
+        int deleted = command.ExecuteNonQuery();
+        command.Parameters.Clear();
+        command.CommandText = "DELETE FROM activity WHERE id IN (SELECT id FROM activity ORDER BY started_at DESC,id DESC LIMIT -1 OFFSET $max)";
         command.Parameters.AddWithValue("$max", MaxRows);
-        command.ExecuteNonQuery();
+        deleted += command.ExecuteNonQuery();
+        if (deleted > 0) Interlocked.Increment(ref revision);
+        Execute("PRAGMA incremental_vacuum(256)");
     }
 
     private SqliteConnection OpenRead()
@@ -366,7 +426,7 @@ public sealed class ActivityStore : IDisposable
     private static string Clip(string text, int length) => text.Length <= length ? text : text[..length];
     private static TaskCompletionSource NewCompletion() => new(TaskCreationOptions.RunContinuationsAsynchronously);
     private void Execute(string sql) { using var command = connection!.CreateCommand(); command.CommandText = sql; command.ExecuteNonQuery(); }
-    private void Fail(Exception ex) => error = "No se pudo acceder al historial local. El proxy sigue funcionando. " + ex.Message;
+    private void Fail(Exception ex) => error = L10n.T("CouldNotAccessLocalHistoryFilteringIsStillRunning") + ex.Message;
 
     public void Dispose()
     {

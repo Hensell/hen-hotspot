@@ -22,14 +22,14 @@ public sealed class NativeWfp : IDisposable
 
     public NativeWfp()
     {
-        if (!Environment.Is64BitProcess) throw new PlatformNotSupportedException("El control de acceso requiere Windows x64.");
+        if (!Environment.Is64BitProcess) throw new PlatformNotSupportedException(L10n.T("AccessControlRequires64BitWindows"));
         using var memory = new NativeMemory();
-        var session = new Session { Key = Guid.NewGuid(), Display = memory.Display("Hen Hotspot · sesión de acceso"), Flags = 1, Timeout = 5000 };
-        Check(FwpmEngineOpen0(null, 10, IntPtr.Zero, ref session, out engine), "abrir el filtro de Windows");
+        var session = new Session { Key = Guid.NewGuid(), Display = memory.Display(L10n.T("HenHotspotAccessSession")), Flags = 1, Timeout = 5000 };
+        Check(FwpmEngineOpen0(null, 10, IntPtr.Zero, ref session, out engine), L10n.T("OpenTheWindowsFilter"));
         try
         {
-            var layer = new Sublayer { Key = sublayer, Display = memory.Display("Hen Hotspot · dispositivos"), Weight = 0x7000 };
-            Check(FwpmSubLayerAdd0(engine, ref layer, IntPtr.Zero), "crear la sesión de dispositivos");
+            var layer = new Sublayer { Key = sublayer, Display = memory.Display(L10n.T("HenHotspotDevices")), Weight = 0x7000 };
+            Check(FwpmSubLayerAdd0(engine, ref layer, IntPtr.Zero), L10n.T("CreateTheDeviceSession"));
         }
         catch { Dispose(); throw; }
     }
@@ -37,40 +37,40 @@ public sealed class NativeWfp : IDisposable
     public void Apply(GuardPlan plan)
     {
         if (engine == IntPtr.Zero) throw new ObjectDisposedException(nameof(NativeWfp));
-        if (plan.Network.Index == 0 || plan.Network.Luid == 0) throw new ArgumentException("Interfaz no válida.");
+        if (plan.Network.Index == 0 || plan.Network.Luid == 0) throw new ArgumentException(L10n.T("InvalidInterface"));
         var added = new List<ulong>();
-        Check(FwpmTransactionBegin0(engine, 0), "iniciar los cambios de acceso");
+        Check(FwpmTransactionBegin0(engine, 0), L10n.T("StartTheAccessChanges"));
         try
         {
-            foreach (ulong id in ids) Check(FwpmFilterDeleteById0(engine, id), "actualizar una regla de acceso");
+            foreach (ulong id in ids) Check(FwpmFilterDeleteById0(engine, id), L10n.T("UpdateAnAccessRule"));
             using var memory = new NativeMemory();
             var incoming = Condition.UInt(SourceInterface, 3, plan.Network.Index);
             var outgoing = Condition.UInt(DestinationInterface, 3, plan.Network.Index);
             var local = Condition.Pointer(LocalInterface, 4, memory.UInt64(plan.Network.Luid));
             // ICS rewrites the source IPv4 before IPFORWARD on this Windows path.
             // Match the device at packet arrival, while its original address is still present.
-            added.Add(Add(Inbound4, false, 1, [local], memory, "Sin autorización · entrada antes de NAT"));
-            added.Add(Add(Forward4, false, 1, [outgoing], memory, "Sin autorización · retorno de internet"));
-            added.Add(Add(Forward6, false, 1, [incoming], memory, "Sin autorización · salida IPv6"));
-            added.Add(Add(Forward6, false, 1, [outgoing], memory, "Sin autorización · retorno IPv6"));
+            added.Add(Add(Inbound4, false, 1, [local], memory, L10n.T("UnauthorizedInboundBeforeNAT")));
+            added.Add(Add(Forward4, false, 1, [outgoing], memory, L10n.T("UnauthorizedInternetReturn")));
+            added.Add(Add(Forward6, false, 1, [incoming], memory, L10n.T("UnauthorizedOutboundIPv6")));
+            added.Add(Add(Forward6, false, 1, [outgoing], memory, L10n.T("UnauthorizedIPv6Return")));
             // IPPACKET has no transport ports. Let locally addressed DHCP reach ALE,
             // where the existing UDP/67 exception and default deny still apply.
             uint gateway = BinaryPrimitives.ReadUInt32BigEndian(IPAddress.Parse(plan.Network.Address).GetAddressBytes());
             uint broadcast = gateway | (uint.MaxValue >> plan.Network.PrefixLength);
             foreach (uint destination in new[] { gateway, broadcast, uint.MaxValue }.Distinct())
-                added.Add(Add(Inbound4, true, 8, [local, Condition.UInt(LocalAddress, 3, destination)], memory, "Tráfico local · comprobar servicios"));
+                added.Add(Add(Inbound4, true, 8, [local, Condition.UInt(LocalAddress, 3, destination)], memory, L10n.T("LocalTrafficCheckServices")));
             foreach (var layer in new[] { Receive4, Receive6 })
-                added.Add(Add(layer, false, 1, [local], memory, "Sin autorización · servicios de la laptop"));
+                added.Add(Add(layer, false, 1, [local], memory, L10n.T("UnauthorizedLaptopServices")));
             // DHCP remains available so new clients obtain an address and can be approved in the UI.
-            added.Add(Add(Receive4, true, 8, [local, Condition.UInt(Protocol, 1, 17), Condition.UInt(LocalPort, 2, 67)], memory, "Asignación DHCP"));
+            added.Add(Add(Receive4, true, 8, [local, Condition.UInt(Protocol, 1, 17), Condition.UInt(LocalPort, 2, 67)], memory, L10n.T("DHCPAssignment")));
             foreach (string address in plan.ApprovedAddresses)
             {
                 uint ip = BinaryPrimitives.ReadUInt32BigEndian(IPAddress.Parse(address).GetAddressBytes());
-                added.Add(Add(Inbound4, true, 8, [local, Condition.UInt(RemoteAddress, 3, ip)], memory, "Dispositivo autorizado · entrada antes de NAT"));
-                added.Add(Add(Forward4, true, 8, [outgoing, Condition.UInt(DestinationAddress, 3, ip)], memory, "Dispositivo autorizado · retorno"));
-                added.Add(Add(Receive4, true, 8, [local, Condition.UInt(RemoteAddress, 3, ip)], memory, "Dispositivo autorizado · servicios locales"));
+                added.Add(Add(Inbound4, true, 8, [local, Condition.UInt(RemoteAddress, 3, ip)], memory, L10n.T("AuthorizedDeviceInboundBeforeNAT")));
+                added.Add(Add(Forward4, true, 8, [outgoing, Condition.UInt(DestinationAddress, 3, ip)], memory, L10n.T("AuthorizedDeviceReturn")));
+                added.Add(Add(Receive4, true, 8, [local, Condition.UInt(RemoteAddress, 3, ip)], memory, L10n.T("AuthorizedDeviceLocalServices")));
             }
-            Check(FwpmTransactionCommit0(engine), "aplicar los cambios de acceso");
+            Check(FwpmTransactionCommit0(engine), L10n.T("ApplyTheAccessChanges"));
             ids = added;
         }
         catch { FwpmTransactionAbort0(engine); throw; }
@@ -80,26 +80,34 @@ public sealed class NativeWfp : IDisposable
     {
         foreach (ulong id in ids)
         {
-            Check(FwpmFilterGetById0(engine, id, out var pointer), "comprobar el filtro de acceso");
-            try { if (Marshal.PtrToStructure<Filter>(pointer).SubLayer != sublayer) throw new InvalidOperationException("La regla de acceso cambió inesperadamente."); }
+            Check(FwpmFilterGetById0(engine, id, out var pointer), L10n.T("CheckTheAccessFilter"));
+            try { if (Marshal.PtrToStructure<Filter>(pointer).SubLayer != sublayer) throw new InvalidOperationException(L10n.T("TheAccessRuleChangedUnexpectedly")); }
             finally { FwpmFreeMemory0(ref pointer); }
         }
     }
 
     private ulong Add(Guid layer, bool allow, uint weight, Condition[] conditions, NativeMemory memory, string name)
     {
-        var filter = new Filter { Key = Guid.NewGuid(), Display = memory.Display("Hen · " + name), Layer = layer, SubLayer = sublayer,
-            Weight = new Value { Type = 1, Data = weight }, Count = (uint)conditions.Length, Conditions = memory.Array(conditions),
-            Action = new ActionValue { Type = allow ? 0x1002u : 0x1001u } };
+        var filter = new Filter
+        {
+            Key = Guid.NewGuid(),
+            Display = memory.Display("Hen · " + name),
+            Layer = layer,
+            SubLayer = sublayer,
+            Weight = new Value { Type = 1, Data = weight },
+            Count = (uint)conditions.Length,
+            Conditions = memory.Array(conditions),
+            Action = new ActionValue { Type = allow ? 0x1002u : 0x1001u }
+        };
         // Soft permits within our sublayer: never override another firewall provider's block.
-        Check(FwpmFilterAdd0(engine, ref filter, IntPtr.Zero, out ulong id), "crear la regla " + name);
+        Check(FwpmFilterAdd0(engine, ref filter, IntPtr.Zero, out ulong id), L10n.T("CreateTheRule") + name);
         return id;
     }
 
     public void Dispose() { if (engine != IntPtr.Zero) { FwpmEngineClose0(engine); engine = IntPtr.Zero; ids.Clear(); } }
     private static void Check(uint result, string operation)
     {
-        if (result != 0) throw new InvalidOperationException($"Windows no pudo {operation} (0x{result:X8}): {new Win32Exception(unchecked((int)result)).Message}");
+        if (result != 0) throw new InvalidOperationException(L10n.F("WindowsCouldNot00x1X82", operation, result, new Win32Exception(unchecked((int)result)).Message));
     }
 
     [StructLayout(LayoutKind.Sequential)] public struct DisplayData { public IntPtr Name, Description; }
@@ -108,13 +116,15 @@ public sealed class NativeWfp : IDisposable
     [StructLayout(LayoutKind.Sequential)] public struct Session { public Guid Key; public DisplayData Display; public uint Flags, Timeout, ProcessId; public IntPtr Sid, User; public int Kernel; }
     [StructLayout(LayoutKind.Sequential)] public struct Sublayer { public Guid Key; public DisplayData Display; public uint Flags; public IntPtr Provider; public Blob Data; public ushort Weight; }
     [StructLayout(LayoutKind.Sequential)] public struct ActionValue { public uint Type; public Guid Key; }
-    [StructLayout(LayoutKind.Sequential)] public struct Condition
+    [StructLayout(LayoutKind.Sequential)]
+    public struct Condition
     {
         public Guid Key; public uint Match; public Value Value;
         public static Condition UInt(Guid key, uint type, uint value) => new() { Key = key, Value = new Value { Type = type, Data = value } };
         public static Condition Pointer(Guid key, uint type, IntPtr value) => new() { Key = key, Value = new Value { Type = type, Data = (ulong)value } };
     }
-    [StructLayout(LayoutKind.Explicit, Size = 200)] public struct Filter
+    [StructLayout(LayoutKind.Explicit, Size = 200)]
+    public struct Filter
     {
         [FieldOffset(0)] public Guid Key;
         [FieldOffset(16)] public DisplayData Display;

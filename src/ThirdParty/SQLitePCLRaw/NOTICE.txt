@@ -1,0 +1,13 @@
+SQLitePCLRaw 2.1.12
+Copyright 2014-2024 SourceGear, LLC
+
+Hen Hotspot uses the unmodified SQLitePCLRaw.core, bundle_e_sqlite3,
+provider.e_sqlite3, and lib.e_sqlite3 NuGet packages, whose package metadata
+specifies Apache-2.0. The accompanying LICENSE.TXT is copied unchanged from:
+https://github.com/ericsink/SQLitePCL.raw/blob/v2.1.12/LICENSE.TXT
+
+Project: https://github.com/ericsink/SQLitePCL.raw/tree/v2.1.12
+SQLite: https://www.sqlite.org/copyright.html
+
+These terms apply to their respective components; Hen Hotspot's MIT license
+does not replace them.

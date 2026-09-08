@@ -58,7 +58,7 @@ public sealed class DeviceAccessStore
     {
         string normalized = NormalizeMac(mac);
         if (state is not (DeviceAccessState.Pending or DeviceAccessState.Approved or DeviceAccessState.Blocked))
-            throw new ArgumentOutOfRangeException(nameof(state), "El estado de autorización no es válido.");
+            throw new ArgumentOutOfRangeException(nameof(state), L10n.T("InvalidAuthorizationStatus"));
         string alias = ValidateName(name);
         lock (gate)
         {
@@ -70,7 +70,7 @@ public sealed class DeviceAccessStore
             else
             {
                 if (!next.ContainsKey(normalized) && next.Count >= MaximumEntries)
-                    throw new InvalidOperationException("Puedes guardar hasta 128 dispositivos. Elimina una autorización anterior para agregar otro.");
+                    throw new InvalidOperationException(L10n.T("YouCanSaveUpTo128DevicesRemoveAn"));
                 next[normalized] = new(normalized, alias, state, DateTimeOffset.UtcNow);
             }
 
@@ -90,7 +90,7 @@ public sealed class DeviceAccessStore
             }
             catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or JsonException or NotSupportedException)
             {
-                lastError = "No se pudieron guardar las autorizaciones de dispositivos. " + ex.Message;
+                lastError = L10n.T("CouldNotSaveDeviceAuthorizations") + ex.Message;
                 throw new IOException(lastError, ex);
             }
             finally
@@ -124,19 +124,19 @@ public sealed class DeviceAccessStore
         try
         {
             using var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
-            if (stream.Length > MaximumFileBytes) throw new JsonException("El archivo de autorizaciones supera el tamaño permitido.");
+            if (stream.Length > MaximumFileBytes) throw new JsonException(L10n.T("TheAuthorizationFileExceedsTheSizeLimit"));
             var document = JsonSerializer.Deserialize<AccessDocument>(stream, JsonOptions);
             if (document is null || document.Version != 1 || document.Entries is null || document.Entries.Length > MaximumEntries)
-                throw new JsonException("El formato de autorizaciones no es válido.");
+                throw new JsonException(L10n.T("InvalidAuthorizationFormat"));
             var loaded = new Dictionary<string, DevicePermission>(StringComparer.Ordinal);
             foreach (var permission in document.Entries)
             {
                 if (permission is null || permission.State is not (DeviceAccessState.Approved or DeviceAccessState.Blocked) || permission.UpdatedAt == default)
-                    throw new JsonException("Hay una autorización incompleta o con un estado no válido.");
+                    throw new JsonException(L10n.T("AnAuthorizationIsIncompleteOrHasAnInvalidStatus"));
                 string normalized = NormalizeMac(permission.Mac);
                 string alias = ValidateName(permission.Name);
                 if (!loaded.TryAdd(normalized, permission with { Mac = normalized, Name = alias, UpdatedAt = permission.UpdatedAt.ToUniversalTime() }))
-                    throw new JsonException("El archivo contiene direcciones de dispositivo duplicadas.");
+                    throw new JsonException(L10n.T("TheFileContainsDuplicateDeviceAddresses"));
             }
             // Never partially accept a damaged document: one invalid entry invalidates the entire load.
             entries = loaded;
@@ -144,12 +144,12 @@ public sealed class DeviceAccessStore
         catch (FileNotFoundException) { }
         catch (DirectoryNotFoundException ex)
         {
-            if (File.Exists(directory)) lastError = "No se pudieron leer las autorizaciones. Ningún dispositivo se aprobará a partir de este archivo. " + ex.Message;
+            if (File.Exists(directory)) lastError = L10n.T("CouldNotReadAuthorizationsNoDevicesWillBeApproved") + ex.Message;
         }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or JsonException or ArgumentException or NotSupportedException)
         {
             entries.Clear();
-            lastError = "No se pudieron leer las autorizaciones. Ningún dispositivo se aprobará a partir de este archivo. " + ex.Message;
+            lastError = L10n.T("CouldNotReadAuthorizationsNoDevicesWillBeApproved") + ex.Message;
         }
     }
 
@@ -158,9 +158,9 @@ public sealed class DeviceAccessStore
         ArgumentNullException.ThrowIfNull(name);
         string trimmed = name.Trim();
         if (trimmed.Length > 80 || trimmed.Any(char.IsControl))
-            throw new ArgumentException("El nombre admite hasta 80 caracteres y no puede contener saltos de línea ni caracteres de control.", nameof(name));
+            throw new ArgumentException(L10n.T("TheNameCanContainUpTo80CharactersWithout"), nameof(name));
         return trimmed;
     }
-    private static ArgumentException InvalidMac() => new("Usa una dirección MAC unicast válida de seis pares hexadecimales separados por dos puntos o guiones.", "mac");
+    private static ArgumentException InvalidMac() => new(L10n.T("EnterAValidUnicastMACAddressWithSixHexadecimal"), "mac");
     private sealed record AccessDocument(int Version, DevicePermission[] Entries);
 }

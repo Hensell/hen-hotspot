@@ -66,8 +66,11 @@ public static class DeviceAccessStoreTests
             store.Set(bob, "Bob", DeviceAccessState.Approved);
             check(store.LastError is null && new DeviceAccessStore(directory).IsApproved(bob), "A later successful device save clears the previous storage error");
 
-            var jsonOptions = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-                Converters = { new JsonStringEnumConverter(JsonNamingPolicy.CamelCase) } };
+            var jsonOptions = new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                Converters = { new JsonStringEnumConverter(JsonNamingPolicy.CamelCase) }
+            };
             void WriteDocument(IEnumerable<DevicePermission> entries, int version = 1) => File.WriteAllText(path,
                 JsonSerializer.Serialize(new { Version = version, Entries = entries.ToArray() }, jsonOptions));
             var permission = new DevicePermission(alice, "Ana", DeviceAccessState.Approved, DateTimeOffset.UtcNow);

@@ -1,189 +1,845 @@
-<Window x:Class="HenHotspot.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
- Title="Hen Hotspot" Icon="Assets/Brand/hen-hotspot.ico" Width="1280" Height="860" MinWidth="1000" MinHeight="650" WindowStartupLocation="CenterScreen" Background="#F5F6F4" FontFamily="Segoe UI Variable, Segoe UI" FontSize="13" Foreground="#172723" UseLayoutRounding="True" SnapsToDevicePixels="True">
- <Window.Resources><ResourceDictionary><ResourceDictionary.MergedDictionaries><ResourceDictionary Source="Theme.xaml"/><ResourceDictionary Source="Assets/Brand/BrandResources.xaml"/></ResourceDictionary.MergedDictionaries></ResourceDictionary></Window.Resources>
- <Grid>
-  <Grid.ColumnDefinitions><ColumnDefinition Width="205"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
-  <Border Background="{StaticResource RailBrush}" Padding="17,27,17,18">
-   <DockPanel>
-    <StackPanel DockPanel.Dock="Top" Margin="8,0,0,36">
-     <StackPanel Orientation="Horizontal"><Image x:Name="BrandMark" Source="{StaticResource HenMarkImage}" Width="38" Height="38" Margin="0,0,10,0"/><StackPanel VerticalAlignment="Center"><TextBlock Text="hen" Foreground="#F6FBF8" FontSize="28" FontWeight="SemiBold" LineHeight="27"/><TextBlock Text="HOTSPOT" Foreground="#91B5A8" FontSize="10" FontWeight="SemiBold"/></StackPanel></StackPanel>
-    </StackPanel>
-    <StackPanel DockPanel.Dock="Bottom">
-     <Grid Margin="8,20,8,0"><TextBlock Text="HEN HOTSPOT" FontSize="10" Foreground="#728A83"/><TextBlock Text="v0.6.1" FontSize="10" Foreground="#8FA49B" HorizontalAlignment="Right"/></Grid>
-    </StackPanel>
-    <StackPanel>
-     <TextBlock Text="ESPACIO DE TRABAJO" FontSize="10" FontWeight="SemiBold" Foreground="#69877E" Margin="14,0,0,12"/>
-     <Button x:Name="OverviewNav" Style="{StaticResource NavButton}" Click="Overview_Click" AutomationProperties.Name="Resumen"><StackPanel Orientation="Horizontal"><TextBlock Text="&#xE80F;" Style="{StaticResource Glyph}" FontSize="16" Margin="0,0,13,0"/><TextBlock Text="Resumen"/></StackPanel></Button>
-     <Button x:Name="NetworkNav" Style="{StaticResource NavButton}" Click="Network_Click" AutomationProperties.Name="Red Wi-Fi"><StackPanel Orientation="Horizontal"><TextBlock Text="&#xE701;" Style="{StaticResource Glyph}" FontSize="17" Margin="0,0,12,0"/><TextBlock Text="Red Wi-Fi"/></StackPanel></Button>
-     <Button x:Name="RulesNav" Style="{StaticResource NavButton}" Click="Rules_Click" AutomationProperties.Name="Dominios"><StackPanel Orientation="Horizontal"><TextBlock Text="&#xE9E9;" Style="{StaticResource Glyph}" FontSize="16" Margin="0,0,13,0"/><TextBlock Text="Dominios"/></StackPanel></Button>
-     <Button x:Name="DeviceNav" Style="{StaticResource NavButton}" Click="Devices_Click" AutomationProperties.Name="Dispositivos"><StackPanel Orientation="Horizontal"><TextBlock Text="&#xE8EA;" Style="{StaticResource Glyph}" FontSize="16" Margin="0,0,13,0"/><TextBlock Text="Dispositivos"/></StackPanel></Button>
-     <Button x:Name="ActivityNav" Style="{StaticResource NavButton}" Click="Activity_Click" AutomationProperties.Name="Actividad"><StackPanel Orientation="Horizontal"><TextBlock Text="&#xE81C;" Style="{StaticResource Glyph}" FontSize="16" Margin="0,0,13,0"/><TextBlock Text="Actividad"/></StackPanel></Button>     <Border Height="1" Background="#243733" Margin="13,22,13,17"/>
-     <Button x:Name="DiagnosticsNav" Style="{StaticResource NavButton}" Click="Diagnostics_Click" AutomationProperties.Name="Diagnóstico"><StackPanel Orientation="Horizontal"><TextBlock Text="&#xE9D9;" Style="{StaticResource Glyph}" FontSize="17" Margin="0,0,12,0"/><TextBlock Text="Diagnóstico"/></StackPanel></Button>
-    </StackPanel>
-   </DockPanel>
-  </Border>
-  <Grid Grid.Column="1">
-   <Grid.RowDefinitions><RowDefinition Height="58"/><RowDefinition Height="*"/></Grid.RowDefinitions>
-   <Border Background="#FCFDFC" BorderBrush="#E4E9E3" BorderThickness="0,0,0,1" Padding="28,0">
-    <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions><Grid VerticalAlignment="Center" Margin="0,0,16,0"><Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions><TextBlock Text="Consola de red" FontSize="12" Foreground="#65736D"/><TextBlock Grid.Column="1" Text=" / " Foreground="#C5CEC8" Margin="9,0"/><TextBlock x:Name="BreadcrumbText" Grid.Column="2" Text="Resumen" FontSize="12" FontWeight="SemiBold" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis"/></Grid>
-     <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
-      <Border Background="#F0F4EF" CornerRadius="16" Padding="11,7" Margin="0,0,8,0"><StackPanel Orientation="Horizontal"><Ellipse x:Name="GlobalStateDot" Width="6" Height="6" Fill="#9DAC9E" Margin="0,0,7,0"/><TextBlock Text="Hotspot " FontSize="11" Foreground="#728073"/><TextBlock x:Name="GlobalStateText" Text="Consultando" FontSize="11" FontWeight="SemiBold"/></StackPanel></Border>
-      <Border Background="#F0F4EF" CornerRadius="16" Padding="11,7"><StackPanel Orientation="Horizontal"><Ellipse x:Name="FilterStateDot" Width="6" Height="6" Fill="#9DAC9E" Margin="0,0,7,0"/><TextBlock x:Name="GlobalFilterText" Text="DNS apagado" FontSize="11" FontWeight="SemiBold"/></StackPanel></Border>
-      <Border Background="#F0F4EF" CornerRadius="16" Padding="11,7" Margin="8,0,0,0" AutomationProperties.Name="Estado del control de dispositivos"><StackPanel Orientation="Horizontal"><TextBlock Text="&#xE72E;" Style="{StaticResource Glyph}" FontSize="11" Foreground="#65736D" Margin="0,0,6,0"/><TextBlock x:Name="GlobalDeviceAccessText" Text="Control apagado" FontSize="11" FontWeight="SemiBold" MaxWidth="145" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" ToolTip="{Binding Text, RelativeSource={RelativeSource Self}}"/></StackPanel></Border>
-     </StackPanel>
-    </Grid>
-   </Border>
-   <Grid Grid.Row="1" Margin="28,24,28,15">
-    <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
-    <Grid Margin="0,0,0,21"><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions><StackPanel><TextBlock x:Name="PageTitle" Text="Resumen de tu red" FontSize="28" FontWeight="SemiBold"/><TextBlock x:Name="PageSubtitle" Text="Tu conexión, los dispositivos y el acceso. Todo en un lugar." Style="{StaticResource Body}" Margin="0,5,16,0"/></StackPanel><Button x:Name="RefreshButton" Grid.Column="1" Style="{StaticResource QuietButton}" Click="Refresh_Click" VerticalAlignment="Center" AutomationProperties.Name="Actualizar estado"><StackPanel Orientation="Horizontal"><TextBlock Text="&#xE72C;" Style="{StaticResource Glyph}" FontSize="14" Margin="0,0,8,0"/><TextBlock Text="Actualizar"/></StackPanel></Button></Grid>
-    <Border x:Name="NoticeBorder" Grid.Row="1" Background="#E8F5EE" CornerRadius="8" Padding="14,10" Margin="0,0,0,14" Visibility="Collapsed"><Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions><TextBlock x:Name="NoticeText" Foreground="#21624C" VerticalAlignment="Center"/><Button Grid.Column="1" Style="{StaticResource QuietButton}" Click="DismissNotice_Click" Padding="8,0" MinHeight="24" Margin="10,0,0,0" AutomationProperties.Name="Cerrar aviso"><TextBlock Text="&#xE711;" Style="{StaticResource Glyph}" FontSize="10"/></Button></Grid></Border>
-    <ScrollViewer x:Name="PageScroll" Grid.Row="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Padding="0,0,3,0">
-     <Grid>
-      <StackPanel x:Name="OverviewPanel">
-       <Border Background="#172E2C" CornerRadius="15" Padding="24,18" Margin="0,0,0,16">
-        <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
-         <StackPanel><StackPanel Orientation="Horizontal"><TextBlock Text="&#xE701;" Style="{StaticResource Glyph}" FontSize="14" Foreground="#70DAB8" Margin="0,0,8,0"/><TextBlock Text="TU PUNTO DE ACCESO" FontSize="10" FontWeight="SemiBold" Foreground="#8FB2A5"/></StackPanel><TextBlock x:Name="HeroSsidText" Text="Hen Hotspot" Foreground="#F4FAF5" FontSize="33" FontWeight="SemiBold" Margin="0,9,0,3"/><TextBlock x:Name="StateText" Text="Consultando Windows…" Foreground="#BCD3C6" FontSize="12"/><TextBlock x:Name="NetworkSummary" Text="" Visibility="Collapsed"/></StackPanel>
-         <StackPanel Grid.Column="1" VerticalAlignment="Center"><Button x:Name="ToggleButton" Style="{StaticResource MintButton}" Content="Encender hotspot" Click="Toggle_Click" IsEnabled="False" MinWidth="154"/><Button Content="Configurar red" Click="Network_Click" Style="{StaticResource QuietButton}" Foreground="#BCD3C6" Margin="0,5,0,0" MinHeight="30" Padding="10,5"/></StackPanel>
-        </Grid>
-       </Border>
-       <UniformGrid Columns="3" Margin="0,0,0,16">
-        <Border Style="{StaticResource Card}" Padding="19,15" Margin="0,0,12,0"><StackPanel><TextBlock Text="DISPOSITIVOS" Style="{StaticResource Caption}" FontSize="10"/><StackPanel Orientation="Horizontal" Margin="0,5,0,3"><TextBlock x:Name="CountText" Text="—" FontSize="30" FontWeight="SemiBold"/><TextBlock x:Name="ConnectedCountLabel" Text="conectados" Foreground="#65736D" FontSize="11" VerticalAlignment="Bottom" Margin="8,0,0,6"/></StackPanel><TextBlock x:Name="CapacityText" Text="Consultando capacidad" FontSize="11" Foreground="#65736D"/></StackPanel></Border>
-        <Border Style="{StaticResource Card}" Padding="19,15" Margin="0,0,12,0"><StackPanel><TextBlock Text="INTERNET DE ENTRADA" Style="{StaticResource Caption}" FontSize="10"/><TextBlock x:Name="SourceText" Text="—" FontSize="19" FontWeight="SemiBold" Margin="0,12,0,9" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis"/><TextBlock x:Name="InternetText" Text="Consultando conexión" FontSize="11" Foreground="#65736D"/></StackPanel></Border>
-        <Border Style="{StaticResource Card}" Padding="19,15"><StackPanel><TextBlock Text="FILTRO DNS · PRUEBA" Style="{StaticResource Caption}" FontSize="10"/><TextBlock x:Name="FilterStateSummary" Text="Apagado" FontSize="24" FontWeight="SemiBold" Margin="0,8,0,6"/><TextBlock x:Name="FilterStatsSummary" Text="Sin reglas en uso" FontSize="11" Foreground="#65736D"/></StackPanel></Border>
-       </UniformGrid>
-       <Grid>
-        <Border Style="{StaticResource Card}" Padding="0"><StackPanel><Grid Margin="20,18,20,15"><TextBlock Text="En tu red" Style="{StaticResource SectionTitle}"/><TextBlock Text="EN VIVO" FontSize="10" FontWeight="SemiBold" Foreground="#618A75" HorizontalAlignment="Right" VerticalAlignment="Center"/></Grid>
-         <Border x:Name="EmptyClientCard" Padding="24,13,24,26"><StackPanel><TextBlock Text="&#xE8EA;" Style="{StaticResource Glyph}" FontSize="28" Foreground="#A9C1B0" HorizontalAlignment="Left" Margin="0,0,0,12"/><TextBlock x:Name="EmptyClients" Text="Conecta un dispositivo para verlo aquí." Style="{StaticResource Body}"/></StackPanel></Border>
-         <DataGrid x:Name="ClientsGrid" MaxHeight="210" Visibility="Collapsed" AutomationProperties.Name="Dispositivos conectados"><DataGrid.Columns>
-          <DataGridTemplateColumn Header="DISPOSITIVO" Width="*"><DataGridTemplateColumn.CellTemplate><DataTemplate><Grid><Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions><Border Background="#EDF5EC" CornerRadius="9" Width="34" Height="34" Margin="0,0,10,0"><TextBlock Text="&#xE8EA;" Style="{StaticResource Glyph}" FontSize="16" Foreground="#4B8267" HorizontalAlignment="Center"/></Border><StackPanel Grid.Column="1" VerticalAlignment="Center"><TextBlock ToolTip="{Binding DisplayName}" Text="{Binding DisplayName}" FontSize="12" FontWeight="SemiBold" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis"/><TextBlock Text="{Binding Address}" FontFamily="Consolas" FontSize="10" Foreground="#65736D" Margin="0,3,0,0"/></StackPanel></Grid></DataTemplate></DataGridTemplateColumn.CellTemplate></DataGridTemplateColumn>
-          <DataGridTemplateColumn Header="ESTADO" Width="115"><DataGridTemplateColumn.CellTemplate><DataTemplate><Border Background="#EAF5EB" CornerRadius="10" Padding="8,4" HorizontalAlignment="Left"><TextBlock Text="Conectado" FontSize="10" Foreground="#367153"/></Border></DataTemplate></DataGridTemplateColumn.CellTemplate></DataGridTemplateColumn>
-         </DataGrid.Columns></DataGrid>
-        </StackPanel></Border>
-       </Grid>
-      </StackPanel>
-      <StackPanel x:Name="NetworkPanel" Visibility="Collapsed">
-       <Border Style="{StaticResource Card}" Padding="24">
-        <StackPanel>
-         <Grid Margin="0,0,0,20"><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions><TextBlock Text="Configuración de red" Style="{StaticResource SectionTitle}" VerticalAlignment="Center"/><Button Grid.Column="1" Content="Ajustes de Windows" Style="{StaticResource QuietButton}" Click="WindowsSettings_Click"/></Grid>
-         <TextBlock x:Name="NetworkLockText" Text="Consultando disponibilidad…" FontSize="12" Foreground="#65736D" Margin="0,0,0,22"/>
-         <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="24"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
-          <StackPanel><TextBlock Text="Nombre de la red" Style="{StaticResource FieldLabel}"/><TextBox x:Name="SsidBox" MaxLength="32" AutomationProperties.Name="Nombre de la red"/></StackPanel>
-          <StackPanel Grid.Column="2"><TextBlock Text="Nueva contraseña" Style="{StaticResource FieldLabel}"/><PasswordBox x:Name="PasswordBox" MaxLength="63" AutomationProperties.Name="Nueva contraseña"/><TextBlock Text="8–63 caracteres" FontSize="11" Foreground="#65736D" Margin="0,7,0,0"/></StackPanel>
-         </Grid>
-         <StackPanel Width="280" HorizontalAlignment="Left" Margin="0,22,0,0"><TextBlock Text="Banda Wi-Fi" Style="{StaticResource FieldLabel}"/><ComboBox x:Name="BandBox" AutomationProperties.Name="Banda Wi-Fi" SelectedIndex="0"><ComboBoxItem Content="Automática"/><ComboBoxItem Content="2.4 GHz"/><ComboBoxItem Content="5 GHz"/></ComboBox></StackPanel>
-         <Border BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,1,0,0" Margin="0,24,0,0" Padding="0,18,0,0"><Button x:Name="SaveNetworkButton" Content="Guardar configuración" Style="{StaticResource PrimaryButton}" Click="SaveNetwork_Click" HorizontalAlignment="Right"/></Border>
+<Window x:Class="HenHotspot.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Language="{DynamicResource AppLanguage}" Title="Hen Hotspot" Icon="Assets/Brand/hen-hotspot.ico" Width="1280" Height="860" MinWidth="1000" MinHeight="650" WindowStartupLocation="CenterScreen" Background="#F5F6F4" FontFamily="Segoe UI Variable, Segoe UI" FontSize="13" Foreground="#172723" UseLayoutRounding="True" SnapsToDevicePixels="True">
+  <Window.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Theme.xaml" />
+        <ResourceDictionary Source="Assets/Brand/BrandResources.xaml" />
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+  </Window.Resources>
+  <Grid>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="205" />
+      <ColumnDefinition Width="*" />
+    </Grid.ColumnDefinitions>
+    <Border Background="{StaticResource RailBrush}" Padding="17,27,17,18">
+      <DockPanel>
+        <StackPanel DockPanel.Dock="Top" Margin="8,0,0,36">
+          <StackPanel Orientation="Horizontal">
+            <Image x:Name="BrandMark" Source="{StaticResource HenMarkImage}" Width="38" Height="38" Margin="0,0,10,0" />
+            <StackPanel VerticalAlignment="Center">
+              <TextBlock Text="hen" Foreground="#F6FBF8" FontSize="28" FontWeight="SemiBold" LineHeight="27" />
+              <TextBlock Text="HOTSPOT" Foreground="#91B5A8" FontSize="10" FontWeight="SemiBold" />
+            </StackPanel>
+          </StackPanel>
         </StackPanel>
-       </Border>
-      </StackPanel>
-      <StackPanel x:Name="RulesPanel" Visibility="Collapsed">
-       <Grid Height="{Binding ViewportHeight, ElementName=PageScroll}" MinHeight="410"><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
-       <Border Style="{StaticResource Card}" Padding="20,14" Margin="0,0,0,14"><Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions><StackPanel><TextBlock x:Name="FilterStateText" Text="Filtro DNS apagado" FontSize="17" FontWeight="SemiBold"/><TextBlock x:Name="ActivePolicyText" Text="" FontSize="12" Foreground="#65736D" Margin="0,5,18,0"/><TextBlock x:Name="FilterUsageText" Visibility="Collapsed" FontSize="11" Foreground="#65736D" Margin="0,5,18,0"/></StackPanel><Button x:Name="FilterToggleButton" Grid.Column="1" Style="{StaticResource PrimaryButton}" Content="Activar filtro DNS" Click="FilterToggle_Click" VerticalAlignment="Center" IsEnabled="False"/></Grid></Border>
-       <TextBlock Grid.Row="1" x:Name="FilterErrorText" Visibility="Collapsed" Foreground="#9D462F" FontSize="12" Margin="2,0,2,14"/>
-       <Border Grid.Row="2" Style="{StaticResource Card}" Padding="16">
-        <Grid><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
-         <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
-          <StackPanel VerticalAlignment="Center"><TextBlock x:Name="DomainListTitle" Text="Dominios bloqueados" Style="{StaticResource SectionTitle}"/><TextBlock x:Name="DomainCountText" Text="0 dominios" FontSize="11" Foreground="#65736D" Margin="0,3,0,0"/></StackPanel>
-          <ComboBox x:Name="ModeBox" Grid.Column="1" Width="276" AutomationProperties.Name="Modo de filtrado DNS" ToolTip="Modo de filtrado" SelectedIndex="0"><ComboBoxItem Content="Bloquear dominios"/><ComboBoxItem Content="Permitir solo estos dominios"/></ComboBox>
-         </Grid>
-         <Grid Grid.Row="1" Margin="0,12,0,0"><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="10"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
-          <Grid><TextBox x:Name="DomainInput" MaxLength="2048" FontSize="13" AutomationProperties.Name="Agregar dominio o dirección web" KeyDown="DomainInput_KeyDown"/><TextBlock x:Name="DomainPlaceholder" Text="Escribe un dominio o pega una URL" Foreground="#65736D" FontSize="13" VerticalAlignment="Center" Margin="13,0,0,0" IsHitTestVisible="False"/></Grid>
-          <Button x:Name="AddDomainButton" Grid.Column="2" Click="AddDomain_Click" IsEnabled="False" AutomationProperties.Name="Agregar dominio"><StackPanel Orientation="Horizontal"><TextBlock Text="&#xE710;" Style="{StaticResource Glyph}" FontSize="12" Margin="0,0,8,0"/><TextBlock Text="Agregar"/></StackPanel></Button>
-         </Grid>
-         <TextBlock Grid.Row="2" x:Name="DomainInputError" Visibility="Collapsed" Foreground="#9D462F" FontSize="12" Margin="1,8,0,0" AutomationProperties.LiveSetting="Polite"/>
-         <DataGrid Grid.Row="3" x:Name="DomainList" Margin="0,12,0,0" RowHeight="44" MinHeight="64" CanUserSortColumns="False" CanUserResizeColumns="False" AutomationProperties.Name="Lista de dominios">
-          <DataGrid.Columns>
-           <DataGridTemplateColumn Header="DOMINIO" Width="*"><DataGridTemplateColumn.CellTemplate><DataTemplate><Grid><Grid.ColumnDefinitions><ColumnDefinition Width="28"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions><TextBlock Text="&#xE774;" Style="{StaticResource Glyph}" FontSize="16" Foreground="#65736D"/><TextBlock Grid.Column="1" Text="{Binding}" FontWeight="SemiBold" FontSize="13" VerticalAlignment="Center" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" ToolTip="{Binding}"/></Grid></DataTemplate></DataGridTemplateColumn.CellTemplate></DataGridTemplateColumn>
-           <DataGridTemplateColumn Header="ALCANCE" Width="180"><DataGridTemplateColumn.CellTemplate><DataTemplate><TextBlock Text="Incluye subdominios" Foreground="#65736D" FontSize="12"/></DataTemplate></DataGridTemplateColumn.CellTemplate></DataGridTemplateColumn>
-           <DataGridTemplateColumn Width="110"><DataGridTemplateColumn.CellTemplate><DataTemplate><Button Tag="{Binding}" Click="RemoveDomain_Click" Style="{StaticResource QuietButton}" Padding="8,6" MinHeight="34" AutomationProperties.Name="{Binding StringFormat='Eliminar {0}'}"><StackPanel Orientation="Horizontal"><TextBlock Text="&#xE74D;" Style="{StaticResource Glyph}" FontSize="13" Margin="0,0,7,0"/><TextBlock Text="Eliminar" FontSize="12"/></StackPanel></Button></DataTemplate></DataGridTemplateColumn.CellTemplate></DataGridTemplateColumn>
-          </DataGrid.Columns>
-         </DataGrid>
-         <StackPanel Grid.Row="3" VerticalAlignment="Center" x:Name="EmptyDomainsPanel" Margin="0,22,0,12"><TextBlock Text="Sin dominios" FontSize="15" FontWeight="SemiBold"/><TextBlock x:Name="EmptyDomainsText" FontSize="12" Foreground="#65736D" Margin="0,6,0,0"/></StackPanel>
-         <Border Grid.Row="4" BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,1,0,0" Margin="0,10,0,0" Padding="0,12,0,0"><Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions><TextBlock x:Name="DraftStatusText" FontSize="11" Foreground="#65736D" VerticalAlignment="Center" Margin="0,0,16,0"/><StackPanel Grid.Column="1" Orientation="Horizontal"><Button x:Name="SaveDraftButton" Content="Guardar borrador" Click="SaveDraft_Click" Margin="0,0,10,0"/><Button x:Name="ApplyRulesButton" Content="Aplicar cambios" Style="{StaticResource PrimaryButton}" Click="ApplyRules_Click" IsEnabled="False"/></StackPanel></Grid></Border>
+        <StackPanel DockPanel.Dock="Bottom">
+          <TextBlock Text="{DynamicResource Language}" FontSize="11" Foreground="#91B5A8" Margin="8,0,0,8" />
+          <ComboBox x:Name="LanguageBox" SelectedValuePath="Tag" SelectionChanged="Language_Changed" AutomationProperties.Name="{DynamicResource Language}" ToolTip="{DynamicResource ChangeLanguage}" FontSize="12">
+            <ComboBoxItem Content="Español" Tag="es" />
+            <ComboBoxItem Content="English" Tag="en" />
+            <ComboBoxItem Content="Português (Brasil)" Tag="pt-BR" />
+          </ComboBox>
+          <Grid Margin="8,20,8,0">
+            <TextBlock Text="HEN HOTSPOT" FontSize="10" Foreground="#728A83" />
+            <TextBlock Text="v0.8.0" FontSize="10" Foreground="#8FA49B" HorizontalAlignment="Right" />
+          </Grid>
+        </StackPanel>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+          <StackPanel>
+            <TextBlock Text="{DynamicResource WORKSPACE}" FontSize="10" FontWeight="SemiBold" Foreground="#69877E" Margin="14,0,0,12" />
+            <Button x:Name="OverviewNav" Style="{StaticResource NavButton}" Click="Overview_Click" AutomationProperties.Name="{DynamicResource Overview}">
+              <StackPanel Orientation="Horizontal">
+                <TextBlock Text="" Style="{StaticResource Glyph}" FontSize="16" Margin="0,0,13,0" />
+                <TextBlock Text="{DynamicResource Overview}" />
+              </StackPanel>
+            </Button>
+            <Button x:Name="NetworkNav" Style="{StaticResource NavButton}" Click="Network_Click" AutomationProperties.Name="{DynamicResource WiFiNetwork}">
+              <StackPanel Orientation="Horizontal">
+                <TextBlock Text="" Style="{StaticResource Glyph}" FontSize="17" Margin="0,0,12,0" />
+                <TextBlock Text="{DynamicResource WiFiNetwork}" />
+              </StackPanel>
+            </Button>
+            <Button x:Name="RulesNav" Style="{StaticResource NavButton}" Click="Rules_Click" AutomationProperties.Name="{DynamicResource Domains}">
+              <StackPanel Orientation="Horizontal">
+                <TextBlock Text="" Style="{StaticResource Glyph}" FontSize="16" Margin="0,0,13,0" />
+                <TextBlock Text="{DynamicResource Domains}" />
+              </StackPanel>
+            </Button>
+            <Button x:Name="DeviceNav" Style="{StaticResource NavButton}" Click="Devices_Click" AutomationProperties.Name="{DynamicResource Devices}">
+              <StackPanel Orientation="Horizontal">
+                <TextBlock Text="" Style="{StaticResource Glyph}" FontSize="16" Margin="0,0,13,0" />
+                <TextBlock Text="{DynamicResource Devices}" />
+              </StackPanel>
+            </Button>
+            <Button x:Name="ActivityNav" Style="{StaticResource NavButton}" Click="Activity_Click" AutomationProperties.Name="{DynamicResource Activity}">
+              <StackPanel Orientation="Horizontal">
+                <TextBlock Text="" Style="{StaticResource Glyph}" FontSize="16" Margin="0,0,13,0" />
+                <TextBlock Text="{DynamicResource Activity}" />
+              </StackPanel>
+            </Button>
+            <Border Height="1" Background="#243733" Margin="13,14,13,9" />
+            <Button x:Name="DiagnosticsNav" Style="{StaticResource NavButton}" Click="Diagnostics_Click" AutomationProperties.Name="{DynamicResource Diagnostics}">
+              <StackPanel Orientation="Horizontal">
+                <TextBlock Text="" Style="{StaticResource Glyph}" FontSize="17" Margin="0,0,12,0" />
+                <TextBlock Text="{DynamicResource Diagnostics}" />
+              </StackPanel>
+            </Button>
+            <Button x:Name="AboutNav" Style="{StaticResource NavButton}" Click="About_Click" AutomationProperties.Name="{DynamicResource AboutMe}">
+              <StackPanel Orientation="Horizontal">
+                <TextBlock Text="" Style="{StaticResource Glyph}" FontSize="16" Margin="0,0,13,0" />
+                <TextBlock Text="{DynamicResource AboutMe}" />
+              </StackPanel>
+            </Button>
+          </StackPanel>
+        </ScrollViewer>
+      </DockPanel>
+    </Border>
+    <Grid Grid.Column="1">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="58" />
+        <RowDefinition Height="*" />
+      </Grid.RowDefinitions>
+      <Border Background="#FCFDFC" BorderBrush="#E4E9E3" BorderThickness="0,0,0,1" Padding="28,0">
+        <Grid>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+          </Grid.ColumnDefinitions>
+          <Grid VerticalAlignment="Center" Margin="0,0,16,0">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="Auto" />
+              <ColumnDefinition Width="Auto" />
+              <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="{DynamicResource NetworkConsole}" FontSize="12" Foreground="#65736D" />
+            <TextBlock Grid.Column="1" Text=" / " Foreground="#C5CEC8" Margin="9,0" />
+            <TextBlock x:Name="BreadcrumbText" Grid.Column="2" Text="{DynamicResource Overview}" FontSize="12" FontWeight="SemiBold" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" />
+          </Grid>
+          <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+            <Border Background="#F0F4EF" CornerRadius="16" Padding="11,7" Margin="0,0,8,0">
+              <StackPanel Orientation="Horizontal">
+                <Ellipse x:Name="GlobalStateDot" Width="6" Height="6" Fill="#9DAC9E" Margin="0,0,7,0" />
+                <TextBlock Text="Hotspot " FontSize="11" Foreground="#728073" />
+                <TextBlock x:Name="GlobalStateText" Text="{DynamicResource Checking}" FontSize="11" FontWeight="SemiBold" />
+              </StackPanel>
+            </Border>
+            <Border Background="#F0F4EF" CornerRadius="16" Padding="11,7">
+              <StackPanel Orientation="Horizontal">
+                <Ellipse x:Name="FilterStateDot" Width="6" Height="6" Fill="#9DAC9E" Margin="0,0,7,0" />
+                <TextBlock x:Name="GlobalFilterText" Text="{DynamicResource DNSOff}" FontSize="11" FontWeight="SemiBold" />
+              </StackPanel>
+            </Border>
+            <Border Background="#F0F4EF" CornerRadius="16" Padding="11,7" Margin="8,0,0,0" AutomationProperties.Name="{DynamicResource DeviceAccessControlStatus}">
+              <StackPanel Orientation="Horizontal">
+                <TextBlock Text="" Style="{StaticResource Glyph}" FontSize="11" Foreground="#65736D" Margin="0,0,6,0" />
+                <TextBlock x:Name="GlobalDeviceAccessText" Text="{DynamicResource ControlOff}" FontSize="11" FontWeight="SemiBold" MaxWidth="145" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" ToolTip="{Binding Text, RelativeSource={RelativeSource Self}}" />
+              </StackPanel>
+            </Border>
+          </StackPanel>
         </Grid>
-       </Border>
-       <Expander Grid.Row="3" Header="Acerca del filtro DNS" Foreground="#65736D" FontSize="12" Margin="2,14,0,0"><TextBlock Text="Se filtran las consultas DNS enviadas al hotspot. DNS privado o externo, VPN, caché e IP directas pueden evitar las reglas. Los cambios afectan consultas nuevas; no cierran conexiones existentes. Mantén Hen abierto para mantener el filtro activo." Style="{StaticResource Body}" Margin="0,10,0,0"/></Expander>
-       </Grid>
-      </StackPanel>
-      <StackPanel x:Name="DevicesPanel" Visibility="Collapsed">
-       <Border Style="{StaticResource Card}" Padding="20,15" Margin="0,0,0,12">
-        <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
-         <StackPanel Margin="0,0,20,0"><StackPanel Orientation="Horizontal"><TextBlock Text="ACCESO A INTERNET" Style="{StaticResource Caption}" FontSize="10"/><Border Background="#FFF0DA" CornerRadius="5" Padding="6,2" Margin="10,-2,0,0"><TextBlock Text="EXPERIMENTAL" FontSize="9" FontWeight="SemiBold" Foreground="#79551E"/></Border></StackPanel><TextBlock x:Name="DeviceGuardStateText" Text="Control de dispositivos apagado" FontSize="19" FontWeight="SemiBold" Margin="0,8,0,5"/><TextBlock x:Name="DeviceGuardDetailText" Text="Activa el control para decidir qué dispositivos pueden usar internet." Foreground="{StaticResource MutedBrush}" FontSize="12" LineHeight="18"/></StackPanel>
-         <StackPanel Grid.Column="1" VerticalAlignment="Center" MaxWidth="220"><Button x:Name="DeviceGuardToggleButton" Content="Activar control" Style="{StaticResource PrimaryButton}" Click="ToggleDeviceGuard_Click" IsEnabled="False" ToolTip="Windows pedirá permiso de administrador. Desactivar el control quita este bloqueo de internet."/></StackPanel>
+      </Border>
+      <Grid Grid.Row="1" Margin="28,24,28,15">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="*" />
+          <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid Margin="0,0,0,21">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+          </Grid.ColumnDefinitions>
+          <StackPanel>
+            <TextBlock x:Name="PageTitle" Text="{DynamicResource YourNetworkOverview}" FontSize="28" FontWeight="SemiBold" />
+            <TextBlock x:Name="PageSubtitle" Text="{DynamicResource YourConnectionDevicesAndAccessAllInOnePlace}" Style="{StaticResource Body}" Margin="0,5,16,0" />
+          </StackPanel>
+          <Button x:Name="RefreshButton" Grid.Column="1" Style="{StaticResource QuietButton}" Click="Refresh_Click" VerticalAlignment="Center" AutomationProperties.Name="{DynamicResource RefreshStatus}">
+            <StackPanel Orientation="Horizontal">
+              <TextBlock Text="" Style="{StaticResource Glyph}" FontSize="14" Margin="0,0,8,0" />
+              <TextBlock Text="{DynamicResource Refresh}" />
+            </StackPanel>
+          </Button>
         </Grid>
-       </Border>
-       <TextBlock x:Name="DeviceGuardErrorText" Visibility="Collapsed" Foreground="#9D462F" FontSize="12" Margin="2,0,2,12"/>
-       <TabControl>
-        <TabItem Header="Dispositivos"><StackPanel>
-         <Border Style="{StaticResource Card}" Padding="0"><StackPanel>
-          <Grid Margin="18,15,18,12"><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions><TextBlock Text="Equipos" Style="{StaticResource SectionTitle}"/><TextBlock Grid.Column="1" Text="APROBACIÓN MANUAL" FontSize="10" Foreground="{StaticResource MutedBrush}" VerticalAlignment="Center" Margin="16,0,0,0"/></Grid>
-          <TextBlock Text="Acceso solo para equipos autorizados cuando el control está activo." Foreground="{StaticResource MutedBrush}" FontSize="12" Margin="18,0,18,14"/>
-          <TextBlock x:Name="DeviceEmptyText" Text="Conecta un dispositivo al hotspot para revisarlo, o añade su MAC en la otra pestaña." Style="{StaticResource Body}" Margin="18,6,18,22"/>
-          <DataGrid x:Name="DeviceGrid" Visibility="Collapsed" RowHeight="58" MaxHeight="246" CanUserSortColumns="False" AutomationProperties.Name="Dispositivos y autorización de internet">
-           <DataGrid.Columns>
-            <DataGridTemplateColumn Header="DISPOSITIVO" Width="*"><DataGridTemplateColumn.CellTemplate><DataTemplate><TextBlock Text="{Binding Name}" FontSize="12" FontWeight="SemiBold" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" ToolTip="{Binding Name}"/></DataTemplate></DataGridTemplateColumn.CellTemplate></DataGridTemplateColumn>
-            <DataGridTemplateColumn Header="MAC" Width="140"><DataGridTemplateColumn.CellTemplate><DataTemplate><TextBlock Text="{Binding Mac}" FontFamily="Consolas" FontSize="11" Foreground="{StaticResource MutedBrush}" TextWrapping="NoWrap" ToolTip="{Binding Mac}"/></DataTemplate></DataGridTemplateColumn.CellTemplate></DataGridTemplateColumn>
-            <DataGridTemplateColumn Header="DIRECCIÓN IP" Width="120"><DataGridTemplateColumn.CellTemplate><DataTemplate><TextBlock Text="{Binding Address}" FontFamily="Consolas" FontSize="11" Foreground="{StaticResource MutedBrush}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" ToolTip="{Binding Address}"/></DataTemplate></DataGridTemplateColumn.CellTemplate></DataGridTemplateColumn>
-            <DataGridTemplateColumn Header="ACCESO" Width="150"><DataGridTemplateColumn.CellTemplate><DataTemplate><Border Background="#EFF4EF" CornerRadius="7" Padding="7,5" HorizontalAlignment="Left"><TextBlock Text="{Binding Status}" FontSize="11" Foreground="#344D3F" ToolTip="{Binding Status}"/></Border></DataTemplate></DataGridTemplateColumn.CellTemplate></DataGridTemplateColumn>
-            <DataGridTemplateColumn Header="ACCIONES" Width="184"><DataGridTemplateColumn.CellTemplate><DataTemplate><Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="6"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions><Button Content="Autorizar" Style="{StaticResource PrimaryButton}" Padding="8,6" MinHeight="32" FontSize="11" Click="ApproveDevice_Click" Tag="{Binding Mac}" IsEnabled="{Binding ApproveEnabled, FallbackValue=False}" AutomationProperties.Name="{Binding Name, StringFormat='Autorizar {0}'}"/><Button Grid.Column="2" Content="Bloquear" Padding="8,6" MinHeight="32" FontSize="11" Foreground="#9D462F" Click="BlockDevice_Click" Tag="{Binding Mac}" IsEnabled="{Binding BlockEnabled, FallbackValue=False}" AutomationProperties.Name="{Binding Name, StringFormat='Bloquear {0}'}"/></Grid></DataTemplate></DataGridTemplateColumn.CellTemplate></DataGridTemplateColumn>
-           </DataGrid.Columns>
-          </DataGrid>
-         </StackPanel></Border>
-
-         <Expander Header="Acerca del control de dispositivos" Foreground="{StaticResource MutedBrush}" FontSize="12" Margin="2,12,0,0"><StackPanel Margin="0,10,0,0"><TextBlock Text="El control requiere permiso de administrador. Al cerrar Hen con el control activo, se apaga el hotspot. El bloqueo de internet no desconecta el dispositivo del Wi-Fi." Style="{StaticResource Body}"/><TextBlock Text="La MAC identifica una conexión de red; no demuestra quién usa el dispositivo. Si cambia su MAC privada, aparecerá como un dispositivo nuevo." Style="{StaticResource Body}" Margin="0,9,0,0"/></StackPanel></Expander>
-        </StackPanel></TabItem>
-        <TabItem Header="Añadir por MAC"><StackPanel>
-         <Border Style="{StaticResource Card}" Padding="22"><StackPanel>
-          <TextBlock Text="Nuevo dispositivo" Style="{StaticResource SectionTitle}"/><TextBlock Text="Usa la MAC que el dispositivo muestra para esta red." Style="{StaticResource Body}" Margin="0,7,0,20"/>
-          <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="16"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions><StackPanel><TextBlock Text="Dirección MAC" Style="{StaticResource FieldLabel}"/><TextBox x:Name="DeviceMacBox" MaxLength="17" FontFamily="Consolas" AutomationProperties.Name="Dirección MAC del dispositivo"/><TextBlock Text="Ejemplo: AA:BB:CC:DD:EE:FF" Foreground="{StaticResource MutedBrush}" FontSize="11" Margin="0,7,0,0"/></StackPanel><StackPanel Grid.Column="2"><TextBlock Text="Nombre del dispositivo" Style="{StaticResource FieldLabel}"/><TextBox x:Name="DeviceNameBox" MaxLength="128" AutomationProperties.Name="Nombre del dispositivo"/></StackPanel></Grid>
-          <Button Content="Añadir dispositivo" Style="{StaticResource PrimaryButton}" Click="AddDevice_Click" HorizontalAlignment="Right" Margin="0,20,0,0"/>
-         </StackPanel></Border>
-        </StackPanel></TabItem>
-       </TabControl>
-      </StackPanel>
-      <StackPanel x:Name="ActivityPanel" Visibility="Collapsed">
-       <Border Style="{StaticResource Card}" Padding="18,13" Margin="0,0,0,10"><Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions><StackPanel><TextBlock x:Name="ActivityStateText" Text="Registro local" FontSize="17" FontWeight="SemiBold"/><TextBlock x:Name="ActivityRetentionText" Foreground="{StaticResource MutedBrush}" FontSize="12" Margin="0,5,12,0"/></StackPanel><Button x:Name="ActivityRecordButton" Grid.Column="1" Content="Pausar registro" Click="ToggleActivityRecording_Click" VerticalAlignment="Center"/></Grid></Border>
-       <TextBlock x:Name="ActivityErrorText" Visibility="Collapsed" Foreground="#9D462F" FontSize="12" Margin="0,0,0,12"/>
-       <TabControl>
-        <TabItem Header="Historial"><StackPanel>
-         <Border Style="{StaticResource Card}" Padding="16" Margin="0,0,0,12"><StackPanel>
-          <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="116"/><ColumnDefinition Width="10"/><ColumnDefinition Width="116"/><ColumnDefinition Width="10"/><ColumnDefinition Width="1.2*"/><ColumnDefinition Width="10"/><ColumnDefinition Width="*"/><ColumnDefinition Width="10"/><ColumnDefinition Width="124"/><ColumnDefinition Width="10"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
-           <StackPanel><TextBlock Text="Desde" Style="{StaticResource FieldLabel}"/><DatePicker x:Name="ActivityFromDate" SelectedDateFormat="Short" AutomationProperties.Name="Fecha inicial del historial"/></StackPanel>
-           <StackPanel Grid.Column="2"><TextBlock Text="Hasta" Style="{StaticResource FieldLabel}"/><DatePicker x:Name="ActivityUntilDate" SelectedDateFormat="Short" AutomationProperties.Name="Fecha final del historial"/></StackPanel>
-           <StackPanel Grid.Column="4"><TextBlock Text="Dispositivo" Style="{StaticResource FieldLabel}"/><ComboBox x:Name="ActivityDeviceBox" SelectedValuePath="Id" AutomationProperties.Name="Filtrar dispositivo"><ComboBox.ItemTemplate><DataTemplate><TextBlock Text="{Binding Label}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis"/></DataTemplate></ComboBox.ItemTemplate></ComboBox></StackPanel>
-           <StackPanel Grid.Column="6"><TextBlock Text="Dominio contiene" Style="{StaticResource FieldLabel}"/><TextBox x:Name="ActivityDomainBox" MaxLength="253" FontSize="13" AutomationProperties.Name="Buscar dominio en el historial" ToolTip="Deja vacío para ver todos. Puedes escribir un dominio o parte de su nombre."/></StackPanel>
-           <StackPanel Grid.Column="8"><TextBlock Text="Resultado" Style="{StaticResource FieldLabel}"/><ComboBox x:Name="ActivityOutcomeBox" SelectedIndex="0" AutomationProperties.Name="Filtrar resultado"><ComboBoxItem Content="Todos" Tag=""/><ComboBoxItem Content="Permitidas" Tag="Allowed"/><ComboBoxItem Content="Bloqueadas" Tag="Blocked"/><ComboBoxItem Content="Errores" Tag="Error"/><ComboBoxItem Content="Interrumpidas" Tag="Interrupted"/><ComboBoxItem Content="Conectando" Tag="Connecting"/></ComboBox></StackPanel>
-           <Button Grid.Column="10" Content="Filtrar" Style="{StaticResource PrimaryButton}" Click="ApplyActivityFilters_Click" VerticalAlignment="Bottom" Height="42"/>
-          </Grid>         </StackPanel></Border>
-         <Border Style="{StaticResource Card}" Padding="0"><StackPanel>
-          <TextBlock x:Name="ActivitySummaryText" Text="Sin registros" Foreground="{StaticResource MutedBrush}" FontSize="12" Margin="16,13"/>
-          <Border x:Name="EmptyActivityBorder" Padding="20,14,20,18"><StackPanel><TextBlock Text="Tu actividad aparecerá aquí" FontSize="17" FontWeight="SemiBold"/><TextBlock x:Name="EmptyActivityText" Style="{StaticResource Body}" Margin="0,8,0,0"/></StackPanel></Border>
-          <DataGrid x:Name="ActivityGrid" MaxHeight="240" Visibility="Collapsed" RowHeight="60" AutomationProperties.Name="Historial local de consultas DNS y registros anteriores" CanUserSortColumns="False">
-           <DataGrid.Columns>
-            <DataGridTemplateColumn Header="INICIO" Width="96"><DataGridTemplateColumn.CellTemplate><DataTemplate><TextBlock Text="{Binding Date}" FontSize="11" Foreground="{StaticResource MutedBrush}" ToolTip="{Binding Details}"/></DataTemplate></DataGridTemplateColumn.CellTemplate></DataGridTemplateColumn>
-            <DataGridTemplateColumn Header="DOMINIO" Width="1.5*"><DataGridTemplateColumn.CellTemplate><DataTemplate><StackPanel ToolTip="{Binding Details}"><TextBlock Text="{Binding Domain}" FontSize="12" FontWeight="SemiBold" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis"/><TextBlock Text="{Binding Protocol}" FontSize="10" Foreground="{StaticResource MutedBrush}" Margin="0,3,0,0"/></StackPanel></DataTemplate></DataGridTemplateColumn.CellTemplate></DataGridTemplateColumn>
-            <DataGridTemplateColumn Header="DISPOSITIVO" Width="1.2*"><DataGridTemplateColumn.CellTemplate><DataTemplate><StackPanel ToolTip="{Binding Details}"><TextBlock Text="{Binding Device}" FontSize="12" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis"/><TextBlock Text="{Binding Ip}" FontFamily="Consolas" FontSize="10" Foreground="{StaticResource MutedBrush}" Margin="0,3,0,0"/></StackPanel></DataTemplate></DataGridTemplateColumn.CellTemplate></DataGridTemplateColumn>
-            <DataGridTemplateColumn Header="DURACIÓN" Width="100"><DataGridTemplateColumn.CellTemplate><DataTemplate><TextBlock Text="{Binding Duration}" FontSize="12" ToolTip="{Binding Details}"/></DataTemplate></DataGridTemplateColumn.CellTemplate></DataGridTemplateColumn>
-            <DataGridTemplateColumn Header="TRÁFICO" Width="104"><DataGridTemplateColumn.CellTemplate><DataTemplate><TextBlock Text="{Binding Traffic}" FontSize="11" Foreground="{StaticResource MutedBrush}"/></DataTemplate></DataGridTemplateColumn.CellTemplate></DataGridTemplateColumn>
-            <DataGridTemplateColumn Header="RESULTADO" Width="116"><DataGridTemplateColumn.CellTemplate><DataTemplate><Border Background="{Binding StatusColor}" CornerRadius="8" Padding="7,5" HorizontalAlignment="Left" ToolTip="{Binding Details}"><TextBlock Text="{Binding Status}" FontSize="11"/></Border></DataTemplate></DataGridTemplateColumn.CellTemplate></DataGridTemplateColumn>
-           </DataGrid.Columns>
-          </DataGrid>
-         </StackPanel></Border>
-         <Grid Margin="0,10,0,0"><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions><TextBlock x:Name="ActivityPageText" Text="Página 1 de 1" Foreground="{StaticResource MutedBrush}" FontSize="11" VerticalAlignment="Center"/><StackPanel Grid.Column="1" Orientation="Horizontal"><Button x:Name="ActivityPreviousButton" Content="Anterior" Click="ActivityPrevious_Click" IsEnabled="False" Margin="0,0,8,0"/><Button x:Name="ActivityNextButton" Content="Siguiente" Click="ActivityNext_Click" IsEnabled="False"/></StackPanel></Grid>
-
-        </StackPanel></TabItem>
-        <TabItem Header="Preferencias"><Border Style="{StaticResource Card}"><StackPanel>
-         <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions><StackPanel Margin="0,0,24,0"><TextBlock Text="Conservar historial" Style="{StaticResource SectionTitle}"/><TextBlock Text="Los registros fuera del plazo se eliminan automáticamente." Style="{StaticResource Body}" Margin="0,6,0,0"/></StackPanel><StackPanel Grid.Column="1" Orientation="Horizontal"><ComboBox x:Name="RetentionBox" Width="150" SelectedIndex="1" AutomationProperties.Name="Días de conservación"><ComboBoxItem Content="1 día" Tag="1"/><ComboBoxItem Content="7 días" Tag="7"/><ComboBoxItem Content="30 días" Tag="30"/><ComboBoxItem Content="90 días" Tag="90"/></ComboBox><Button x:Name="SaveRetentionButton" Content="Guardar" Click="SaveRetention_Click" Style="{StaticResource PrimaryButton}" Margin="10,0,0,0"/></StackPanel></Grid>
-         <Border BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,1,0,0" Margin="0,24,0,0" Padding="0,24,0,0"><Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions><StackPanel Margin="0,0,24,0"><TextBlock Text="Borrar historial" Style="{StaticResource SectionTitle}"/><TextBlock Text="Elimina todos los registros guardados en esta laptop." Style="{StaticResource Body}" Margin="0,6,0,0"/></StackPanel><Button x:Name="ClearActivityStartButton" Grid.Column="1" Content="Borrar historial" Click="ConfirmActivityClear_Click" Foreground="#9D462F" VerticalAlignment="Center"/></Grid></Border>
-         <Border x:Name="ActivityClearConfirmation" Visibility="Collapsed" Background="#FBE9E0" CornerRadius="8" Padding="14" Margin="0,14,0,0"><StackPanel><TextBlock Text="Esta acción no se puede deshacer." Foreground="#873D2B" FontSize="12"/><StackPanel Orientation="Horizontal" Margin="0,12,0,0"><Button Content="Borrar definitivamente" Background="#9D462F" Foreground="White" Click="ClearActivity_Click"/><Button Content="Cancelar" Click="CancelActivityClear_Click" Margin="10,0,0,0"/></StackPanel></StackPanel></Border>
-        </StackPanel></Border></TabItem>
-       </TabControl>
-      </StackPanel>      <StackPanel x:Name="DiagnosticsPanel" Visibility="Collapsed">
-       <Border Style="{StaticResource Card}"><StackPanel><Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions><TextBlock Text="Estado del equipo" Style="{StaticResource SectionTitle}" VerticalAlignment="Center"/><StackPanel Grid.Column="1" Orientation="Horizontal"><Button Content="Ajustes de Windows" Click="WindowsSettings_Click" Style="{StaticResource QuietButton}" Margin="0,0,8,0"/><Button Content="Exportar diagnóstico" Click="Export_Click"/></StackPanel></Grid><TextBox x:Name="DiagnosticText" IsReadOnly="True" TextWrapping="Wrap" BorderThickness="0" Background="Transparent" FontFamily="Consolas" FontSize="12" Foreground="#607669" Margin="0,20,0,0" Padding="0" MinHeight="200"/></StackPanel></Border>
-      </StackPanel>
-     </Grid>
-    </ScrollViewer>
-    <Grid Grid.Row="3" Margin="0,13,0,0"><TextBlock x:Name="UpdatedText" Text="Consultando Windows…" Foreground="#65736D" FontSize="10"/></Grid>
-   </Grid>
+        <Border x:Name="NoticeBorder" Grid.Row="1" Background="#E8F5EE" CornerRadius="8" Padding="14,10" Margin="0,0,0,14" Visibility="Collapsed">
+          <Grid>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="*" />
+              <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Name="NoticeText" Foreground="#21624C" VerticalAlignment="Center" />
+            <Button Grid.Column="1" Style="{StaticResource QuietButton}" Click="DismissNotice_Click" Padding="8,0" MinHeight="24" Margin="10,0,0,0" AutomationProperties.Name="{DynamicResource DismissNotice}">
+              <TextBlock Text="" Style="{StaticResource Glyph}" FontSize="10" />
+            </Button>
+          </Grid>
+        </Border>
+        <ScrollViewer x:Name="PageScroll" Grid.Row="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Padding="0,0,3,0">
+          <Grid>
+            <StackPanel x:Name="OverviewPanel">
+              <Border Background="#172E2C" CornerRadius="15" Padding="24,18" Margin="0,0,0,16">
+                <Grid>
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                  </Grid.ColumnDefinitions>
+                  <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                      <TextBlock Text="" Style="{StaticResource Glyph}" FontSize="14" Foreground="#70DAB8" Margin="0,0,8,0" />
+                      <TextBlock Text="{DynamicResource YOURACCESSPOINT}" FontSize="10" FontWeight="SemiBold" Foreground="#8FB2A5" />
+                    </StackPanel>
+                    <TextBlock x:Name="HeroSsidText" Text="Hen Hotspot" Foreground="#F4FAF5" FontSize="33" FontWeight="SemiBold" Margin="0,9,0,3" />
+                    <TextBlock x:Name="StateText" Text="{DynamicResource CheckingWindows}" Foreground="#BCD3C6" FontSize="12" />
+                    <TextBlock x:Name="NetworkSummary" Text="" Visibility="Collapsed" />
+                  </StackPanel>
+                  <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                    <Button x:Name="ToggleButton" Style="{StaticResource MintButton}" Content="{DynamicResource TurnOnHotspot}" Click="Toggle_Click" IsEnabled="False" MinWidth="154" />
+                    <Button Content="{DynamicResource SetUpNetwork}" Click="Network_Click" Style="{StaticResource QuietButton}" Foreground="#BCD3C6" Margin="0,5,0,0" MinHeight="30" Padding="10,5" />
+                  </StackPanel>
+                </Grid>
+              </Border>
+              <UniformGrid Columns="3" Margin="0,0,0,16">
+                <Border Style="{StaticResource Card}" Padding="19,15" Margin="0,0,12,0">
+                  <StackPanel>
+                    <TextBlock Text="{DynamicResource DEVICES}" Style="{StaticResource Caption}" FontSize="10" />
+                    <StackPanel Orientation="Horizontal" Margin="0,5,0,3">
+                      <TextBlock x:Name="CountText" Text="—" FontSize="30" FontWeight="SemiBold" />
+                      <TextBlock x:Name="ConnectedCountLabel" Text="{DynamicResource Connected2}" Foreground="#65736D" FontSize="11" VerticalAlignment="Bottom" Margin="8,0,0,6" />
+                    </StackPanel>
+                    <TextBlock x:Name="CapacityText" Text="{DynamicResource CheckingCapacity}" FontSize="11" Foreground="#65736D" />
+                  </StackPanel>
+                </Border>
+                <Border Style="{StaticResource Card}" Padding="19,15" Margin="0,0,12,0">
+                  <StackPanel>
+                    <TextBlock Text="{DynamicResource INTERNETSOURCE}" Style="{StaticResource Caption}" FontSize="10" />
+                    <TextBlock x:Name="SourceText" Text="—" FontSize="19" FontWeight="SemiBold" Margin="0,12,0,9" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" />
+                    <TextBlock x:Name="InternetText" Text="{DynamicResource CheckingConnection}" FontSize="11" Foreground="#65736D" />
+                  </StackPanel>
+                </Border>
+                <Border Style="{StaticResource Card}" Padding="19,15">
+                  <StackPanel>
+                    <TextBlock Text="{DynamicResource DNSFILTERTRIAL}" Style="{StaticResource Caption}" FontSize="10" />
+                    <TextBlock x:Name="FilterStateSummary" Text="{DynamicResource Off}" FontSize="24" FontWeight="SemiBold" Margin="0,8,0,6" />
+                    <TextBlock x:Name="FilterStatsSummary" Text="{DynamicResource NoRulesInUse}" FontSize="11" Foreground="#65736D" />
+                  </StackPanel>
+                </Border>
+              </UniformGrid>
+              <Grid>
+                <Border Style="{StaticResource Card}" Padding="0">
+                  <StackPanel>
+                    <Grid Margin="20,18,20,15">
+                      <TextBlock Text="{DynamicResource OnYourNetwork}" Style="{StaticResource SectionTitle}" />
+                      <TextBlock Text="{DynamicResource LIVE}" FontSize="10" FontWeight="SemiBold" Foreground="#618A75" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                    </Grid>
+                    <Border x:Name="EmptyClientCard" Padding="24,13,24,26">
+                      <StackPanel>
+                        <TextBlock Text="" Style="{StaticResource Glyph}" FontSize="28" Foreground="#A9C1B0" HorizontalAlignment="Left" Margin="0,0,0,12" />
+                        <TextBlock x:Name="EmptyClients" Text="{DynamicResource ConnectADeviceToSeeItHere}" Style="{StaticResource Body}" />
+                      </StackPanel>
+                    </Border>
+                    <DataGrid x:Name="ClientsGrid" MaxHeight="210" Visibility="Collapsed" AutomationProperties.Name="{DynamicResource ConnectedDevices}">
+                      <DataGrid.Columns>
+                        <DataGridTemplateColumn Width="*">
+                          <DataGridTemplateColumn.Header>
+                            <TextBlock Text="{DynamicResource DEVICE}" />
+                          </DataGridTemplateColumn.Header>
+                          <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                              <Grid>
+                                <Grid.ColumnDefinitions>
+                                  <ColumnDefinition Width="Auto" />
+                                  <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Border Background="#EDF5EC" CornerRadius="9" Width="34" Height="34" Margin="0,0,10,0">
+                                  <TextBlock Text="" Style="{StaticResource Glyph}" FontSize="16" Foreground="#4B8267" HorizontalAlignment="Center" />
+                                </Border>
+                                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                  <TextBlock ToolTip="{Binding DisplayName}" Text="{Binding DisplayName}" FontSize="12" FontWeight="SemiBold" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" />
+                                  <TextBlock Text="{Binding Address}" FontFamily="Consolas" FontSize="10" Foreground="#65736D" Margin="0,3,0,0" />
+                                </StackPanel>
+                              </Grid>
+                            </DataTemplate>
+                          </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Width="115">
+                          <DataGridTemplateColumn.Header>
+                            <TextBlock Text="{DynamicResource STATUS}" />
+                          </DataGridTemplateColumn.Header>
+                          <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                              <Border Background="#EAF5EB" CornerRadius="10" Padding="8,4" HorizontalAlignment="Left">
+                                <TextBlock Text="{DynamicResource Connected3}" FontSize="10" Foreground="#367153" />
+                              </Border>
+                            </DataTemplate>
+                          </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                      </DataGrid.Columns>
+                    </DataGrid>
+                  </StackPanel>
+                </Border>
+              </Grid>
+            </StackPanel>
+            <StackPanel x:Name="NetworkPanel" Visibility="Collapsed">
+              <Border Style="{StaticResource Card}" Padding="24">
+                <StackPanel>
+                  <Grid Margin="0,0,0,20">
+                    <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="*" />
+                      <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="{DynamicResource NetworkSettings}" Style="{StaticResource SectionTitle}" VerticalAlignment="Center" />
+                    <Button Grid.Column="1" Content="{DynamicResource WindowsSettings}" Style="{StaticResource QuietButton}" Click="WindowsSettings_Click" />
+                  </Grid>
+                  <TextBlock x:Name="NetworkLockText" Text="{DynamicResource CheckingAvailability}" FontSize="12" Foreground="#65736D" Margin="0,0,0,22" />
+                  <Grid>
+                    <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="*" />
+                      <ColumnDefinition Width="24" />
+                      <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel>
+                      <TextBlock Text="{DynamicResource NetworkName}" Style="{StaticResource FieldLabel}" />
+                      <TextBox x:Name="SsidBox" MaxLength="32" AutomationProperties.Name="{DynamicResource NetworkName}" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="2">
+                      <TextBlock Text="{DynamicResource NewPassword}" Style="{StaticResource FieldLabel}" />
+                      <PasswordBox x:Name="PasswordBox" MaxLength="63" AutomationProperties.Name="{DynamicResource NewPassword}" />
+                      <TextBlock Text="{DynamicResource 863Characters}" FontSize="11" Foreground="#65736D" Margin="0,7,0,0" />
+                    </StackPanel>
+                  </Grid>
+                  <StackPanel Width="280" HorizontalAlignment="Left" Margin="0,22,0,0">
+                    <TextBlock Text="{DynamicResource WiFiBand}" Style="{StaticResource FieldLabel}" />
+                    <ComboBox x:Name="BandBox" AutomationProperties.Name="{DynamicResource WiFiBand}" SelectedIndex="0">
+                      <ComboBoxItem Content="{DynamicResource Automatic}" Tag="Auto" />
+                      <ComboBoxItem Content="2.4 GHz" Tag="2.4 GHz" />
+                      <ComboBoxItem Content="5 GHz" Tag="5 GHz" />
+                    </ComboBox>
+                  </StackPanel>
+                  <Border BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,1,0,0" Margin="0,24,0,0" Padding="0,18,0,0">
+                    <Button x:Name="SaveNetworkButton" Content="{DynamicResource SaveSettings}" Style="{StaticResource PrimaryButton}" Click="SaveNetwork_Click" HorizontalAlignment="Right" />
+                  </Border>
+                </StackPanel>
+              </Border>
+            </StackPanel>
+            <StackPanel x:Name="RulesPanel" Visibility="Collapsed">
+              <Grid Height="{Binding ViewportHeight, ElementName=PageScroll}" MinHeight="410">
+                <Grid.RowDefinitions>
+                  <RowDefinition Height="Auto" />
+                  <RowDefinition Height="Auto" />
+                  <RowDefinition Height="*" />
+                  <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Border Style="{StaticResource Card}" Padding="20,14" Margin="0,0,0,14">
+                  <Grid>
+                    <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="*" />
+                      <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel>
+                      <TextBlock x:Name="FilterStateText" Text="{DynamicResource DNSFilterOff}" FontSize="17" FontWeight="SemiBold" />
+                      <TextBlock x:Name="ActivePolicyText" Text="" FontSize="12" Foreground="#65736D" Margin="0,5,18,0" />
+                      <TextBlock x:Name="FilterUsageText" Visibility="Collapsed" FontSize="11" Foreground="#65736D" Margin="0,5,18,0" />
+                    </StackPanel>
+                    <Button x:Name="FilterToggleButton" Grid.Column="1" Style="{StaticResource PrimaryButton}" Content="{DynamicResource EnableDNSFilter}" Click="FilterToggle_Click" VerticalAlignment="Center" IsEnabled="False" />
+                  </Grid>
+                </Border>
+                <TextBlock Grid.Row="1" x:Name="FilterErrorText" Visibility="Collapsed" Foreground="#9D462F" FontSize="12" Margin="2,0,2,14" />
+                <Border Grid.Row="2" Style="{StaticResource Card}" Padding="16">
+                  <Grid>
+                    <Grid.RowDefinitions>
+                      <RowDefinition Height="Auto" />
+                      <RowDefinition Height="Auto" />
+                      <RowDefinition Height="Auto" />
+                      <RowDefinition Height="*" />
+                      <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid>
+                      <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                      </Grid.ColumnDefinitions>
+                      <StackPanel VerticalAlignment="Center">
+                        <TextBlock x:Name="DomainListTitle" Text="{DynamicResource BlockedDomains}" Style="{StaticResource SectionTitle}" />
+                        <TextBlock x:Name="DomainCountText" Text="{DynamicResource 0Domains}" FontSize="11" Foreground="#65736D" Margin="0,3,0,0" />
+                      </StackPanel>
+                      <ComboBox x:Name="ModeBox" Grid.Column="1" Width="288" AutomationProperties.Name="{DynamicResource DNSFilteringMode}" ToolTip="{DynamicResource FilteringMode}" SelectedIndex="0">
+                        <ComboBoxItem Content="{DynamicResource BlockDomains}" />
+                        <ComboBoxItem Content="{DynamicResource AllowOnlyTheseDomains}" />
+                      </ComboBox>
+                    </Grid>
+                    <Grid Grid.Row="1" Margin="0,12,0,0">
+                      <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="10" />
+                        <ColumnDefinition Width="Auto" />
+                      </Grid.ColumnDefinitions>
+                      <Grid>
+                        <TextBox x:Name="DomainInput" MaxLength="2048" FontSize="13" AutomationProperties.Name="{DynamicResource AddDomainOrWebAddress}" KeyDown="DomainInput_KeyDown" />
+                        <TextBlock x:Name="DomainPlaceholder" Text="{DynamicResource TypeADomainOrPasteAURL}" Foreground="#65736D" FontSize="13" VerticalAlignment="Center" Margin="13,0,0,0" IsHitTestVisible="False" />
+                      </Grid>
+                      <Button x:Name="AddDomainButton" Grid.Column="2" Click="AddDomain_Click" IsEnabled="False" AutomationProperties.Name="{DynamicResource AddDomain}">
+                        <StackPanel Orientation="Horizontal">
+                          <TextBlock Text="" Style="{StaticResource Glyph}" FontSize="12" Margin="0,0,8,0" />
+                          <TextBlock Text="{DynamicResource Add}" />
+                        </StackPanel>
+                      </Button>
+                    </Grid>
+                    <TextBlock Grid.Row="2" x:Name="DomainInputError" Visibility="Collapsed" Foreground="#9D462F" FontSize="12" Margin="1,8,0,0" AutomationProperties.LiveSetting="Polite" />
+                    <DataGrid Grid.Row="3" x:Name="DomainList" Margin="0,12,0,0" RowHeight="44" MinHeight="64" CanUserSortColumns="False" CanUserResizeColumns="False" AutomationProperties.Name="{DynamicResource DomainList}">
+                      <DataGrid.Columns>
+                        <DataGridTemplateColumn Width="*">
+                          <DataGridTemplateColumn.Header>
+                            <TextBlock Text="{DynamicResource DOMAIN}" />
+                          </DataGridTemplateColumn.Header>
+                          <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                              <Grid>
+                                <Grid.ColumnDefinitions>
+                                  <ColumnDefinition Width="28" />
+                                  <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="" Style="{StaticResource Glyph}" FontSize="16" Foreground="#65736D" />
+                                <TextBlock Grid.Column="1" Text="{Binding}" FontWeight="SemiBold" FontSize="13" VerticalAlignment="Center" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" ToolTip="{Binding}" />
+                              </Grid>
+                            </DataTemplate>
+                          </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Width="185">
+                          <DataGridTemplateColumn.Header>
+                            <TextBlock Text="{DynamicResource SCOPE}" />
+                          </DataGridTemplateColumn.Header>
+                          <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                              <TextBlock Text="{DynamicResource IncludesSubdomains}" Foreground="#65736D" FontSize="12" />
+                            </DataTemplate>
+                          </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Width="110">
+                          <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                              <Button Tag="{Binding}" Click="RemoveDomain_Click" Style="{StaticResource QuietButton}" Padding="8,6" MinHeight="34" AutomationProperties.Name="{DynamicResource Remove}" AutomationProperties.HelpText="{Binding }">
+                                <StackPanel Orientation="Horizontal">
+                                  <TextBlock Text="" Style="{StaticResource Glyph}" FontSize="13" Margin="0,0,7,0" />
+                                  <TextBlock Text="{DynamicResource Remove}" FontSize="12" />
+                                </StackPanel>
+                              </Button>
+                            </DataTemplate>
+                          </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                      </DataGrid.Columns>
+                    </DataGrid>
+                    <StackPanel Grid.Row="3" VerticalAlignment="Center" x:Name="EmptyDomainsPanel" Margin="0,22,0,12">
+                      <TextBlock Text="{DynamicResource NoDomains}" FontSize="15" FontWeight="SemiBold" />
+                      <TextBlock x:Name="EmptyDomainsText" FontSize="12" Foreground="#65736D" Margin="0,6,0,0" />
+                    </StackPanel>
+                    <Border Grid.Row="4" BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,1,0,0" Margin="0,10,0,0" Padding="0,12,0,0">
+                      <Grid>
+                        <Grid.ColumnDefinitions>
+                          <ColumnDefinition Width="*" />
+                          <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="DraftStatusText" FontSize="11" Foreground="#65736D" VerticalAlignment="Center" Margin="0,0,16,0" />
+                        <StackPanel Grid.Column="1" Orientation="Horizontal">
+                          <Button x:Name="SaveDraftButton" Content="{DynamicResource SaveDraft}" Click="SaveDraft_Click" Margin="0,0,10,0" />
+                          <Button x:Name="ApplyRulesButton" Content="{DynamicResource ApplyChanges}" Style="{StaticResource PrimaryButton}" Click="ApplyRules_Click" IsEnabled="False" />
+                        </StackPanel>
+                      </Grid>
+                    </Border>
+                  </Grid>
+                </Border>
+                <Expander Grid.Row="3" Header="{DynamicResource AboutTheDNSFilter}" Foreground="#65736D" FontSize="12" Margin="2,14,0,0">
+                  <TextBlock Text="{DynamicResource FiltersDNSQueriesSentToTheHotspotPrivateOr}" Style="{StaticResource Body}" Margin="0,10,0,0" />
+                </Expander>
+              </Grid>
+            </StackPanel>
+            <StackPanel x:Name="DevicesPanel" Visibility="Collapsed">
+              <Border Style="{StaticResource Card}" Padding="20,15" Margin="0,0,0,12">
+                <Grid>
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                  </Grid.ColumnDefinitions>
+                  <StackPanel Margin="0,0,20,0">
+                    <StackPanel Orientation="Horizontal">
+                      <TextBlock Text="{DynamicResource INTERNETACCESS}" Style="{StaticResource Caption}" FontSize="10" />
+                      <Border Background="#FFF0DA" CornerRadius="5" Padding="6,2" Margin="10,-2,0,0">
+                        <TextBlock Text="{DynamicResource EXPERIMENTAL}" FontSize="9" FontWeight="SemiBold" Foreground="#79551E" />
+                      </Border>
+                    </StackPanel>
+                    <TextBlock x:Name="DeviceGuardStateText" Text="{DynamicResource DeviceAccessControlOff}" FontSize="19" FontWeight="SemiBold" Margin="0,8,0,5" />
+                    <TextBlock x:Name="DeviceGuardDetailText" Text="{DynamicResource EnableAccessControlToChooseWhichDevicesCanUse}" Foreground="{StaticResource MutedBrush}" FontSize="12" LineHeight="18" />
+                  </StackPanel>
+                  <StackPanel Grid.Column="1" VerticalAlignment="Center" MaxWidth="220">
+                    <Button x:Name="DeviceGuardToggleButton" Content="{DynamicResource EnableControl}" Style="{StaticResource PrimaryButton}" Click="ToggleDeviceGuard_Click" IsEnabled="False" ToolTip="{DynamicResource WindowsWillAskForAdministratorPermissionDisablingAccessControl}" />
+                  </StackPanel>
+                </Grid>
+              </Border>
+              <TextBlock x:Name="DeviceGuardErrorText" Visibility="Collapsed" Foreground="#9D462F" FontSize="12" Margin="2,0,2,12" />
+              <TabControl>
+                <TabItem Header="{DynamicResource Devices}">
+                  <StackPanel>
+                    <Border Style="{StaticResource Card}" Padding="0">
+                      <StackPanel>
+                        <Grid Margin="18,15,18,12">
+                          <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                          </Grid.ColumnDefinitions>
+                          <TextBlock Text="{DynamicResource Devices2}" Style="{StaticResource SectionTitle}" />
+                          <TextBlock Grid.Column="1" Text="{DynamicResource MANUALAPPROVAL}" FontSize="10" Foreground="{StaticResource MutedBrush}" VerticalAlignment="Center" Margin="16,0,0,0" />
+                        </Grid>
+                        <TextBlock Text="{DynamicResource AccessForAuthorizedDevicesOnlyWhileControlIsActive}" Foreground="{StaticResource MutedBrush}" FontSize="12" Margin="18,0,18,14" />
+                        <TextBlock x:Name="DeviceEmptyText" Text="{DynamicResource ConnectADeviceToTheHotspotToReviewIt}" Style="{StaticResource Body}" Margin="18,6,18,22" />
+                        <DataGrid x:Name="DeviceGrid" Visibility="Collapsed" RowHeight="58" MaxHeight="246" CanUserSortColumns="False" AutomationProperties.Name="{DynamicResource DevicesAndInternetAuthorization}">
+                          <DataGrid.Columns>
+                            <DataGridTemplateColumn Width="*">
+                              <DataGridTemplateColumn.Header>
+                                <TextBlock Text="{DynamicResource DEVICE}" />
+                              </DataGridTemplateColumn.Header>
+                              <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                  <TextBlock Text="{Binding Name}" FontSize="12" FontWeight="SemiBold" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" ToolTip="{Binding Name}" />
+                                </DataTemplate>
+                              </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="MAC" Width="140">
+                              <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                  <TextBlock Text="{Binding Mac}" FontFamily="Consolas" FontSize="11" Foreground="{StaticResource MutedBrush}" TextWrapping="NoWrap" ToolTip="{Binding Mac}" />
+                                </DataTemplate>
+                              </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Width="120">
+                              <DataGridTemplateColumn.Header>
+                                <TextBlock Text="{DynamicResource IPADDRESS}" />
+                              </DataGridTemplateColumn.Header>
+                              <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                  <TextBlock Text="{Binding Address}" FontFamily="Consolas" FontSize="11" Foreground="{StaticResource MutedBrush}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" ToolTip="{Binding Address}" />
+                                </DataTemplate>
+                              </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Width="150">
+                              <DataGridTemplateColumn.Header>
+                                <TextBlock Text="{DynamicResource ACCESS}" />
+                              </DataGridTemplateColumn.Header>
+                              <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                  <Border Background="#EFF4EF" CornerRadius="7" Padding="7,5" HorizontalAlignment="Left">
+                                    <TextBlock Text="{Binding Status}" FontSize="11" Foreground="#344D3F" ToolTip="{Binding Status}" />
+                                  </Border>
+                                </DataTemplate>
+                              </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Width="184">
+                              <DataGridTemplateColumn.Header>
+                                <TextBlock Text="{DynamicResource ACTIONS}" />
+                              </DataGridTemplateColumn.Header>
+                              <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                  <Grid>
+                                    <Grid.ColumnDefinitions>
+                                      <ColumnDefinition Width="*" />
+                                      <ColumnDefinition Width="6" />
+                                      <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Button Content="{DynamicResource Authorize}" Style="{StaticResource PrimaryButton}" Padding="8,6" MinHeight="32" FontSize="11" Click="ApproveDevice_Click" Tag="{Binding Mac}" IsEnabled="{Binding ApproveEnabled, FallbackValue=False}" AutomationProperties.Name="{DynamicResource Authorize}" AutomationProperties.HelpText="{Binding Name}" />
+                                    <Button Grid.Column="2" Content="{DynamicResource Block}" Padding="8,6" MinHeight="32" FontSize="11" Foreground="#9D462F" Click="BlockDevice_Click" Tag="{Binding Mac}" IsEnabled="{Binding BlockEnabled, FallbackValue=False}" AutomationProperties.Name="{DynamicResource Block}" AutomationProperties.HelpText="{Binding Name}" />
+                                  </Grid>
+                                </DataTemplate>
+                              </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                          </DataGrid.Columns>
+                        </DataGrid>
+                      </StackPanel>
+                    </Border>
+                    <Expander Header="{DynamicResource AboutDeviceAccessControl}" Foreground="{StaticResource MutedBrush}" FontSize="12" Margin="2,12,0,0">
+                      <StackPanel Margin="0,10,0,0">
+                        <TextBlock Text="{DynamicResource AccessControlRequiresAdministratorPermissionClosingHenWithControl}" Style="{StaticResource Body}" />
+                        <TextBlock Text="{DynamicResource AMACIdentifiesANetworkConnectionItDoesNot}" Style="{StaticResource Body}" Margin="0,9,0,0" />
+                      </StackPanel>
+                    </Expander>
+                  </StackPanel>
+                </TabItem>
+                <TabItem Header="{DynamicResource AddByMAC}">
+                  <StackPanel>
+                    <Border Style="{StaticResource Card}" Padding="22">
+                      <StackPanel>
+                        <TextBlock Text="{DynamicResource NewDevice}" Style="{StaticResource SectionTitle}" />
+                        <TextBlock Text="{DynamicResource UseTheMACAddressTheDeviceShowsForThis}" Style="{StaticResource Body}" Margin="0,7,0,20" />
+                        <Grid>
+                          <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="16" />
+                            <ColumnDefinition Width="*" />
+                          </Grid.ColumnDefinitions>
+                          <StackPanel>
+                            <TextBlock Text="{DynamicResource MACAddress}" Style="{StaticResource FieldLabel}" />
+                            <TextBox x:Name="DeviceMacBox" MaxLength="17" FontFamily="Consolas" AutomationProperties.Name="{DynamicResource DeviceMACAddress}" />
+                            <TextBlock Text="{DynamicResource ExampleAABBCCDDEEFF}" Foreground="{StaticResource MutedBrush}" FontSize="11" Margin="0,7,0,0" />
+                          </StackPanel>
+                          <StackPanel Grid.Column="2">
+                            <TextBlock Text="{DynamicResource DeviceName}" Style="{StaticResource FieldLabel}" />
+                            <TextBox x:Name="DeviceNameBox" MaxLength="128" AutomationProperties.Name="{DynamicResource DeviceName}" />
+                          </StackPanel>
+                        </Grid>
+                        <Button Content="{DynamicResource AddDevice}" Style="{StaticResource PrimaryButton}" Click="AddDevice_Click" HorizontalAlignment="Right" Margin="0,20,0,0" />
+                      </StackPanel>
+                    </Border>
+                  </StackPanel>
+                </TabItem>
+              </TabControl>
+            </StackPanel>
+            <StackPanel x:Name="ActivityPanel" Visibility="Collapsed">
+              <Border Style="{StaticResource Card}" Padding="18,13" Margin="0,0,0,10">
+                <Grid>
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                  </Grid.ColumnDefinitions>
+                  <StackPanel>
+                    <TextBlock x:Name="ActivityStateText" Text="{DynamicResource LocalRecording}" FontSize="17" FontWeight="SemiBold" />
+                    <TextBlock x:Name="ActivityRetentionText" Foreground="{StaticResource MutedBrush}" FontSize="12" Margin="0,5,12,0" />
+                  </StackPanel>
+                  <Button x:Name="ActivityRecordButton" Grid.Column="1" Content="{DynamicResource PauseRecording}" Click="ToggleActivityRecording_Click" VerticalAlignment="Center" />
+                </Grid>
+              </Border>
+              <TextBlock x:Name="ActivityErrorText" Visibility="Collapsed" Foreground="#9D462F" FontSize="12" Margin="0,0,0,12" />
+              <TabControl>
+                <TabItem Header="{DynamicResource History}">
+                  <StackPanel>
+                    <Border Style="{StaticResource Card}" Padding="16" Margin="0,0,0,12">
+                      <StackPanel>
+                        <Grid>
+                          <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="116" />
+                            <ColumnDefinition Width="10" />
+                            <ColumnDefinition Width="116" />
+                            <ColumnDefinition Width="10" />
+                            <ColumnDefinition Width="1.2*" />
+                            <ColumnDefinition Width="10" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="10" />
+                            <ColumnDefinition Width="124" />
+                            <ColumnDefinition Width="10" />
+                            <ColumnDefinition Width="Auto" />
+                          </Grid.ColumnDefinitions>
+                          <StackPanel>
+                            <TextBlock Text="{DynamicResource From}" Style="{StaticResource FieldLabel}" />
+                            <DatePicker x:Name="ActivityFromDate" SelectedDateFormat="Short" AutomationProperties.Name="{DynamicResource HistoryStartDate}" />
+                          </StackPanel>
+                          <StackPanel Grid.Column="2">
+                            <TextBlock Text="{DynamicResource To}" Style="{StaticResource FieldLabel}" />
+                            <DatePicker x:Name="ActivityUntilDate" SelectedDateFormat="Short" AutomationProperties.Name="{DynamicResource HistoryEndDate}" />
+                          </StackPanel>
+                          <StackPanel Grid.Column="4">
+                            <TextBlock Text="{DynamicResource Device}" Style="{StaticResource FieldLabel}" />
+                            <ComboBox x:Name="ActivityDeviceBox" SelectedValuePath="Id" AutomationProperties.Name="{DynamicResource FilterDevice}">
+                              <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                  <TextBlock Text="{Binding Label}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" />
+                                </DataTemplate>
+                              </ComboBox.ItemTemplate>
+                            </ComboBox>
+                          </StackPanel>
+                          <StackPanel Grid.Column="6">
+                            <TextBlock Text="{DynamicResource DomainContains}" Style="{StaticResource FieldLabel}" />
+                            <TextBox x:Name="ActivityDomainBox" MaxLength="253" FontSize="13" AutomationProperties.Name="{DynamicResource SearchHistoryByDomain}" ToolTip="{DynamicResource LeaveBlankToSeeAllEnterADomainOr}" />
+                          </StackPanel>
+                          <StackPanel Grid.Column="8">
+                            <TextBlock Text="{DynamicResource Outcome}" Style="{StaticResource FieldLabel}" />
+                            <ComboBox x:Name="ActivityOutcomeBox" SelectedIndex="0" AutomationProperties.Name="{DynamicResource FilterOutcome}">
+                              <ComboBoxItem Content="{DynamicResource All}" Tag="" />
+                              <ComboBoxItem Content="{DynamicResource Allowed2}" Tag="Allowed" />
+                              <ComboBoxItem Content="{DynamicResource Blocked3}" Tag="Blocked" />
+                              <ComboBoxItem Content="{DynamicResource Errors}" Tag="Error" />
+                              <ComboBoxItem Content="{DynamicResource Interrupted2}" Tag="Interrupted" />
+                              <ComboBoxItem Content="{DynamicResource Connecting}" Tag="Connecting" />
+                            </ComboBox>
+                          </StackPanel>
+                          <Button Grid.Column="10" Content="{DynamicResource Filter}" Style="{StaticResource PrimaryButton}" Click="ApplyActivityFilters_Click" VerticalAlignment="Bottom" Height="42" />
+                        </Grid>
+                      </StackPanel>
+                    </Border>
+                    <Border Style="{StaticResource Card}" Padding="0">
+                      <StackPanel>
+                        <TextBlock x:Name="ActivitySummaryText" Text="{DynamicResource NoRecords}" Foreground="{StaticResource MutedBrush}" FontSize="12" Margin="16,13" />
+                        <Border x:Name="EmptyActivityBorder" Padding="20,14,20,18">
+                          <StackPanel>
+                            <TextBlock Text="{DynamicResource YourActivityWillAppearHere}" FontSize="17" FontWeight="SemiBold" />
+                            <TextBlock x:Name="EmptyActivityText" Style="{StaticResource Body}" Margin="0,8,0,0" />
+                          </StackPanel>
+                        </Border>
+                        <DataGrid x:Name="ActivityGrid" MaxHeight="240" Visibility="Collapsed" RowHeight="60" AutomationProperties.Name="{DynamicResource LocalDNSQueryHistoryAndPreviousRecords}" CanUserSortColumns="False">
+                          <DataGrid.Columns>
+                            <DataGridTemplateColumn Width="96">
+                              <DataGridTemplateColumn.Header>
+                                <TextBlock Text="{DynamicResource START}" />
+                              </DataGridTemplateColumn.Header>
+                              <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                  <TextBlock Text="{Binding Date}" FontSize="11" Foreground="{StaticResource MutedBrush}" ToolTip="{Binding Details}" />
+                                </DataTemplate>
+                              </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Width="1.5*">
+                              <DataGridTemplateColumn.Header>
+                                <TextBlock Text="{DynamicResource DOMAIN}" />
+                              </DataGridTemplateColumn.Header>
+                              <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                  <StackPanel ToolTip="{Binding Details}">
+                                    <TextBlock Text="{Binding Domain}" FontSize="12" FontWeight="SemiBold" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" />
+                                    <TextBlock Text="{Binding Protocol}" FontSize="10" Foreground="{StaticResource MutedBrush}" Margin="0,3,0,0" />
+                                  </StackPanel>
+                                </DataTemplate>
+                              </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Width="1.2*">
+                              <DataGridTemplateColumn.Header>
+                                <TextBlock Text="{DynamicResource DEVICE}" />
+                              </DataGridTemplateColumn.Header>
+                              <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                  <StackPanel ToolTip="{Binding Details}">
+                                    <TextBlock Text="{Binding Device}" FontSize="12" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" />
+                                    <TextBlock Text="{Binding Ip}" FontFamily="Consolas" FontSize="10" Foreground="{StaticResource MutedBrush}" Margin="0,3,0,0" />
+                                  </StackPanel>
+                                </DataTemplate>
+                              </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Width="100">
+                              <DataGridTemplateColumn.Header>
+                                <TextBlock Text="{DynamicResource DURATION}" />
+                              </DataGridTemplateColumn.Header>
+                              <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                  <TextBlock Text="{Binding Duration}" FontSize="12" ToolTip="{Binding Details}" />
+                                </DataTemplate>
+                              </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Width="104">
+                              <DataGridTemplateColumn.Header>
+                                <TextBlock Text="{DynamicResource TRAFFIC}" />
+                              </DataGridTemplateColumn.Header>
+                              <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                  <TextBlock Text="{Binding Traffic}" FontSize="11" Foreground="{StaticResource MutedBrush}" />
+                                </DataTemplate>
+                              </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Width="116">
+                              <DataGridTemplateColumn.Header>
+                                <TextBlock Text="{DynamicResource OUTCOME}" />
+                              </DataGridTemplateColumn.Header>
+                              <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                  <Border Background="{Binding StatusColor}" CornerRadius="8" Padding="7,5" HorizontalAlignment="Left" ToolTip="{Binding Details}">
+                                    <TextBlock Text="{Binding Status}" FontSize="11" />
+                                  </Border>
+                                </DataTemplate>
+                              </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                          </DataGrid.Columns>
+                        </DataGrid>
+                      </StackPanel>
+                    </Border>
+                    <Grid Margin="0,10,0,0">
+                      <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                      </Grid.ColumnDefinitions>
+                      <TextBlock x:Name="ActivityPageText" Text="{DynamicResource Page1Of1}" Foreground="{StaticResource MutedBrush}" FontSize="11" VerticalAlignment="Center" />
+                      <StackPanel Grid.Column="1" Orientation="Horizontal">
+                        <Button x:Name="ActivityPreviousButton" Content="{DynamicResource Previous}" Click="ActivityPrevious_Click" IsEnabled="False" Margin="0,0,8,0" />
+                        <Button x:Name="ActivityNextButton" Content="{DynamicResource Next}" Click="ActivityNext_Click" IsEnabled="False" />
+                      </StackPanel>
+                    </Grid>
+                  </StackPanel>
+                </TabItem>
+                <TabItem Header="{DynamicResource Preferences}">
+                  <Border Style="{StaticResource Card}">
+                    <StackPanel>
+                      <Grid>
+                        <Grid.ColumnDefinitions>
+                          <ColumnDefinition Width="*" />
+                          <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Margin="0,0,24,0">
+                          <TextBlock Text="{DynamicResource KeepHistory}" Style="{StaticResource SectionTitle}" />
+                          <TextBlock Text="{DynamicResource RecordsOutsideTheRetentionPeriodAreDeletedAutomatically}" Style="{StaticResource Body}" Margin="0,6,0,0" />
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Orientation="Horizontal">
+                          <ComboBox x:Name="RetentionBox" Width="150" SelectedIndex="1" AutomationProperties.Name="{DynamicResource RetentionDays}">
+                            <ComboBoxItem Content="{DynamicResource 1Day}" Tag="1" />
+                            <ComboBoxItem Content="{DynamicResource 7Days}" Tag="7" />
+                            <ComboBoxItem Content="{DynamicResource 30Days}" Tag="30" />
+                            <ComboBoxItem Content="{DynamicResource 90Days}" Tag="90" />
+                          </ComboBox>
+                          <Button x:Name="SaveRetentionButton" Content="{DynamicResource Save}" Click="SaveRetention_Click" Style="{StaticResource PrimaryButton}" Margin="10,0,0,0" />
+                        </StackPanel>
+                      </Grid>
+                      <Border BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,1,0,0" Margin="0,24,0,0" Padding="0,24,0,0">
+                        <Grid>
+                          <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                          </Grid.ColumnDefinitions>
+                          <StackPanel Margin="0,0,24,0">
+                            <TextBlock Text="{DynamicResource ClearHistory}" Style="{StaticResource SectionTitle}" />
+                            <TextBlock Text="{DynamicResource DeleteAllRecordsStoredOnThisLaptop}" Style="{StaticResource Body}" Margin="0,6,0,0" />
+                          </StackPanel>
+                          <Button x:Name="ClearActivityStartButton" Grid.Column="1" Content="{DynamicResource ClearHistory}" Click="ConfirmActivityClear_Click" Foreground="#9D462F" VerticalAlignment="Center" />
+                        </Grid>
+                      </Border>
+                      <Border x:Name="ActivityClearConfirmation" Visibility="Collapsed" Background="#FBE9E0" CornerRadius="8" Padding="14" Margin="0,14,0,0">
+                        <StackPanel>
+                          <TextBlock Text="{DynamicResource ThisActionCannotBeUndone}" Foreground="#873D2B" FontSize="12" />
+                          <StackPanel Orientation="Horizontal" Margin="0,12,0,0">
+                            <Button Content="{DynamicResource DeletePermanently}" Background="#9D462F" Foreground="White" Click="ClearActivity_Click" />
+                            <Button Content="{DynamicResource Cancel}" Click="CancelActivityClear_Click" Margin="10,0,0,0" />
+                          </StackPanel>
+                        </StackPanel>
+                      </Border>
+                    </StackPanel>
+                  </Border>
+                </TabItem>
+              </TabControl>
+            </StackPanel>
+            <StackPanel x:Name="DiagnosticsPanel" Visibility="Collapsed">
+              <Border Style="{StaticResource Card}">
+                <StackPanel>
+                  <Grid>
+                    <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="*" />
+                      <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="{DynamicResource ComputerStatus}" Style="{StaticResource SectionTitle}" VerticalAlignment="Center" />
+                    <StackPanel Grid.Column="1" Orientation="Horizontal">
+                      <Button Content="{DynamicResource WindowsSettings}" Click="WindowsSettings_Click" Style="{StaticResource QuietButton}" Margin="0,0,8,0" />
+                      <Button Content="{DynamicResource ExportDiagnostics}" Click="Export_Click" />
+                    </StackPanel>
+                  </Grid>
+                  <TextBox x:Name="DiagnosticText" IsReadOnly="True" TextWrapping="Wrap" BorderThickness="0" Background="Transparent" FontFamily="Consolas" FontSize="12" Foreground="#607669" Margin="0,20,0,0" Padding="0" MinHeight="200" />
+                </StackPanel>
+              </Border>
+            </StackPanel>
+            <StackPanel x:Name="AboutPanel" Visibility="Collapsed">
+              <Border Style="{StaticResource Card}" Padding="32" MinWidth="420" MaxWidth="680" HorizontalAlignment="Left">
+                <StackPanel>
+                  <StackPanel Orientation="Horizontal">
+                    <Image Source="{StaticResource HenMarkImage}" Width="48" Height="48" Margin="0,0,14,0" />
+                    <TextBlock Text="Hen Hotspot" FontSize="24" FontWeight="SemiBold" VerticalAlignment="Center" />
+                  </StackPanel>
+                  <Border Height="1" Background="{StaticResource BorderBrush}" Margin="0,26,0,26" />
+                  <TextBlock Text="{DynamicResource CreatedBy}" Style="{StaticResource Caption}" />
+                  <TextBlock Text="Hensell" FontSize="36" FontWeight="SemiBold" Margin="0,4,0,24" />
+                  <TextBlock Text="{DynamicResource Portfolio}" Style="{StaticResource FieldLabel}" />
+                  <Button x:Name="PortfolioButton" Click="Portfolio_Click" Style="{StaticResource PrimaryButton}" HorizontalAlignment="Left" MinHeight="48" Padding="18,12" ToolTip="{DynamicResource OpenPortfolioInBrowser}" AutomationProperties.Name="{DynamicResource OpenPortfolioInBrowser}">
+                    <StackPanel Orientation="Horizontal">
+                      <TextBlock Text="hensell.dev" FontSize="14" />
+                      <TextBlock Text="" Style="{StaticResource Glyph}" FontSize="14" Margin="30,0,0,0" />
+                    </StackPanel>
+                  </Button>
+                </StackPanel>
+              </Border>
+            </StackPanel>
+          </Grid>
+        </ScrollViewer>
+        <Grid Grid.Row="3" Margin="0,13,0,0">
+          <TextBlock x:Name="UpdatedText" Text="{DynamicResource CheckingWindows}" Foreground="#65736D" FontSize="10" />
+        </Grid>
+      </Grid>
+    </Grid>
   </Grid>
- </Grid>
 </Window>

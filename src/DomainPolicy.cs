@@ -11,12 +11,12 @@ public sealed class DomainPolicy
     {
         ArgumentNullException.ThrowIfNull(domains);
         var values = domains.Take(129).ToArray();
-        if (values.Length > 128) throw new ArgumentException("Máximo 128 dominios por lista.");
+        if (values.Length > 128) throw new ArgumentException(L10n.T("UpTo128DomainsPerList"));
         if (values.Any(value => string.IsNullOrWhiteSpace(value) || value.Length > 512))
-            throw new ArgumentException("La lista contiene un dominio vacío o demasiado largo.");
+            throw new ArgumentException(L10n.T("TheListContainsAnEmptyOrOverlyLongDomain"));
         this.domains = values.Select(Validation.Domain).Distinct(StringComparer.Ordinal).ToArray();
         if (allowOnly && this.domains.Length == 0)
-            throw new ArgumentException("Agrega al menos un dominio a la lista de permitidos.");
+            throw new ArgumentException(L10n.T("AddAtLeastOneDomainToTheAllowlist"));
         AllowOnly = allowOnly;
     }
 

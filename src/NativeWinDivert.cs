@@ -68,13 +68,13 @@ public static class NativeWinDivert
         int error = code ?? Marshal.GetLastWin32Error();
         string detail = error switch
         {
-            2 => "Faltan los archivos del controlador WinDivert junto a Hen.",
-            5 => "Windows requiere autorización de administrador para activar el filtro.",
-            577 => "Windows no aceptó la firma del controlador WinDivert.",
-            654 => "Hay otra versión de WinDivert cargada; reinicia Windows antes de volver a probar.",
-            1275 => "Windows o un programa de seguridad bloqueó el controlador WinDivert.",
+            2 => L10n.T("WinDivertDriverFilesAreMissingNextToHen"),
+            5 => L10n.T("WindowsRequiresAdministratorPermissionToEnableTheFilter"),
+            577 => L10n.T("WindowsDidNotAcceptTheWinDivertDriverSignature"),
+            654 => L10n.T("AnotherWinDivertVersionIsLoadedRestartWindowsBeforeTrying"),
+            1275 => L10n.T("WindowsOrSecuritySoftwareBlockedTheWinDivertDriver"),
             _ => new Win32Exception(error).Message
         };
-        return new Win32Exception(error, $"No se pudo {operation}: {detail} (WinDivert {error}).");
+        return new Win32Exception(error, L10n.F("CouldNot01WinDivert2", operation, detail, error));
     }
 }

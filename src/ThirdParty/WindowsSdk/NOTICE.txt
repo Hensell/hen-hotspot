@@ -1,0 +1,14 @@
+Microsoft.Windows.SDK.NET.Ref 10.0.19041.57
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+The .NET Windows SDK targeting pack supplies Microsoft.Windows.SDK.NET.dll
+and WinRT.Runtime.dll. The package metadata identifies the Windows SDK terms:
+https://aka.ms/WinSDKLicenseURL
+
+Project: https://aka.ms/WinSDKProjectURL
+
+CsWinRT-LICENSE.txt preserves the C#/WinRT project's MIT license:
+https://github.com/microsoft/CsWinRT/blob/master/LICENSE
+
+The C#/WinRT license does not replace the Windows SDK package terms.
+Hen Hotspot's MIT license applies to Hen Hotspot's original code only.

@@ -28,9 +28,9 @@ public partial class MainWindow
         {
             string domain = DomainEntryInput.Normalize(DomainInput.Text);
             if (domainEntries.Contains(domain, StringComparer.OrdinalIgnoreCase))
-                throw new ArgumentException("Ese dominio ya está en la lista.");
+                throw new ArgumentException(L10n.T("ThatDomainIsAlreadyOnTheList"));
             if (domainEntries.Count >= 128)
-                throw new ArgumentException("La lista admite hasta 128 dominios.");
+                throw new ArgumentException(L10n.T("TheListSupportsUpTo128Domains"));
             domainEntries.Add(domain);
             DomainInput.Clear();
             DomainList.ScrollIntoView(domain);
