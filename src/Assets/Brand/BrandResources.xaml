@@ -1,0 +1,14 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Color x:Key="HenGraphite">#101A23</Color>
+    <Color x:Key="HenMint">#57D6AD</Color>
+    <Color x:Key="HenCanvas">#F6F7F5</Color>
+    <SolidColorBrush x:Key="HenGraphiteBrush" Color="{StaticResource HenGraphite}"/>
+    <SolidColorBrush x:Key="HenMintBrush" Color="{StaticResource HenMint}"/>
+    <SolidColorBrush x:Key="HenCanvasBrush" Color="{StaticResource HenCanvas}"/>
+    <DrawingImage x:Key="HenMarkImage">
+        <DrawingImage.Drawing>
+            <ImageDrawing ImageSource="/HenHotspot;component/Assets/Brand/hen-mark.png" Rect="0,0,512,512"/>
+        </DrawingImage.Drawing>
+    </DrawingImage>
+</ResourceDictionary>

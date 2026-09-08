@@ -1,0 +1,27 @@
+**/bin/
+**/obj/
+app/
+work/
+*.user
+
+# IDE state and local shortcuts
+.vs/
+*.suo
+*.lnk
+
+# Local settings, activity, and exports
+.env
+.env.*
+!.env.example
+*.db
+*.db-shm
+*.db-wal
+*.log
+policy-draft.json
+device-access.json
+windivert-self-test.json
+hen-hotspot-diagnostico.json
+
+# OS files
+Thumbs.db
+.DS_Store

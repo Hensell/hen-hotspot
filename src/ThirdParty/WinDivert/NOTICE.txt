@@ -1,0 +1,12 @@
+Hen Hotspot includes WinDivert 2.2.2, by basil and its contributors.
+Project: https://reqrypt.org/windivert.html
+Source: https://github.com/basil00/WinDivert/tree/v2.2.2
+
+The unmodified x64 DLL and signed driver come from the official
+WinDivert-2.2.2-A.zip distribution. WinDivert is distributed here under
+GNU LGPL version 3 or later; see LICENSE for the complete license texts.
+The corresponding source archive is included in this directory.
+WinDivert remains a separate dynamic library; no WinDivert source changes
+have been made. Its license and attribution are retained.
+
+WinDivert is an independent project and is not a Microsoft product.

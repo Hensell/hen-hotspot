@@ -1,0 +1,10 @@
+Tool: image_gen.imagegen, built-in mode
+Use case: logo-brand.
+Asset type: production app identity mark for Hen Hotspot, a premium Windows Wi-Fi network management app for small business.
+
+Create ONE distinctive, sophisticated, minimalist geometric symbol only, no words or letters set in type. The mark should subtly evoke an H through two interlocking, offset rounded pathways: connectivity, a bridge, two signals meeting. Invent a memorable fluid but rigorously geometric solid emblem. Use strong, broad strokes with balanced negative space so it stays crisp at 24 pixels. Flat vector style, monochrome solid mint #57D6AD only, no gradient, no shadows, no lighting, no textures.
+
+Composition: exactly one symbol centered, occupying 78 percent of a square canvas with clear transparent padding. Truly transparent background with real alpha; no checkerboard baked in. No square enclosure, no phone, no router, no antenna, no generic three-bar Wi-Fi icon, no text, no mockup, no brand sheet, no watermark. This is a finished premium application logo ready for a dark graphite sidebar.
+
+Selected output: exec-eba66be8-6cd5-4d23-8cc8-abb37980a4ee.png
+Source preserved as hen-mark-source.png.
